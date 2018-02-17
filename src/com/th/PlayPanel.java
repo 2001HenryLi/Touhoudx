@@ -10,8 +10,8 @@ class PlayPanel extends JPanel implements KeyListener, FocusListener, ActionList
     private final int HEIGHT = (int)(960 * MASTER_SCALE);
 
     private Player p;
-    private int xDir = 0;
-    private int yDir = 0;
+    private final int[] INPUT_CODES = {KeyEvent.VK_LEFT, KeyEvent.VK_RIGHT, KeyEvent.VK_UP, KeyEvent.VK_DOWN, KeyEvent.VK_SHIFT};
+    private boolean[] keysDown = new boolean[INPUT_CODES.length];
 
     public PlayPanel(Player p){
         setBackground(new Color(255,255,255));
@@ -29,21 +29,17 @@ class PlayPanel extends JPanel implements KeyListener, FocusListener, ActionList
 
     public void update(){
         if(!isFocusOwner()) requestFocus();
-        if(!(xDir == 0 && yDir == 0)) p.move(xDir, yDir);
+        p.move(keysDown);
         repaint();
     }
     public void keyTyped(KeyEvent e) {}
     public void keyPressed(KeyEvent e){
         int key = e.getKeyCode();
-        if(key == KeyEvent.VK_LEFT) xDir = -1;
-        if(key == KeyEvent.VK_RIGHT) xDir = 1;
-        if(key == KeyEvent.VK_UP) yDir = -1;
-        if(key == KeyEvent.VK_DOWN) yDir = 1;
+        for(int i = 0; i < keysDown.length; i++) if(key == INPUT_CODES[i]) keysDown[i] = true;
     }
     public void keyReleased(KeyEvent e) {
         int key = e.getKeyCode();
-        if(key == KeyEvent.VK_LEFT || key == KeyEvent.VK_RIGHT) xDir = 0;
-        if(key == KeyEvent.VK_UP || key == KeyEvent.VK_DOWN) yDir = 0;
+        for(int i = 0; i < keysDown.length; i++) if(key == INPUT_CODES[i]) keysDown[i] = false;
     }
     public void focusGained(FocusEvent e) {}
     public void focusLost(FocusEvent e) {}

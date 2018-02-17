@@ -25,8 +25,10 @@ public class Player {
         vx = 5;
         vy = 5;
     }
-    public void move(int xDir, int yDir){
-        x += vx*xDir;
-        y += vy*yDir;
+    public void move(boolean[] keysDown){
+        if(keysDown[0]) x -= vx;
+        if(keysDown[1]) x += vx;
+        if(keysDown[2]) y -= vy;
+        if(keysDown[3]) y += vy;
     }
 }
