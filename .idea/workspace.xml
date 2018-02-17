@@ -2,42 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a0edc6b3-f861-4023-acd0-71445d476e6b" name="Default" comment="">
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/vcs.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/com/th/BGMusic.java" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/com/th/SFX.java" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/SFX/1UP.wav" afterPath="$PROJECT_DIR$/Resources/SFX/1UP.wav" />
-      <change beforePath="$PROJECT_DIR$/SFX/ATTACK.wav" afterPath="$PROJECT_DIR$/Resources/SFX/ATTACK.wav" />
-      <change beforePath="$PROJECT_DIR$/SFX/ATTACK2.wav" afterPath="$PROJECT_DIR$/Resources/SFX/ATTACK2.wav" />
-      <change beforePath="$PROJECT_DIR$/SFX/ATTACK3.wav" afterPath="$PROJECT_DIR$/Resources/SFX/ATTACK3.wav" />
-      <change beforePath="$PROJECT_DIR$/SFX/ATTACK4.wav" afterPath="$PROJECT_DIR$/Resources/SFX/ATTACK4.wav" />
-      <change beforePath="$PROJECT_DIR$/SFX/ATTACK5.wav" afterPath="$PROJECT_DIR$/Resources/SFX/ATTACK5.wav" />
-      <change beforePath="$PROJECT_DIR$/SFX/BONUS.wav" afterPath="$PROJECT_DIR$/Resources/SFX/BONUS.wav" />
-      <change beforePath="$PROJECT_DIR$/SFX/BONUS2.wav" afterPath="$PROJECT_DIR$/Resources/SFX/BONUS2.wav" />
-      <change beforePath="$PROJECT_DIR$/SFX/BONUS3.wav" afterPath="$PROJECT_DIR$/Resources/SFX/BONUS3.wav" />
-      <change beforePath="$PROJECT_DIR$/SFX/CAUTION.wav" afterPath="$PROJECT_DIR$/Resources/SFX/CAUTION.wav" />
-      <change beforePath="$PROJECT_DIR$/SFX/DEAD.wav" afterPath="$PROJECT_DIR$/Resources/SFX/DEAD.wav" />
-      <change beforePath="$PROJECT_DIR$/SFX/DEFEATED.wav" afterPath="$PROJECT_DIR$/Resources/SFX/DEFEATED.wav" />
-      <change beforePath="$PROJECT_DIR$/SFX/Energy.wav" afterPath="$PROJECT_DIR$/Resources/SFX/Energy.wav" />
-      <change beforePath="$PROJECT_DIR$/SFX/GUN.wav" afterPath="$PROJECT_DIR$/Resources/SFX/GUN.wav" />
-      <change beforePath="$PROJECT_DIR$/SFX/Horn.wav" afterPath="$PROJECT_DIR$/Resources/SFX/Horn.wav" />
-      <change beforePath="$PROJECT_DIR$/SFX/LASER.wav" afterPath="$PROJECT_DIR$/Resources/SFX/LASER.wav" />
-      <change beforePath="$PROJECT_DIR$/SFX/LASER2.wav" afterPath="$PROJECT_DIR$/Resources/SFX/LASER2.wav" />
-      <change beforePath="$PROJECT_DIR$/SFX/Lily White.wav" afterPath="$PROJECT_DIR$/Resources/SFX/Lily White.wav" />
-      <change beforePath="$PROJECT_DIR$/SFX/MASTER SPARK.wav" afterPath="$PROJECT_DIR$/Resources/SFX/MASTER SPARK.wav" />
-      <change beforePath="$PROJECT_DIR$/SFX/ORIN.wav" afterPath="$PROJECT_DIR$/Resources/SFX/ORIN.wav" />
-      <change beforePath="$PROJECT_DIR$/SFX/POWER UP.wav" afterPath="$PROJECT_DIR$/Resources/SFX/POWER UP.wav" />
-      <change beforePath="$PROJECT_DIR$/SFX/SPELLCARD.wav" afterPath="$PROJECT_DIR$/Resources/SFX/SPELLCARD.wav" />
-      <change beforePath="$PROJECT_DIR$/SFX/Snapshot.wav" afterPath="$PROJECT_DIR$/Resources/SFX/Snapshot.wav" />
-      <change beforePath="$PROJECT_DIR$/SFX/TWINKLE.wav" afterPath="$PROJECT_DIR$/Resources/SFX/TWINKLE.wav" />
-      <change beforePath="$PROJECT_DIR$/SFX/TWINKLE2.wav" afterPath="$PROJECT_DIR$/Resources/SFX/TWINKLE2.wav" />
-      <change beforePath="$PROJECT_DIR$/SFX/TWINKLE3.wav" afterPath="$PROJECT_DIR$/Resources/SFX/TWINKLE3.wav" />
-      <change beforePath="$PROJECT_DIR$/SFX/Time Slow.wav" afterPath="$PROJECT_DIR$/Resources/SFX/Time Slow.wav" />
-      <change beforePath="$PROJECT_DIR$/SFX/Time Stop.wav" afterPath="$PROJECT_DIR$/Resources/SFX/Time Stop.wav" />
-      <change beforePath="$PROJECT_DIR$/SFX/UFO.wav" afterPath="$PROJECT_DIR$/Resources/SFX/UFO.wav" />
-      <change beforePath="$PROJECT_DIR$/SFX/Warp 1.wav" afterPath="$PROJECT_DIR$/Resources/SFX/Warp 1.wav" />
-      <change beforePath="$PROJECT_DIR$/SFX/Warp 2.wav" afterPath="$PROJECT_DIR$/Resources/SFX/Warp 2.wav" />
-      <change beforePath="$PROJECT_DIR$/SFX/Wave.wav" afterPath="$PROJECT_DIR$/Resources/SFX/Wave.wav" />
+      <change beforePath="$PROJECT_DIR$/src/com/th/BGMusic.java" afterPath="$PROJECT_DIR$/src/com/th/BGMusic.java" />
+      <change beforePath="$PROJECT_DIR$/src/com/th/Main.java" afterPath="$PROJECT_DIR$/src/com/th/MainFrame.java" />
+      <change beforePath="$PROJECT_DIR$/src/com/th/SFX.java" afterPath="$PROJECT_DIR$/src/com/th/SFX.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -52,22 +20,49 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="375">
-      <file leaf-file-name="Main.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/th/Main.java">
+      <file leaf-file-name="MainFrame.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/com/th/MainFrame.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="119">
-              <caret line="7" column="0" lean-forward="true" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
+            <state relative-caret-position="287">
+              <caret line="25" column="5" lean-forward="true" selection-start-line="25" selection-start-column="5" selection-end-line="25" selection-end-column="5" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="StartPanel.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/th/StartPanel.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="17">
+              <caret line="1" column="0" lean-forward="false" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
+              <folding>
+                <element signature="e#1157#1158#0" expanded="true" />
+                <element signature="e#1228#1229#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="GlassPanel.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/th/GlassPanel.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="221">
+              <caret line="15" column="5" lean-forward="false" selection-start-line="15" selection-start-column="5" selection-end-line="15" selection-end-column="5" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="SFX.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="SFX.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/th/SFX.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="289">
-              <caret line="20" column="32" lean-forward="true" selection-start-line="20" selection-start-column="32" selection-end-line="20" selection-end-column="32" />
-              <folding />
+            <state relative-caret-position="17">
+              <caret line="1" column="0" lean-forward="false" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -75,8 +70,8 @@
       <file leaf-file-name="BGMusic.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/th/BGMusic.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+            <state relative-caret-position="34">
+              <caret line="5" column="27" lean-forward="false" selection-start-line="5" selection-start-column="27" selection-end-line="5" selection-end-column="27" />
               <folding />
             </state>
           </provider>
@@ -95,8 +90,12 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/com/th/Main.java" />
+        <option value="$PROJECT_DIR$/src/com/th/SFX.java" />
         <option value="$PROJECT_DIR$/src/com/th/BGMusic.java" />
+        <option value="$PROJECT_DIR$/src/com/th/Main.java" />
+        <option value="$PROJECT_DIR$/src/com/th/StartPanel.java" />
+        <option value="$PROJECT_DIR$/src/com/th/GlassPanel.java" />
+        <option value="$PROJECT_DIR$/src/com/th/MainFrame.java" />
       </list>
     </option>
   </component>
@@ -174,7 +173,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Application.MainFrame">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
       <option name="MAIN_CLASS_NAME" value="com.th.Main" />
@@ -191,6 +190,25 @@
       <RunnerSettings RunnerId="Run" />
       <ConfigurationWrapper RunnerId="Run" />
     </configuration>
+    <configuration name="MainFrame" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
+        <pattern>
+          <option name="PATTERN" value="com.th.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="MAIN_CLASS_NAME" value="com.th.MainFrame" />
+      <option name="VM_PARAMETERS" />
+      <option name="PROGRAM_PARAMETERS" />
+      <option name="WORKING_DIRECTORY" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="ENABLE_SWING_INSPECTOR" value="false" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <module name="Touhoudx" />
+      <envs />
+    </configuration>
     <configuration default="true" type="Application" factoryName="Application">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
       <option name="MAIN_CLASS_NAME" />
@@ -206,6 +224,15 @@
       <envs />
       <method />
     </configuration>
+    <list size="2">
+      <item index="0" class="java.lang.String" itemvalue="Application.Main" />
+      <item index="1" class="java.lang.String" itemvalue="Application.MainFrame" />
+    </list>
+    <recent_temporary>
+      <list size="1">
+        <item index="0" class="java.lang.String" itemvalue="Application.MainFrame" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="ShelveChangesManager" show_recycled="false">
     <option name="remove_strategy" value="false" />
@@ -221,6 +248,14 @@
       <option name="presentableId" value="Default" />
       <updated>1518900162808</updated>
     </task>
+    <task id="LOCAL-00001" summary="Adds BGMusic and SFX code">
+      <created>1518900791511</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1518900791511</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -229,12 +264,13 @@
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32969433" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -259,40 +295,69 @@
   <component name="VcsContentAnnotationSettings">
     <option name="myLimit" value="2678400000" />
   </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Adds BGMusic and SFX code" />
+    <option name="LAST_COMMIT_MESSAGE" value="Adds BGMusic and SFX code" />
+  </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/com/th/Main.java">
+    <entry file="file://$PROJECT_DIR$/src/com/th/MainFrame.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/th/Main.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="7" column="0" lean-forward="true" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/th/BGMusic.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/th/SFX.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="289">
-          <caret line="20" column="32" lean-forward="true" selection-start-line="20" selection-start-column="32" selection-end-line="20" selection-end-column="32" />
+        <state relative-caret-position="17">
+          <caret line="1" column="0" lean-forward="false" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/th/BGMusic.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34">
+          <caret line="5" column="27" lean-forward="false" selection-start-line="5" selection-start-column="27" selection-end-line="5" selection-end-column="27" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/th/StartPanel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="17">
+          <caret line="1" column="0" lean-forward="false" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
+          <folding>
+            <element signature="e#1157#1158#0" expanded="true" />
+            <element signature="e#1228#1229#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/th/GlassPanel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="221">
+          <caret line="15" column="5" lean-forward="false" selection-start-line="15" selection-start-column="5" selection-end-line="15" selection-end-column="5" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/th/MainFrame.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="287">
+          <caret line="25" column="5" lean-forward="true" selection-start-line="25" selection-start-column="5" selection-end-line="25" selection-end-column="5" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

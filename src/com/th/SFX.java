@@ -1,6 +1,4 @@
-package com.th; /**
- * Created by RyanNiu on 5/8/2016.
- */
+package com.th;
 
 import javax.sound.sampled.*;
 import java.io.File;
