@@ -6,8 +6,8 @@ public class Background extends JPanel{
 	
   private int level;
   
-  private final int IMAGEWIDTH = 1280; //constants
-  private final int IMAGEHEIGHT = 960;
+  private final int IMAGEWIDTH = 960; //constants
+  private final int IMAGEHEIGHT = 1280;
   private final int SPEED = 1;
   
   public Background(){
