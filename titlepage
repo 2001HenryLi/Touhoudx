@@ -19,11 +19,18 @@ public class Title extends JPanel{
   public void paintComponent(Graphics g){
     super.paintComponent(g);
     render(g);
+    doText(g);
   }
   
   public void render(Graphics g){
-  	pic = Toolkit.getDefaultToolkit().getImage("titleresized.PNG");
-	  double ypos = Math.cos(ang)*50+140;
-	  g.drawImage(pic, 225, (int)ypos, 500, 140, this);
+	pic = Toolkit.getDefaultToolkit().getImage("titleresized.PNG");
+	double ypos = Math.cos(ang)*70+140;
+	g.drawImage(pic, 225, (int)ypos, 500, 140, this);
+  }
+  
+  public void doText(Graphics g){
+	  g.setFont(new Font(Font.SANS_SERIF, Font.TRUETYPE_FONT, 30));
+	  double ypos = Math.sin(ang)*20+700;
+	  g.drawString("Press Space to Play", 360, (int)ypos);
   }
 }
