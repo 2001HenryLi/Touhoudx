@@ -1,35 +1,24 @@
 import java.awt.*;
-import javax.swing;
+import javax.swing.*;
 
 public class Background extends JPanel{
-  private int x1; //upper left and bottom right coordinates
-  private int y1;
-  private int x2;
-  private int y2;
+  public Image pic;
+	
+  private int level;
   
-  private final int IMAGEWIDTH = 100; //constants
-  private final int IMAGEHEIGHT = 100;
+  private final int IMAGEWIDTH = 1280; //constants
+  private final int IMAGEHEIGHT = 960;
   private final int SPEED = 1;
-  private final int SPACE = 10; //buffer space
   
   public Background(){
-    x1 = 10;
-    x2 = IMAGEWIDTH - SPACE;
-    y1 = 0
-    y2 = IMAGEWIDTH;
+    level = 0;
   }
   
   public void update(){ //ryan calls this method
-    y1+= SPEED;
-    y2+= SPEED;
-    if(y1 > IMAGEHEIGHT){
-      y1 = 0;
-      y2 = IMAGEHEIGHT;
-    }
-  }
-  
-  public void shakeScreen(){ //if you want effects and stuff
-    //not gonna do yet
+    level += SPEED;
+    if(level > IMAGEHEIGHT)
+      level = 0;
+    repaint();
   }
   
   public void paintComponent(Graphics g){
@@ -38,7 +27,8 @@ public class Background extends JPanel{
   }
   
   public void render(Graphics g){
-    g.drawImage(pic, SPACE, 0, x1, y1, SPACE, y2, IMAGEWIDTH-SPACE, IMAGEHEIGHT, this);
-    g.drawImage(pic, x1, y1, x2, y2, SPACE, 0, x2, IMAGEHEIGHT-y2, this);
+	pic = Toolkit.getDefaultToolkit().getImage("backwlines.PNG");
+	g.drawImage(pic, 0, 0, IMAGEWIDTH, IMAGEHEIGHT-level, 0, level, IMAGEWIDTH, IMAGEHEIGHT, this);
+	g.drawImage(pic, 0, IMAGEHEIGHT-level, IMAGEWIDTH, IMAGEHEIGHT, 0, 0, IMAGEWIDTH, level, this);
   }
 }
