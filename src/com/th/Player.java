@@ -20,7 +20,6 @@ public class Player {
             System.out.println("failed");
             System.exit(-1);
         }
-        System.out.println(sprite);
         x = 100;
         y = 100;
         vx = 5;

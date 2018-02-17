@@ -10,6 +10,8 @@ class PlayPanel extends JPanel implements KeyListener, FocusListener, ActionList
     private final int HEIGHT = (int)(960 * MASTER_SCALE);
 
     private Player p;
+    private int xDir = 0;
+    private int yDir = 0;
 
     public PlayPanel(Player p){
         setBackground(new Color(255,255,255));
@@ -22,24 +24,27 @@ class PlayPanel extends JPanel implements KeyListener, FocusListener, ActionList
     }
     public void paintComponent(Graphics g){
         super.paintComponent(g);
-        g.drawImage(p.sprite, p.x, p.y, p.sprite.getWidth(this), p.sprite.getHeight(this),this);
-        //System.out.println("yee");
+        g.drawImage(p.sprite, p.x, p.y, 64, 64,this);
     }
 
     public void update(){
         if(!isFocusOwner()) requestFocus();
-
+        if(!(xDir == 0 && yDir == 0)) p.move(xDir, yDir);
         repaint();
     }
     public void keyTyped(KeyEvent e) {}
     public void keyPressed(KeyEvent e){
         int key = e.getKeyCode();
-        if(key == KeyEvent.VK_LEFT) p.move(-1,0);
-        if(key == KeyEvent.VK_RIGHT) p.move(1,0);
-        if(key == KeyEvent.VK_UP) p.move(0,-1);
-        if(key == KeyEvent.VK_DOWN) p.move(0,1);
+        if(key == KeyEvent.VK_LEFT) xDir = -1;
+        if(key == KeyEvent.VK_RIGHT) xDir = 1;
+        if(key == KeyEvent.VK_UP) yDir = -1;
+        if(key == KeyEvent.VK_DOWN) yDir = 1;
     }
-    public void keyReleased(KeyEvent e) {}
+    public void keyReleased(KeyEvent e) {
+        int key = e.getKeyCode();
+        if(key == KeyEvent.VK_LEFT || key == KeyEvent.VK_RIGHT) xDir = 0;
+        if(key == KeyEvent.VK_UP || key == KeyEvent.VK_DOWN) yDir = 0;
+    }
     public void focusGained(FocusEvent e) {}
     public void focusLost(FocusEvent e) {}
     public void actionPerformed(ActionEvent e){}
