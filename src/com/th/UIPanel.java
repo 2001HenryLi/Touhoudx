@@ -16,10 +16,6 @@ class UIPanel extends JPanel{
     }
     public void paintComponent(Graphics g){
         super.paintComponent(g);
-
-        //this prints the title
-
-
     }
 
     public void update(){
