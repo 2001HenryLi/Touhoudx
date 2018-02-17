@@ -5,8 +5,6 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change beforePath="$PROJECT_DIR$/out/production/Touhoudx/com/th/PlayPanel.class" afterPath="$PROJECT_DIR$/out/production/Touhoudx/com/th/PlayPanel.class" />
       <change beforePath="$PROJECT_DIR$/out/production/Touhoudx/com/th/Player.class" afterPath="$PROJECT_DIR$/out/production/Touhoudx/com/th/Player.class" />
-      <change beforePath="$PROJECT_DIR$/src/com/th/PlayPanel.java" afterPath="$PROJECT_DIR$/src/com/th/PlayPanel.java" />
-      <change beforePath="$PROJECT_DIR$/src/com/th/Player.java" afterPath="$PROJECT_DIR$/src/com/th/Player.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -74,8 +72,8 @@
       <file leaf-file-name="Player.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/com/th/Player.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="273">
-              <caret line="19" column="41" lean-forward="true" selection-start-line="19" selection-start-column="41" selection-end-line="19" selection-end-column="41" />
+            <state relative-caret-position="341">
+              <caret line="23" column="16" lean-forward="true" selection-start-line="23" selection-start-column="16" selection-end-line="23" selection-end-column="16" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -323,7 +321,14 @@
       <option name="project" value="LOCAL" />
       <updated>1518908245356</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="working on player movement">
+      <created>1518909635420</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1518909635420</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -391,7 +396,8 @@
     <MESSAGE value="Fonts and stuff." />
     <MESSAGE value="Renamed the folders" />
     <MESSAGE value="made the thing actually appaer lul" />
-    <option name="LAST_COMMIT_MESSAGE" value="made the thing actually appaer lul" />
+    <MESSAGE value="working on player movement" />
+    <option name="LAST_COMMIT_MESSAGE" value="working on player movement" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -734,8 +740,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/th/Player.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="273">
-          <caret line="19" column="41" lean-forward="true" selection-start-line="19" selection-start-column="41" selection-end-line="19" selection-end-column="41" />
+        <state relative-caret-position="341">
+          <caret line="23" column="16" lean-forward="true" selection-start-line="23" selection-start-column="16" selection-end-line="23" selection-end-column="16" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
