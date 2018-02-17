@@ -13,7 +13,6 @@ class PlayPanel extends JPanel implements KeyListener, FocusListener, ActionList
 
     public PlayPanel(Player p){
         setBackground(new Color(255,255,255));
-        requestFocus();
         setPreferredSize(new Dimension(WIDTH,HEIGHT));
         addKeyListener(this);
         addFocusListener(this);
@@ -24,11 +23,13 @@ class PlayPanel extends JPanel implements KeyListener, FocusListener, ActionList
     public void paintComponent(Graphics g){
         super.paintComponent(g);
         g.drawImage(p.sprite, p.x, p.y, p.sprite.getWidth(this), p.sprite.getHeight(this),this);
+        //System.out.println("yee");
     }
 
     public void update(){
         if(!isFocusOwner()) requestFocus();
-        //System.out.println(p.x);
+
+        repaint();
     }
     public void keyTyped(KeyEvent e) {}
     public void keyPressed(KeyEvent e){

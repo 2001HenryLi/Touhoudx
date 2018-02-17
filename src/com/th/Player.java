@@ -10,7 +10,7 @@ public class Player {
     public int vx, vy;
 
     public Player(){
-        sprite = Toolkit.getDefaultToolkit().getImage("resources\\Character Sprites\\cirno.png");;
+        sprite = Toolkit.getDefaultToolkit().getImage("resources\\CharacterSprites\\hitbox.png");;
         x = 100;
         y = 100;
         vx = 5;

@@ -23,6 +23,6 @@ class UIPanel extends JPanel{
     }
 
     public void update(){
-
+        repaint();
     }
 }
