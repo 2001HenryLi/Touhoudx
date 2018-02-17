@@ -24,7 +24,8 @@ class PlayPanel extends JPanel implements KeyListener, FocusListener, ActionList
     }
     public void paintComponent(Graphics g){
         super.paintComponent(g);
-        g.drawImage(p.sprite, p.x, p.y, 64, 64,this);
+        g.drawImage(p.sprite, p.getSpriteX(), p.getSpriteY(), p.spriteWidth, p.spriteHeight,this);
+        if(keysDown[4]) g.drawImage(p.hitbox, p.getHitboxX(), p.getHitboxY(), p.hitboxWidth, p.hitboxHeight,this);
     }
 
     public void update(){
