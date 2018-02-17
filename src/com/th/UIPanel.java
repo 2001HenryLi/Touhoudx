@@ -19,7 +19,10 @@ class UIPanel extends JPanel{
 
         //this prints the title
 
-        //Image border = Toolkit.getDefaultToolkit().getImage("resources\\board\\start_menu\\border.png");
-        //g.drawImage(border,-bo,-bo,WIDTH+2*bo,HEIGHT+2*bo,this);
+
+    }
+
+    public void update(){
+
     }
 }

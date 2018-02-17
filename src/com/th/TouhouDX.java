@@ -4,8 +4,10 @@ import java.util.concurrent.*;
 
 public class TouhouDX {
     private BGMusic bgm = new BGMusic();
-    public PlayPanel pp = new PlayPanel();
+    public Player p = new Player();
+    public PlayPanel pp = new PlayPanel(p);
     public UIPanel UI = new UIPanel();
+
 
     public static final int FPS = 60;
 
@@ -22,6 +24,7 @@ public class TouhouDX {
     }
 
     private void update(){
-
+        pp.update();
+        UI.update();
     }
 }
