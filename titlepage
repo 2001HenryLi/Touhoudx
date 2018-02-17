@@ -1,0 +1,29 @@
+import java.awt.*;
+import javax.swing.*;
+
+public class Title extends JPanel{
+  public Image pic;
+	
+  private double ang;
+  
+  public Title(){
+    ang = Math.PI;
+    setBackground(Color.WHITE);
+  }
+  
+  public void updategraphic(){ //ryan calls this method
+    ang += (Math.PI/90);
+    repaint();
+  }
+  
+  public void paintComponent(Graphics g){
+    super.paintComponent(g);
+    render(g);
+  }
+  
+  public void render(Graphics g){
+  	pic = Toolkit.getDefaultToolkit().getImage("titleresized.PNG");
+	  double ypos = Math.cos(ang)*50+140;
+	  g.drawImage(pic, 225, (int)ypos, 500, 140, this);
+  }
+}
