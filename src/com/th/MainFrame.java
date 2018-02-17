@@ -48,12 +48,5 @@ public class MainFrame extends JFrame {
         getGlassPane().setVisible(true);
         setVisible(true);
         tdx.startGame();
-        if(true){  //win
-
-        }
-        else{  //loss
-
-        }
-        //System.exit(0);
     }
 }
