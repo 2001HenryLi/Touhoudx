@@ -36,8 +36,8 @@ class PlayPanel extends JPanel implements KeyListener, FocusListener, ActionList
         int key = e.getKeyCode();
         if(key == KeyEvent.VK_LEFT) p.move(-1,0);
         if(key == KeyEvent.VK_RIGHT) p.move(1,0);
-        if(key == KeyEvent.VK_UP) p.move(0,1);
-        if(key == KeyEvent.VK_DOWN) p.move(0,-1);
+        if(key == KeyEvent.VK_UP) p.move(0,-1);
+        if(key == KeyEvent.VK_DOWN) p.move(0,1);
     }
     public void keyReleased(KeyEvent e) {}
     public void focusGained(FocusEvent e) {}
