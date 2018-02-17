@@ -7,21 +7,26 @@ import javax.swing.*;
 
 public class MainFrame extends JFrame {
     private final double MASTER_SCALE = 1.0;
+    private final int WIDTH = 1280;
+    private final int HEIGHT = 960;
+
     private StartPanel sp = null;
     private GlassPanel gp = new GlassPanel();
     private JPanel mainPanel = new JPanel();
 
-    private int stageStart = 0;
+    private TouhouDX tdx = new TouhouDX();
     public MainFrame(){
         super("Touhou DX");
-        mainPanel.setPreferredSize(new Dimension(612,925));
+        mainPanel.setPreferredSize(new Dimension(WIDTH, HEIGHT));
         mainPanel.setLayout(new FlowLayout(FlowLayout.CENTER,0,0));
-        setSize((int)(618*MASTER_SCALE),(int)(954*MASTER_SCALE));
+
+        setSize((int)(WIDTH*MASTER_SCALE),(int)(HEIGHT*MASTER_SCALE));
         setDefaultCloseOperation(EXIT_ON_CLOSE);
-        setResizable(false);  //let's keep things simple, aight?
+        setResizable(false);
         setIconImage(Toolkit.getDefaultToolkit().getImage("resources\\misc\\logo.png"));
         setGlassPane(gp);
         getGlassPane().setVisible(false);
+
         sp = new StartPanel();
     }
     public static void main(String[] args){
@@ -33,12 +38,12 @@ public class MainFrame extends JFrame {
         mainPanel.add(sp);
         setContentPane(mainPanel);
         setVisible(true);
-        if(sp.getInput()) stageStart = 46;
+        sp.waitForInput();
     }
     public void run(){
         mainPanel.remove(sp);
-        //mainPanel.add(pd.ep);
-        //mainPanel.add(pd.bp);
+        mainPanel.add(tdx.pp);
+        mainPanel.add(tdx.UI);
         //pack();
         getGlassPane().setVisible(true);
         setVisible(true);
@@ -49,6 +54,6 @@ public class MainFrame extends JFrame {
         else{  //loss
 
         }
-        System.exit(0);
+        //System.exit(0);
     }
 }
