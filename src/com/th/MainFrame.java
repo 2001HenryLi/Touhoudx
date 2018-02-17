@@ -18,12 +18,12 @@ public class MainFrame extends JFrame {
     public MainFrame(){
         super("Touhou DX");
         mainPanel.setPreferredSize(new Dimension(WIDTH, HEIGHT));
-        mainPanel.setLayout(new FlowLayout(FlowLayout.CENTER,0,0));
+        mainPanel.setLayout(new FlowLayout(FlowLayout.LEFT,0,0));
 
-        setSize((int)(WIDTH*MASTER_SCALE),(int)(HEIGHT*MASTER_SCALE));
+        setSize((int)(WIDTH*MASTER_SCALE) + 6, (int)(HEIGHT*MASTER_SCALE));
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setResizable(false);
-        setIconImage(Toolkit.getDefaultToolkit().getImage("resources\\misc\\logo.png"));
+        setIconImage(Toolkit.getDefaultToolkit().getImage("resources\\misc\\logo.jpg"));
         setGlassPane(gp);
         getGlassPane().setVisible(false);
 
@@ -47,7 +47,7 @@ public class MainFrame extends JFrame {
         //pack();
         getGlassPane().setVisible(true);
         setVisible(true);
-        //pd.startGame(stageStart);
+        tdx.startGame();
         if(true){  //win
 
         }
