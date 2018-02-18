@@ -37,8 +37,8 @@ class PlayPanel extends JPanel implements KeyListener, FocusListener, ActionList
     }
 
     public void makeBackground(Graphics g) {
-        g.drawImage(Toolkit.getDefaultToolkit().getImage("background.png"),0, backgroundScroll,960,1280,this);
-        g.drawImage(Toolkit.getDefaultToolkit().getImage("background.png"),0,0,960, backgroundScroll,this);
+        g.drawImage(Toolkit.getDefaultToolkit().getImage("Resources/Background/background.png"),0, backgroundScroll,960,1280,this);
+        g.drawImage(Toolkit.getDefaultToolkit().getImage("Resources/Background/background.png"),0,0,960, backgroundScroll,this);
         g.drawImage(Toolkit.getDefaultToolkit().getImage("Resources/misc/lines.PNG"),0,0,960,1280,this);
     }
 
