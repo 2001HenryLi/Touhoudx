@@ -110,7 +110,6 @@ public class MainFrame extends JFrame {
         winSwitch = true;
         gameOverSwitch = false;
         restartSwitch = false;
-        restart();
     }
 
     public void gameOver(){

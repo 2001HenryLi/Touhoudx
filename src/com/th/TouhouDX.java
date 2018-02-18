@@ -19,17 +19,17 @@ public class TouhouDX {
     }
 
     public void update(){
-        if(!pp.gameOver && !pp.win){
+        if(pp.win)
+        {
+            wp.update();
+        }
+        else if(!pp.gameOver && !pp.win){
             pp.update();
             UI.update();
         }
         else if(pp.gameOver && !pp.win){
             gp.update();
         }
-        else if(pp.win)
-        {
-            System.out.println("DK DONKEY KONG");
-            wp.update();
-        }
+
     }
 }
