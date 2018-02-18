@@ -37,7 +37,7 @@ public class SelectPanel extends JPanel implements KeyListener, FocusListener{
 			g.drawImage(choicey, 640, 0, 1280, 960, 640, 0, 1280, 960, this);
 		g.setFont(new Font(Font.SANS_SERIF, Font.TRUETYPE_FONT, 50));
 		g.setColor(Color.WHITE);
-		g.drawString("Select a character (Space to toggle)", 375, 100);
+		g.drawString("Select a character (Arrow keys to toggle)", 275, 100);
 	}
 	
 	public void update(){
@@ -66,12 +66,10 @@ public class SelectPanel extends JPanel implements KeyListener, FocusListener{
 				gotInput = true;
 			}
 		}
-		if(e.getKeyCode() == KeyEvent.VK_SPACE){
-			if(choice == 1)
-				choice = 2;
-			else
-				choice = 1;
-		}
+		if((e.getKeyCode() == KeyEvent.VK_LEFT) && (choice == 2))
+			choice = 1;
+		else if((e.getKeyCode() == KeyEvent.VK_RIGHT) && (choice == 1))
+			choice = 2;
 	}
 	public void keyReleased(KeyEvent e) {
 	}
