@@ -15,21 +15,22 @@ class PlayPanel extends JPanel implements KeyListener, FocusListener, ActionList
     public boolean[] keysDown = new boolean[INPUT_CODES.length];
 
     private Player p;
+    private Boss b;
     public volatile ArrayList<Bullet> projectiles = new ArrayList<>();
 
-    public PlayPanel(Player p){
+    public PlayPanel(Player p, Boss b){
         setBackground(new Color(255,255,255));
         setPreferredSize(new Dimension(WIDTH,HEIGHT));
         addKeyListener(this);
         addFocusListener(this);
-
         this.p = p;
+        this.b = b;
         requestFocus();
     }
     public void paintComponent(Graphics g){
         super.paintComponent(g);
         makeBackground(g);
-
+        g.drawImage(Toolkit.getDefaultToolkit().getImage("Resources/BossSprites/BossStage1.png"),b.getXPos(),b.getYPos(),b.width,b.height,this);
         g.drawImage(p.sprite, p.getSpriteX(), p.getSpriteY(), p.spriteWidth, p.spriteHeight,this);
         if(keysDown[4]) g.drawImage(p.hitbox, p.getHitboxX(), p.getHitboxY(), p.hitboxWidth, p.hitboxHeight,this);
 
@@ -47,10 +48,11 @@ class PlayPanel extends JPanel implements KeyListener, FocusListener, ActionList
     public void update(){
         if(!isFocusOwner()) requestFocus();
         p.update();
+        b.update();
         for(int i = 0; i < projectiles.size(); i++){
-            Bullet b = projectiles.get(i);
-            b.update();
-            if(!b.isOnscreen()) projectiles.remove(b);
+            Bullet bull = projectiles.get(i);
+            bull.update();
+            if(!bull.isOnscreen()) projectiles.remove(bull);
         }
         repaint();
     }
