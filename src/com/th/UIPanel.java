@@ -36,9 +36,9 @@ class UIPanel extends JPanel{
     }
 	
 	public void render(Graphics g){
-		Image back = Toolkit.getDefaultToolkit().getImage(Resources/UISprites/backUI.png);
-		Image heart = Toolkit.getDefaultToolkit().getImage(Resources/UISprites/Heart.png);
-		Image card = Toolkit.getDefaultToolkit().getImage(Resources/UISprites/Spellcard.png);
+		Image back = Toolkit.getDefaultToolkit().getImage("Resources/UISprites/backUI.png");
+		Image heart = Toolkit.getDefaultToolkit().getImage("Resources/UISprites/Heart.png");
+		Image card = Toolkit.getDefaultToolkit().getImage("Resources/UISprites/Spellcard.png");
 		g.drawImage(back, 0,0, WIDTH, HEIGHT, this);
 		g.setFont(new Font(Font.SANS_SERIF, Font.TRUETYPE_FONT, 25));
 		g.drawString("Pwr: "+power+" / "+TOTALPOWER, 10, 60);
