@@ -151,6 +151,10 @@ public class Boss {
     }
 
     public void update(){
+        if(health > 2500)
+            name = "BossStage1";
+        else
+            name = "BossStage2";
         if(startTime == -1) startTime = System.nanoTime();
         elapsedTime = System.nanoTime() - startTime;
 
