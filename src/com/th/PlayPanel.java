@@ -5,6 +5,7 @@ import java.awt.*;
 import java.awt.event.*;
 
 class PlayPanel extends JPanel implements KeyListener, FocusListener, ActionListener{
+    private int backgroundScroll = 0;
     private final double MASTER_SCALE = 1.0;  //scale for the whole thing
     private final int WIDTH = (int)(1280 * 3 / 5 * MASTER_SCALE);
     private final int HEIGHT = (int)(960 * MASTER_SCALE);
@@ -25,9 +26,19 @@ class PlayPanel extends JPanel implements KeyListener, FocusListener, ActionList
     }
     public void paintComponent(Graphics g){
         super.paintComponent(g);
+        makeBackground(g);
         g.drawImage(p.sprite, p.getSpriteX(), p.getSpriteY(), p.spriteWidth, p.spriteHeight,this);
         if(keysDown[4]) g.drawImage(p.hitbox, p.getHitboxX(), p.getHitboxY(), p.hitboxWidth, p.hitboxHeight,this);
+        backgroundScroll += 10;
+        if(backgroundScroll >= 1000)
+            backgroundScroll = 0;
     }
+
+    public void makeBackground(Graphics g)
+    {
+        g.drawImage(Toolkit.getDefaultToolkit().getImage("background.png"),0,backgroundScroll,960,1280+backgroundScroll,this);
+    }
+
 
     public void update(){
         if(!isFocusOwner()) requestFocus();
