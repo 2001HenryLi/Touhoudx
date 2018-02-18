@@ -65,6 +65,6 @@ public class Function {
 		if(functiontype == 7) return "y = ("+c+"x)^3";
 		if(functiontype == 8) return "y = sqrt("+c+"x)";
 		if(functiontype == 9) return "y = ln("+c+"x)";
-		return "y = ("+c+"e)^x";
+		return "y = e^("+c+"x)";
 	}
 }
