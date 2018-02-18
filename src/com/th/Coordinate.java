@@ -1,17 +1,10 @@
 package com.th;
 
-public class Coordinate {
-	
-	private int x;
-	private int y;
-	
-	public Coordinate(int one, int two) {
-		x = one;
-		y = two;
-	}
+import java.awt.image.BufferedImage;
 
-	public int getX(){ return x; }
-	public int getY(){ return y; }
-	public void setX(int xpos){ x = xpos;}
-	public void setY(int ypos){ y = ypos;}
+public class Coordinate extends Bullet{
+
+    public Coordinate(BufferedImage img, int X, int Y, int w, int h, MovePath MP){
+        super(img, X, Y, w, h, MP);
+    }
 }

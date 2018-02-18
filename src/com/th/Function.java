@@ -20,20 +20,13 @@ public class Function {
 	private int constant;
 	private final double BOXHEIGHT = 83.3;
 	
-	public Function(int f, int c){
-		functiontype = f;
-		constant = c;
-	}
-	
-	//testing method
-	public static void main(String [] args){
-		Function f = new Function(4,5);
-		f.chooseRandom();
+	public Function(){
+		chooseRandom();
 	}
 	
 	public void chooseRandom(){
-		functiontype = 6;//(int)(Math.random()*9+1);
-		constant = 1;//(int)(Math.random()*5+1);
+		functiontype = (int)(Math.random()*9+1);
+		constant = (int)(Math.random()*5+1);
 	}
 	
 	//returns values in pixels

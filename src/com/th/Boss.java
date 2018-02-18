@@ -25,7 +25,7 @@ public class Boss {
     public int spriteWidth;
     public int spriteHeight;
 
-    private BufferedImage[] shots = new BufferedImage[3];
+    private BufferedImage[] shots = new BufferedImage[4];
 
     private BulletPattern circle = new BulletPattern() {
         @Override
@@ -58,7 +58,7 @@ public class Boss {
                 for (int i = 0; i < 32; i++) {
                     double radians = 2 * Math.PI * i / 32 + offset;
                     int j0 = j;
-                    pattern.add(new Bullet(shots[0], x - 16, y - 16, 32, 32, new MovePath() {
+                    pattern.add(new Bullet(shots[3], x - 16, y - 16, 32, 32, new MovePath() {
                         @Override
                         public int[] move(long t, int x0, int y0) {
                             int[] pos = {x0, y0};
@@ -137,6 +137,7 @@ public class Boss {
             shots[0] = ImageIO.read(new File("Resources\\ProjectileSprites\\BasicShot.png"));
             shots[1] = ImageIO.read(new File("Resources\\ProjectileSprites\\plusc.png"));
             shots[2] = ImageIO.read(new File("Resources\\ProjectileSprites\\PotatoProjectile.png"));
+            shots[3] = ImageIO.read(new File("Resources\\ProjectileSprites\\CircleLarge.png"));
         } catch(IOException e) {
             System.out.println("failed");
             System.exit(-1);

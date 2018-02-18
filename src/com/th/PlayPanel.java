@@ -1,7 +1,11 @@
 package com.th;
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 
 class PlayPanel extends JPanel implements KeyListener, FocusListener, ActionListener{
@@ -23,15 +27,13 @@ class PlayPanel extends JPanel implements KeyListener, FocusListener, ActionList
     public volatile ArrayList<Bullet> bossProjectiles = new ArrayList<>();
     public volatile ArrayList<Bomb> bombProjectiles = new ArrayList<>();
 
-    public Function f;
-    private double fofx;
+    public Function f = new Function();
+    private double fofx = 1;
     public volatile ArrayList<Coordinate> points = new ArrayList<>();
 
     public int pixels = 0;
 
     public PlayPanel(Player p, Boss b){
-        fofx = 0;
-        f = new Function(1,1);
         gameOver = false;
         win = false;
         setBackground(new Color(255,255,255));
@@ -57,11 +59,11 @@ class PlayPanel extends JPanel implements KeyListener, FocusListener, ActionList
         for(Bullet bull : projectiles) g.drawImage(bull.sprite, bull.getSpriteX(), bull.getSpriteY(), bull.spriteWidth, bull.spriteHeight,this);
         for(Bullet bull : bossProjectiles) g.drawImage(bull.sprite, bull.getSpriteX(), bull.getSpriteY(), bull.spriteWidth, bull.spriteHeight,this);
         for(Bomb bomb : bombProjectiles) g.drawImage(bomb.sprite, bomb.getSpriteX(), bomb.getSpriteY(), bomb.spriteWidth, bomb.spriteHeight,this);
+        for(Coordinate c : points) g.drawImage(c.sprite, c.getSpriteX(), c.getSpriteY(), c.spriteWidth, c.spriteHeight,this);
 
-        g.setColor(Color.RED);
+        g.setColor(Color.BLUE);
         g.setFont(new Font(Font.SANS_SERIF, Font.TRUETYPE_FONT, 40));
-        g.drawString(f.getFunction(), 50, HEIGHT-40);
-        for(Coordinate c : points){ g.fillRect(c.getX(), HEIGHT- 40- c.getY(), 10,10);}
+        g.drawString(f.getFunction(), 550, HEIGHT-40);
 
         g.drawRect(10, 10, 250, 50);
         g.setColor(Color.WHITE);
@@ -82,7 +84,7 @@ class PlayPanel extends JPanel implements KeyListener, FocusListener, ActionList
         if(!isFocusOwner()) requestFocus();
         p.update();
         b.update();
-        pixels = (int)((b.health/5000)*(250));
+
         for(int i = 0; i < projectiles.size(); i++){
             Bullet bull = projectiles.get(i);
             bull.update();
@@ -106,10 +108,25 @@ class PlayPanel extends JPanel implements KeyListener, FocusListener, ActionList
             }
             if(p.takeDamage(bull)){
                 bossProjectiles = new ArrayList<Bullet>();
+                points = new ArrayList<Coordinate>();
+                fofx = 10;
                 if(!p.isAlive()) gameOver = true;
             }
         }
-
+        for(int i = 0; i < points.size(); i++){
+            Bullet bull = points.get(i);
+            bull.update();
+            if(!bull.isOnscreen()){
+                points.remove(bull);
+                i--;
+            }
+            if(p.takeDamage(bull)){
+                bossProjectiles = new ArrayList<Bullet>();
+                points = new ArrayList<Coordinate>();
+                fofx = 10;
+                if(!p.isAlive()) gameOver = true;
+            }
+        }
         for(int i = 0; i < bombProjectiles.size(); i++){
             Bomb bomb = bombProjectiles.get(i);
             bomb.update();
@@ -120,24 +137,43 @@ class PlayPanel extends JPanel implements KeyListener, FocusListener, ActionList
                     j--;
                 }
             }
+            for(int j = 0; j < points.size(); j++) {
+                Bullet bull = points.get(j);
+                if (bomb.collide(bull)) {
+                    points.remove(bull);
+                    j--;
+                }
+            }
             if(!bomb.isOnscreen() || b.takeDamage(bomb)){
                 bombProjectiles.remove(bomb);
                 i--;
             }
         }
 
-        fofx+= 0.1;
-        if(fofx<10)
-        {
-            System.out.println(fofx+" "+f.getValue(fofx));
-            points.add(new Coordinate((int) (fofx * 100), (int) (f.getValue(fofx))));
+        fofx += 0.03;
+        if(fofx < 10) {
+            try {
+                BufferedImage b = ImageIO.read(new File("Resources/ProjectileSprites/BasicShot.png"));
+                points.add(new Coordinate(b, (int) (fofx * 100), HEIGHT - 40 - (int) (f.getValue(fofx)), 16, 16, new MovePath() {
+                    @Override
+                    public int[] move(long t, int x0, int y0) {
+                        int[] pos = {x0, y0};
+                        return pos;
+                    }
+                }));
+            } catch(IOException e) {
+                System.out.println("failed");
+                System.exit(-1);
+            }
+
+            if(points.size() > 5000) points.remove(0);
         }
         else{
             f.chooseRandom();
             points.clear();
-            fofx = 0;
+            fofx = -1;
         }
-
+        pixels = (int)((b.health/5000)*(250));
         repaint();
     }
 

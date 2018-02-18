@@ -56,7 +56,7 @@ public class SelectPanel extends JPanel implements KeyListener, FocusListener{
 	public void focusLost(FocusEvent e) {
 	}
 	public void keyPressed(KeyEvent e) {
-		if(e.getKeyCode() == VK_ENTER){
+		if(e.getKeyCode() == KeyEvent.VK_ENTER){
 			if(choice == 1) {
 				guy = new Player("cirno");
 				gotInput = true;
@@ -66,7 +66,7 @@ public class SelectPanel extends JPanel implements KeyListener, FocusListener{
 				gotInput = true;
 			}
 		}
-		if(e.getKeyCode() == VK_SPACE){
+		if(e.getKeyCode() == KeyEvent.VK_SPACE){
 			if(choice == 1)
 				choice = 2;
 			else
