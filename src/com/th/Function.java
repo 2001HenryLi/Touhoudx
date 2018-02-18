@@ -37,4 +37,15 @@ public class Function {
 	
 	public int getFuncType(){ return functiontype; }
 	public double getConstant(){ return constant; }
+	
+	public String getFunction(){ 
+		if(functiontype == 1) return "y = sin("+constant+"x)";
+		if(functiontype == 2) return "y = cos("+constant+"x)";
+		if(functiontype == 3) return "y = tan("+constant+"x)";
+		if(functiontype == 5) return "y = "+constant+"x";
+		if(functiontype == 6) return "y = ("+constant+"x)^2";
+		if(functiontype == 7) return "y = ("+constant+"x)^3";
+		if(functiontype == 8) return "y = sqrt("+constant+"x)";
+		return "y = ("+constant+"e)^x";
+	}
 }
