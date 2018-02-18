@@ -16,6 +16,7 @@ public class Player {
 
     public PlayPanel pp;
 
+    public final String SPRITE_DIRECTORY = "Resources/CharacterSprites/";
     public String name = "cirno";
     public BufferedImage sprite;
     public BufferedImage[] sprites = new BufferedImage[7];
@@ -40,16 +41,16 @@ public class Player {
         startTime = System.nanoTime();
         pp = p;
         try {
-            sprite = ImageIO.read(new File("Resources/CharacterSprites/"+name+".png"));
-            sprites[0] = ImageIO.read(new File("Resources/CharacterSprites/"+name+"Left.png"));
-            sprites[1] = ImageIO.read(new File("Resources/CharacterSprites/"+name+"transitleft2.png"));
-            sprites[2] = ImageIO.read(new File("Resources/CharacterSprites/"+name+"transitleft1.png"));
-            sprites[3] = ImageIO.read(new File("Resources/CharacterSprites/"+name+".png"));
-            sprites[4] = ImageIO.read(new File("Resources/CharacterSprites/"+name+"transitright1.png"));
-            sprites[5] = ImageIO.read(new File("Resources/CharacterSprites/"+name+"transitright2.png"));
-            sprites[6] = ImageIO.read(new File("Resources/CharacterSprites/"+name+"Right.png"));
+            sprite = ImageIO.read(new File(SPRITE_DIRECTORY+name+".png"));
+            sprites[0] = ImageIO.read(new File(SPRITE_DIRECTORY+name+"Left.png"));
+            sprites[1] = ImageIO.read(new File(SPRITE_DIRECTORY+name+"transitleft2.png"));
+            sprites[2] = ImageIO.read(new File(SPRITE_DIRECTORY+name+"transitleft1.png"));
+            sprites[3] = ImageIO.read(new File(SPRITE_DIRECTORY+name+".png"));
+            sprites[4] = ImageIO.read(new File(SPRITE_DIRECTORY+name+"transitright1.png"));
+            sprites[5] = ImageIO.read(new File(SPRITE_DIRECTORY+name+"transitright2.png"));
+            sprites[6] = ImageIO.read(new File(SPRITE_DIRECTORY+name+"Right.png"));
 
-            hitbox = ImageIO.read(new File("Resources/CharacterSprites/hitbox2.png"));
+            hitbox = ImageIO.read(new File("Resources/CharacterSprites/hitbox.png"));
         } catch(IOException e) {
             System.out.println("failed");
             System.exit(-1);
@@ -58,10 +59,19 @@ public class Player {
     public void update(){
         if(startTime == -1) startTime = System.nanoTime();
         elapsedTime = System.nanoTime() - startTime;
+
         if(isInVuln && elapsedTime - inVulnTime >= 1000000000){
             isInVuln = false;
-            System.out.println("ree");
+            try {
+                sprites[0] = ImageIO.read(new File(SPRITE_DIRECTORY+name+"Left.png"));
+                sprites[3] = ImageIO.read(new File(SPRITE_DIRECTORY+name+".png"));
+                sprites[6] = ImageIO.read(new File(SPRITE_DIRECTORY+name+"Right.png"));
+            } catch(IOException e) {
+                System.out.println("failed");
+                System.exit(-1);
+            }
         }
+
         move();
         shoot();
     }
@@ -119,10 +129,18 @@ public class Player {
     public boolean takeDamage(Bullet b){
         Rectangle bRect = new Rectangle(b.getSpriteX(), b.getSpriteY(), b.spriteWidth, b.spriteHeight);
         Rectangle pRect = new Rectangle(getHitboxX(), getHitboxY(), hitboxWidth, hitboxHeight);
-        if(bRect.intersects(pRect)){
-            System.out.println(lives);
+        if(bRect.intersects(pRect) && !isInVuln){
+            inVulnTime = System.nanoTime() - startTime;
             lives--;
             isInVuln = true;
+            try {
+                sprites[0] = ImageIO.read(new File(SPRITE_DIRECTORY+name+"Lefthit.png"));
+                sprites[3] = ImageIO.read(new File(SPRITE_DIRECTORY+name+"hit.png"));
+                sprites[6] = ImageIO.read(new File(SPRITE_DIRECTORY+name+"Righthit.png"));
+            } catch(IOException e) {
+                System.out.println("failed");
+                System.exit(-1);
+            }
             x = 1280 * 3 / 5 / 2;
             y = 960;
             return true;

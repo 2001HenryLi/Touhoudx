@@ -72,7 +72,10 @@ class PlayPanel extends JPanel implements KeyListener, FocusListener, ActionList
         for(int i = 0; i < projectiles.size(); i++){
             Bullet bull = projectiles.get(i);
             bull.update();
-            if(!bull.isOnscreen()) projectiles.remove(bull);
+            if(!bull.isOnscreen()){
+                projectiles.remove(bull);
+                i--;
+            }
             else if(b.takeDamage(bull)){
                 projectiles.remove(bull);
                 i--;
@@ -81,13 +84,16 @@ class PlayPanel extends JPanel implements KeyListener, FocusListener, ActionList
         for(int i = 0; i < bossProjectiles.size(); i++){
             Bullet bull = bossProjectiles.get(i);
             bull.update();
-            if(!bull.isOnscreen()) bossProjectiles.remove(bull);
+            if(!bull.isOnscreen()){
+                bossProjectiles.remove(bull);
+                i--;
+            }
             if(p.takeDamage(bull)){
                 bossProjectiles = new ArrayList<Bullet>();
                 if(!p.isAlive()) gameOver = true;
             }
         }
-
+        System.out.println(bossProjectiles.size());
         fofx+= 0.1;
         if(fofx<10)
         	points.add(new Coordinate((int)(fofx*96),(int)(f.getValue(fofx))));

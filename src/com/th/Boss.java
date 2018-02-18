@@ -29,14 +29,16 @@ public class Boss {
         @Override
         public ArrayList<Bullet> makePattern() {
             ArrayList<Bullet> pattern = new ArrayList<Bullet>();
+            double offset = Math.random()* 2 * Math.PI;
             for(int i = 0; i < 16; i++){
-                double radians = 2*Math.PI * i / 16;
-                pattern.add(new Bullet("Resources\\ProjectileSprites\\BasicSQUARE.png", x - 16, y - 16, 32, 32, new MovePath() {
+                double radians = 2 * Math.PI * i / 16 + offset;
+                pattern.add(new Bullet("Resources\\ProjectileSprites\\BasicShot.png", x - 16, y - 16, 32, 32, new MovePath() {
                     @Override
                     public int[] move(long t, int x0, int y0) {
                         int[] pos = {x0, y0};
-                        pos[0] = x0 + (int)(Math.sin(radians) * TimeUnit.MILLISECONDS.convert(t, TimeUnit.NANOSECONDS));
-                        pos[1] = y0 + (int)(Math.cos(radians) * TimeUnit.MILLISECONDS.convert(t, TimeUnit.NANOSECONDS));
+                        long tMilli = TimeUnit.MILLISECONDS.convert(t, TimeUnit.NANOSECONDS);
+                        pos[0] = x0 + (int)(Math.sin(radians) * tMilli);
+                        pos[1] = y0 + (int)(Math.cos(radians) * tMilli);
                         return pos;
                     }
                 }));
@@ -45,6 +47,32 @@ public class Boss {
         }
     };
 
+    private BulletPattern circle2 = new BulletPattern() {
+        @Override
+        public ArrayList<Bullet> makePattern() {
+            ArrayList<Bullet> pattern = new ArrayList<Bullet>();
+            double offset = Math.random()* 2 * Math.PI;
+            for(int j = 0; j < 8; j++) {
+                for (int i = 0; i < 32; i++) {
+                    double radians = 2 * Math.PI * i / 32 + offset;
+                    int j0 = j;
+                    pattern.add(new Bullet("Resources\\ProjectileSprites\\BasicShot.png", x - 16, y - 16, 32, 32, new MovePath() {
+                        @Override
+                        public int[] move(long t, int x0, int y0) {
+                            int[] pos = {x0, y0};
+                            long tMilli = TimeUnit.MILLISECONDS.convert(t, TimeUnit.NANOSECONDS);
+                            pos[0] = x0 + (int) (Math.sin(radians) * Math.max(tMilli - j0*100, 0)/Math.pow(tMilli, 0.1));
+                            pos[1] = y0 + (int) (Math.cos(radians) * Math.max(tMilli - j0*100, 0)/Math.pow(tMilli, 0.1));
+                            return pos;
+                        }
+                    }));
+                }
+            }
+            return pattern;
+        }
+    };
+
+    private BulletPattern[] bps = {circle, circle2};
     public Boss(PlayPanel p){
         pp = p;
         try {
@@ -60,10 +88,11 @@ public class Boss {
 
     public void update(){
         if(startTime == -1) startTime = System.nanoTime();
-        elapsedTime = System.nanoTime()-startTime;
-        if(elapsedTime > previousShot+1000000000){
+        elapsedTime = System.nanoTime() - startTime;
+
+        if(elapsedTime > previousShot + 1000000000){
             previousShot += 1000000000;
-            ArrayList<Bullet> addProjectiles = circle.makePattern();
+            ArrayList<Bullet> addProjectiles = bps[(int)(Math.random() * bps.length)].makePattern();
             for(Bullet b : addProjectiles) pp.bossProjectiles.add(b);
         }
     }
