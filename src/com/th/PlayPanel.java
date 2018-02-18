@@ -7,7 +7,7 @@ import java.util.ArrayList;
 
 class PlayPanel extends JPanel implements KeyListener, FocusListener, ActionListener{
     private int backgroundScroll = 0;
-    private final double MASTER_SCALE = 1.0;  //scale for the whole thing
+    private final double MASTER_SCALE = 1.0;
     private final int WIDTH = (int)(1280 * 3 / 5 * MASTER_SCALE);
     private final int HEIGHT = (int)(960 * MASTER_SCALE);
 
@@ -28,10 +28,13 @@ class PlayPanel extends JPanel implements KeyListener, FocusListener, ActionList
         this.b = b;
         requestFocus();
     }
+
     public void paintComponent(Graphics g){
         super.paintComponent(g);
         makeBackground(g);
-        g.drawImage(Toolkit.getDefaultToolkit().getImage("Resources/BossSprites/BossStage1.png"),b.x,b.y,b.width,b.height,this);
+
+        g.drawImage(b.sprite, b.getSpriteX(), b.getSpriteY(), b.spriteWidth, b.spriteHeight,this);
+
         g.drawImage(p.sprite, p.getSpriteX(), p.getSpriteY(), p.spriteWidth, p.spriteHeight,this);
         if(keysDown[4]) g.drawImage(p.hitbox, p.getHitboxX(), p.getHitboxY(), p.hitboxWidth, p.hitboxHeight,this);
 
@@ -41,7 +44,7 @@ class PlayPanel extends JPanel implements KeyListener, FocusListener, ActionList
         backgroundScroll = (backgroundScroll+5) % 1280;
     }
 
-    public void makeBackground(Graphics g) {
+    public void makeBackground(Graphics g){
         g.drawImage(Toolkit.getDefaultToolkit().getImage("Resources/Background/background.png"),0, backgroundScroll,960,1280,this);
         g.drawImage(Toolkit.getDefaultToolkit().getImage("Resources/Background/background.png"),0,0,960, backgroundScroll,this);
         g.drawImage(Toolkit.getDefaultToolkit().getImage("Resources/misc/lines.PNG"),0,0,960,1280,this);
@@ -55,17 +58,16 @@ class PlayPanel extends JPanel implements KeyListener, FocusListener, ActionList
             Bullet bull = projectiles.get(i);
             bull.update();
             if(!bull.isOnscreen()) projectiles.remove(bull);
+            else if(b.takeDamage(bull)){
+                projectiles.remove(bull);
+                i--;
+            }
         }
         for(int i = 0; i < bossProjectiles.size(); i++){
             Bullet bull = bossProjectiles.get(i);
             bull.update();
-            if(p.takeDamage(bull))
-            {
-                for(;i > 0; i--)
-                bossProjectiles.remove(i);
-            }
-
             if(!bull.isOnscreen()) bossProjectiles.remove(bull);
+            if(p.takeDamage(bull)) bossProjectiles = new ArrayList<Bullet>();
         }
         repaint();
     }
