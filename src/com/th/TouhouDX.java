@@ -7,6 +7,7 @@ public class TouhouDX {
     public PlayPanel pp;
     public UIPanel UI;
     public GameOverPanel gp = new GameOverPanel();
+    public WinPanel wp = new WinPanel();
 
     public TouhouDX (Player P) {
         p = P;
@@ -18,12 +19,17 @@ public class TouhouDX {
     }
 
     public void update(){
-        if(!pp.gameOver){
+        if(!pp.gameOver && !pp.win){
             pp.update();
             UI.update();
         }
-        else{
+        else if(pp.gameOver && !pp.win){
             gp.update();
+        }
+        else if(pp.win)
+        {
+            System.out.println("DK DONKEY KONG");
+            wp.update();
         }
     }
 }

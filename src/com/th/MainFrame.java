@@ -23,6 +23,7 @@ public class MainFrame extends JFrame {
     private TouhouDX tdx;
     private boolean gameOverSwitch = false;
     private boolean restartSwitch = false;
+    private boolean winSwitch = false;
 
     public MainFrame(){
         super("Touhou DX");
@@ -96,8 +97,22 @@ public class MainFrame extends JFrame {
     public void update(){
         if(!gameOverSwitch && tdx.pp.gameOver) gameOver();
         if(!restartSwitch && tdx.gp.restart) restart();
+        if(!winSwitch && tdx.pp.win) win();
         tdx.update();
     }
+
+    public void win(){
+        mainPanel.setVisible(false);
+        mainPanel.remove(tdx.pp);
+        mainPanel.remove(tdx.UI);
+        mainPanel.add(tdx.wp);
+        mainPanel.setVisible(true);
+        winSwitch = true;
+        gameOverSwitch = false;
+        restartSwitch = false;
+        restart();
+    }
+
     public void gameOver(){
         mainPanel.setVisible(false);
         mainPanel.remove(tdx.pp);
@@ -106,6 +121,7 @@ public class MainFrame extends JFrame {
         mainPanel.setVisible(true);
         gameOverSwitch = true;
         restartSwitch = false;
+        winSwitch = false;
     }
 
     public void restart(){
@@ -121,6 +137,7 @@ public class MainFrame extends JFrame {
         run();
         restartSwitch = true;
         gameOverSwitch = false;
+        winSwitch = false;
     }
 
 }
