@@ -154,6 +154,11 @@ public class Boss {
         if(startTime == -1) startTime = System.nanoTime();
         elapsedTime = System.nanoTime() - startTime;
 
+        try {
+            sprite = ImageIO.read(new File("Resources/BossSprites/"+name+".png"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         if(elapsedTime > previousShot + 1000000000){
             previousShot += 1000000000;
             ArrayList<Bullet> addProjectiles = bps[(int)(Math.random() * bps.length)].makePattern();

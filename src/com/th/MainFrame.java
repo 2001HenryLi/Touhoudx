@@ -138,11 +138,12 @@ public class MainFrame extends JFrame {
         mainPanel.setVisible(true);
         sp.requestFocus();
         sp.waitForInput();
-        run();
 
         restartSwitch = true;
         gameOverSwitch = false;
         winSwitch = false;
+
+        run();
     }
 
 }
