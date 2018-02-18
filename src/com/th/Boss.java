@@ -36,7 +36,7 @@ public class Boss {
 
     public void makeBullet()
     {
-        pp.projectiles.add(new Bullet("Resources\\ProjectileSprites\\BasicShot.png", xpos, ypos, 64, 64, new MovePath() {
+        pp.bossProjectiles.add(new Bullet("Resources\\ProjectileSprites\\BasicShot.png", xpos, ypos, 64, 64, new MovePath() {
             @Override
             public int[] move(long t, int x0, int y0) {
                 int[] pos = {x0, y0};
