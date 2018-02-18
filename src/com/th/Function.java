@@ -16,6 +16,7 @@ public class Function {
 	
 	private int functiontype;
 	private int constant;
+	private final double BOXHEIGHT = 83.3;
 	
 	public Function(int f, int c){
 		functiontype = f;
@@ -25,21 +26,26 @@ public class Function {
 	//testing method
 	public static void main(String [] args){
 		Function f = new Function(4,5);
-		System.out.println(f.getFunction());
-		System.out.println(f.onLine(0.3, 4));
+		f.chooseRandom();
+	}
+	
+	public void chooseRandom(){
+		functiontype = (int)(Math.random()*9+1);
+		constant = (int)(Math.random()*5+1);
+		System.out.println(getFunction());
 	}
 	
 	//returns values in pixels
-	public double getValue(int xval){
-		if(functiontype == 1) return (int)(Math.sin(constant*xval)*83.3);
-		if(functiontype == 2) return (int)(Math.cos(constant*xval)*83.3);
-		if(functiontype == 3) return (int)(Math.tan(constant*xval)*83.3);
-		if(functiontype == 5) return (int)(constant*xval*83.3);
-		if(functiontype == 6) return (int)(Math.pow(constant*xval, 2)*83.3);
-		if(functiontype == 7) return (int)(Math.pow(constant*xval, 3)*83.3);
-		if(functiontype == 8) return (int)(Math.pow(constant*xval, 0.5)*83.3);
-		if(functiontype == 9) return (int)(Math.log(constant*xval)*83.3);
-		return (int)(Math.pow(Math.E, constant*xval)*83.3);
+	public double getValue(double xval){
+		if(functiontype == 1) return (int)(Math.sin(constant*xval)*BOXHEIGHT);
+		if(functiontype == 2) return (int)(Math.cos(constant*xval)*BOXHEIGHT);
+		if(functiontype == 3) return (int)(Math.tan(constant*xval)*BOXHEIGHT);
+		if(functiontype == 5) return (int)(constant*xval*BOXHEIGHT);
+		if(functiontype == 6) return (int)(Math.pow(constant*xval, 2)*BOXHEIGHT);
+		if(functiontype == 7) return (int)(Math.pow(constant*xval, 3)*BOXHEIGHT);
+		if(functiontype == 8) return (int)(Math.pow(constant*xval, 0.5)*BOXHEIGHT);
+		if(functiontype == 9) return (int)(Math.log(constant*xval)*BOXHEIGHT);
+		return (int)(Math.pow(Math.E, constant*xval)*BOXHEIGHT);
 	}
 	
 	//detects if coordinates fit function
