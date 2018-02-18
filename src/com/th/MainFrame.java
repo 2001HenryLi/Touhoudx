@@ -140,14 +140,22 @@ public class MainFrame extends JFrame {
 
         sp = new StartPanel();
         mainPanel.add(sp);
+
+        exe = Executors.newSingleThreadScheduledExecutor();
+        exe.scheduleAtFixedRate(new Runnable() {
+            @Override
+            public void run() {
+                slp.update();
+            }
+        }, 0 , 1000/FPS, TimeUnit.MILLISECONDS);
         mainPanel.setVisible(true);
-        sp.requestFocus();
         sp.waitForInput();
 
         restartSwitch = true;
         gameOverSwitch = false;
         winSwitch = false;
         bgm.stop();
+        exe.shutdown();
         run();
     }
 
