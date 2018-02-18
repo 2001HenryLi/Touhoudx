@@ -14,9 +14,9 @@ public class Bullet {
 
     private int x;
     private int y;
-    public Runnable move;
+    private MovePath mp;
 
-    public Bullet(int X, int Y){
+    public Bullet(int X, int Y, MovePath MP){
         try {
             sprite = ImageIO.read(new File("Resources/CharacterSprites/cirno.png"));
         } catch(IOException e) {
@@ -25,13 +25,10 @@ public class Bullet {
         }
         x = X;
         y = Y;
+        mp = MP;
     }
     public void update(){
-        elapsedTime = System.nanoTime();
-
-    }
-    public void move(long t){
-
-
+        elapsedTime = System.nanoTime() - startTime;
+        mp.move(elapsedTime, x, y);
     }
 }
