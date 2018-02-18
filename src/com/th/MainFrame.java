@@ -15,6 +15,7 @@ public class MainFrame extends JFrame {
     public static final int FPS = 60;
 
     ScheduledExecutorService exe;
+    private SelectPanel slp;
     private StartPanel sp;
     private GlassPanel gp = new GlassPanel();
     private JPanel mainPanel = new JPanel();
@@ -36,6 +37,8 @@ public class MainFrame extends JFrame {
         getGlassPane().setVisible(false);
 
         sp = new StartPanel();
+        slp = new SelectPanel(tdx.p);
+
     }
 
     public static void main(String[] args){
@@ -61,10 +64,24 @@ public class MainFrame extends JFrame {
     }
 
     public void run(){
+
         mainPanel.setVisible(false);
         mainPanel.remove(sp);
-        mainPanel.add(tdx.pp);
-        mainPanel.add(tdx.UI);
+        mainPanel.add(slp);
+        slp.setVisible(true);
+        System.out.println("boi");
+        exe = Executors.newSingleThreadScheduledExecutor();
+        exe.scheduleAtFixedRate(new Runnable() {
+            @Override
+            public void run() {
+                slp.update();
+            }
+        }, 0 , 1000/FPS, TimeUnit.MILLISECONDS);
+        slp.waitForFocus();
+        exe.shutdown();
+        System.out.println("boi");
+        //mainPanel.add(tdx.pp);
+        //mainPanel.add(tdx.UI);
         mainPanel.setVisible(true);
         getGlassPane().setVisible(true);
         setVisible(true);

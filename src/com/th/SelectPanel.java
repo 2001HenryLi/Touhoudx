@@ -1,16 +1,27 @@
+package com.th;
+
+
 import java.awt.*;
 import javax.swing.*;
 import java.awt.event.*;
 
 public class SelectPanel extends JPanel implements KeyListener, FocusListener{
 
+	private final double MASTER_SCALE = 1.0;
+	private final int WIDTH = (int)(1280 * MASTER_SCALE);
+	private final int HEIGHT = (int)(960 * MASTER_SCALE);
+
+	private boolean gotInput;
+
 	private Player guy;
 	
 	public SelectPanel(Player p) {
+		gotInput = false;
+		requestFocus();
 		guy = p;
+		setPreferredSize(new Dimension(WIDTH,HEIGHT));
 		addKeyListener(this);
 		addFocusListener(this);
-		requestFocus();
 	}
 	
 	public void paintComponent(Graphics g){
@@ -28,7 +39,13 @@ public class SelectPanel extends JPanel implements KeyListener, FocusListener{
 	}
 	
 	public void update(){
+		requestFocus();
 		repaint();
+	}
+
+	public void waitForFocus()
+	{
+		while(!gotInput){requestFocus();}
 	}
 	
 	public void focusGained(FocusEvent e) {
@@ -36,10 +53,15 @@ public class SelectPanel extends JPanel implements KeyListener, FocusListener{
 	public void focusLost(FocusEvent e) {
 	}
 	public void keyPressed(KeyEvent e) {
-		if(e.getKeyChar() == '1')
+		System.out.println(e.getKeyChar());
+		if(e.getKeyChar() == '1') {
 			guy.name = "cirno";
-		if(e.getKeyChar() == '2')
+			gotInput = true;
+		}
+		if(e.getKeyChar() == '2') {
 			guy.name = "reimu";
+			gotInput = true;
+		}
 	}
 	public void keyReleased(KeyEvent e) {
 	}
