@@ -20,6 +20,7 @@ class PlayPanel extends JPanel implements KeyListener, FocusListener, ActionList
     private Boss b;
     public volatile ArrayList<Bullet> projectiles = new ArrayList<>();
     public volatile ArrayList<Bullet> bossProjectiles = new ArrayList<>();
+    public volatile ArrayList<Bomb> bombProjectiles = new ArrayList<>();
 
     public Function f;
     private int fofx = 0;
@@ -52,6 +53,7 @@ class PlayPanel extends JPanel implements KeyListener, FocusListener, ActionList
 
         for(Bullet bull : projectiles) g.drawImage(bull.sprite, bull.getSpriteX(), bull.getSpriteY(), bull.spriteWidth, bull.spriteHeight,this);
         for(Bullet bull : bossProjectiles) g.drawImage(bull.sprite, bull.getSpriteX(), bull.getSpriteY(), bull.spriteWidth, bull.spriteHeight,this);
+        for(Bomb bomb : bombProjectiles) g.drawImage(bomb.sprite, bomb.getSpriteX(), bomb.getSpriteY(), bomb.spriteWidth, bomb.spriteHeight,this);
 
         g.setColor(Color.BLACK);
         g.setFont(new Font(Font.SANS_SERIF, Font.TRUETYPE_FONT, 40));
@@ -109,6 +111,23 @@ class PlayPanel extends JPanel implements KeyListener, FocusListener, ActionList
                 if(!p.isAlive()) gameOver = true;
             }
         }
+        for(int i = 0; i < bombProjectiles.size(); i++){
+            Bomb bomb = bombProjectiles.get(i);
+            bomb.update();
+            if(!bomb.isOnscreen()){
+                bossProjectiles.remove(bomb);
+                i--;
+            }
+
+            for(int j = 0; j < bossProjectiles.size(); j++) {
+                Bullet bull = bossProjectiles.get(i);
+                if (bomb.collide(bull)) {
+                    bossProjectiles.remove(bull);
+                    j--;
+                }
+            }
+        }
+
         fofx+= 0.1;
         if(fofx<10)
         	points.add(new Coordinate((int)(fofx*96),(int)(f.getValue(fofx))));

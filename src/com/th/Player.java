@@ -5,6 +5,7 @@ import java.awt.*;
 import java.awt.image.*;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
 
 public class Player {
@@ -36,6 +37,28 @@ public class Player {
 
     public int bombs = 3;
     public int lives = 3;
+
+    private BulletPattern BOMB = new BulletPattern() {
+        @Override
+        public ArrayList<Bullet> makePattern() {
+            ArrayList<Bullet> pattern = new ArrayList<Bullet>();
+            double offset = Math.random()* 2 * Math.PI;
+            for(int i = 0; i < 16; i++){
+                double radians = 2 * Math.PI * i / 16 + offset;
+                pattern.add(new Bomb("Resources\\ProjectileSprites\\CircleLarge.png", x - 32, y - 32, 64, 64, new MovePath() {
+                    @Override
+                    public int[] move(long t, int x0, int y0) {
+                        int[] pos = {x0, y0};
+                        long tMilli = TimeUnit.MILLISECONDS.convert(t, TimeUnit.NANOSECONDS);
+                        pos[0] = x0 + (int)(Math.sin(radians) * tMilli / 4);
+                        pos[1] = y0 + (int)(Math.cos(radians) * tMilli / 4);
+                        return pos;
+                    }
+                }));
+            }
+            return pattern;
+        }
+    };
 
     public Player(PlayPanel p){
         startTime = System.nanoTime();
@@ -121,7 +144,8 @@ public class Player {
             }));
         }
         if(pp.keysDown[6] && bombs > 0){
-            //shoots a bomb
+            ArrayList<Bullet> addProjectiles = BOMB.makePattern();
+            for(Bullet b : addProjectiles) pp.bombProjectiles.add((Bomb)b);
             bombs--;
         }
     }
