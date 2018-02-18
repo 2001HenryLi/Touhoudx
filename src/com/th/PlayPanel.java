@@ -93,7 +93,6 @@ class PlayPanel extends JPanel implements KeyListener, FocusListener, ActionList
                 if(!p.isAlive()) gameOver = true;
             }
         }
-        System.out.println(bossProjectiles.size());
         fofx+= 0.1;
         if(fofx<10)
         	points.add(new Coordinate((int)(fofx*96),(int)(f.getValue(fofx))));

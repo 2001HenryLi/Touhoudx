@@ -3,6 +3,7 @@ package com.th;
 import javax.imageio.ImageIO;
 import java.awt.image.*;
 import java.io.*;
+import java.util.concurrent.TimeUnit;
 
 public class Bullet {
     private long startTime = -1;
@@ -19,7 +20,6 @@ public class Bullet {
     private MovePath mp;
 
     public Bullet(String path, int X, int Y, int w, int h, MovePath MP){
-
         try {
             sprite = ImageIO.read(new File(path));
         } catch(IOException e) {
@@ -49,7 +49,13 @@ public class Bullet {
         return y - spriteHeight/2;
     }
 
+    /*
     public boolean isOnscreen(){
         return x >= 0 && x <= (1280 * 3 / 5) && y >= 0 && y <= 960;
+    }
+    */
+
+    public boolean isOnscreen(){
+        return startTime != -1 && TimeUnit.SECONDS.convert(System.nanoTime() - startTime, TimeUnit.NANOSECONDS) <= 3;
     }
 }

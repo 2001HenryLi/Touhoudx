@@ -61,8 +61,9 @@ public class Boss {
                         public int[] move(long t, int x0, int y0) {
                             int[] pos = {x0, y0};
                             long tMilli = TimeUnit.MILLISECONDS.convert(t, TimeUnit.NANOSECONDS);
-                            pos[0] = x0 + (int) (Math.sin(radians) * Math.max(tMilli - j0*100, 0)/Math.pow(tMilli, 0.1));
-                            pos[1] = y0 + (int) (Math.cos(radians) * Math.max(tMilli - j0*100, 0)/Math.pow(tMilli, 0.1));
+                            long tDiff = Math.max(tMilli - j0*100, 0);
+                            pos[0] = x0 + (int) (Math.sin(radians) * tDiff/Math.pow(tMilli, 0.1));
+                            pos[1] = y0 + (int) (Math.cos(radians) * tDiff/Math.pow(tMilli, 0.1));
                             return pos;
                         }
                     }));
@@ -72,7 +73,35 @@ public class Boss {
         }
     };
 
-    private BulletPattern[] bps = {circle, circle2};
+    private BulletPattern circle3 = new BulletPattern() {
+        @Override
+        public ArrayList<Bullet> makePattern() {
+            ArrayList<Bullet> pattern = new ArrayList<Bullet>();
+            double offset = Math.random()* 2 * Math.PI;
+            System.out.println(Math.random() * 2);
+            int dir = Math.random() >= 0.5 ? -1 : 1;
+            for(int j = 0; j < 16; j++) {
+                for (int i = 0; i < 4; i++) {
+                    double radians = 2 * Math.PI * i / 4 + offset;
+                    int j0 = j;
+                    pattern.add(new Bullet("Resources\\ProjectileSprites\\BasicShot.png", x - 16, y - 16, 32, 32, new MovePath() {
+                        @Override
+                        public int[] move(long t, int x0, int y0) {
+                            int[] pos = {x0, y0};
+                            long tMilli = TimeUnit.MILLISECONDS.convert(t, TimeUnit.NANOSECONDS);
+                            long tDiff = Math.max(tMilli - j0*10, 0);
+                            pos[0] = x0 + (int) (Math.sin(radians + tDiff/1000.0) * tDiff/Math.pow(tMilli, 0.2)) * dir;
+                            pos[1] = y0 + (int) (Math.cos(radians + tDiff/1000.0) * tDiff/Math.pow(tMilli, 0.2)) * dir;
+                            return pos;
+                        }
+                    }));
+                }
+            }
+            return pattern;
+        }
+    };
+
+    private BulletPattern[] bps = {circle, circle2, circle3};
     public Boss(PlayPanel p){
         pp = p;
         try {
