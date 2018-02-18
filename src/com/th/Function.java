@@ -62,7 +62,7 @@ public class Function {
 	
 	public String getFunction(){ 
 		String c = ""+constant;
-		String c2 = ""+constant;
+		String c2 = ""+constant2;
 		if(constant == 1) c = "";
 		if(constant2 == 1) c2 = "";
 

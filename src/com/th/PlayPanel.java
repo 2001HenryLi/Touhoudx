@@ -7,6 +7,7 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.logging.LogManager;
 
 class PlayPanel extends JPanel implements KeyListener, FocusListener, ActionListener{
     private int backgroundScroll = 0;
@@ -34,6 +35,7 @@ class PlayPanel extends JPanel implements KeyListener, FocusListener, ActionList
     public int pixels = 0;
 
     public PlayPanel(Player p, Boss b){
+        LogManager.getLogManager().reset();
         gameOver = false;
         win = false;
         setBackground(new Color(255,255,255));

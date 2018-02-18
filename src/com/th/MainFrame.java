@@ -1,7 +1,5 @@
 package com.th;
 
-import java.util.*;
-import java.io.*;
 import java.awt.*;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
@@ -27,6 +25,7 @@ public class MainFrame extends JFrame {
 
     public MainFrame(){
         super("Touhou DX");
+
         mainPanel.setPreferredSize(new Dimension(WIDTH, HEIGHT));
         mainPanel.setLayout(new FlowLayout(FlowLayout.LEFT,0,0));
 
