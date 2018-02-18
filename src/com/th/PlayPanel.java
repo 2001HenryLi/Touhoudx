@@ -56,6 +56,19 @@ class PlayPanel extends JPanel implements KeyListener, FocusListener, ActionList
         g.drawString(f.getFunction(), 10, 50);
         for(Coordinate c : points) g.fillRect(HEIGHT- c.getX(), c.getY(), 10,10);
         
+        g.drawRect(10, 10, 250, 50);
+		g.setColor(Color.WHITE);
+		g.fillRect(12, 12, 250-4, 50-4);
+		if(pixels < 62)
+			g.setColor(Color.RED);
+		else if(pixels< 125)
+			g.setColor(Color.ORANGE);
+		else if(pixels< 190)
+			g.setColor(Color.YELLOW);
+		else
+			g.setColor(Color.GREEN);
+		g.fillRect(12, 12, pixels, HEIGHT-4);
+        
         backgroundScroll = (backgroundScroll+5) % 1280;
     }
 
@@ -69,6 +82,7 @@ class PlayPanel extends JPanel implements KeyListener, FocusListener, ActionList
         if(!isFocusOwner()) requestFocus();
         p.update();
         b.update();
+        pixels = (int)((b.getHealth()/1000)*(WIDTH-4));
         for(int i = 0; i < projectiles.size(); i++){
             Bullet bull = projectiles.get(i);
             bull.update();
