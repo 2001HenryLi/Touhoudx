@@ -169,6 +169,7 @@ public class Player {
             }
             x = 1280 * 3 / 5 / 2;
             y = 960;
+            bombs = 3;
             return true;
         }
         return false;

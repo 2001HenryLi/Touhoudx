@@ -12,6 +12,7 @@ class PlayPanel extends JPanel implements KeyListener, FocusListener, ActionList
     private final int HEIGHT = (int)(960 * MASTER_SCALE);
 
     public boolean gameOver;
+    public boolean win;
 
     private final int[] INPUT_CODES = {KeyEvent.VK_LEFT, KeyEvent.VK_RIGHT, KeyEvent.VK_UP, KeyEvent.VK_DOWN, KeyEvent.VK_SHIFT, KeyEvent.VK_Z};
     public boolean[] keysDown = new boolean[INPUT_CODES.length];
@@ -31,6 +32,7 @@ class PlayPanel extends JPanel implements KeyListener, FocusListener, ActionList
     public PlayPanel(Player p, Boss b){
         f = new Function(1,1);
         gameOver = false;
+        win = false;
         setBackground(new Color(255,255,255));
         setPreferredSize(new Dimension(WIDTH,HEIGHT));
         addKeyListener(this);
@@ -136,6 +138,9 @@ class PlayPanel extends JPanel implements KeyListener, FocusListener, ActionList
         	points.clear();
             fofx = 0;
         }
+
+        if(!b.isAlive())
+            win = true;
 
         repaint();
     }
