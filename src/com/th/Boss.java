@@ -40,8 +40,8 @@ public class Boss {
             @Override
             public int[] move(long t, int x0, int y0) {
                 int[] pos = {x0, y0};
-                pos[0] = x0;
-                pos[1] = y0 + (int)(TimeUnit.MILLISECONDS.convert(t, TimeUnit.NANOSECONDS)/30);
+                pos[0] = x0 * (int)Math.cos(TimeUnit.SECONDS.convert(t,TimeUnit.NANOSECONDS));
+                pos[1] = y0 * (int)Math.cos(TimeUnit.SECONDS.convert(t, TimeUnit.NANOSECONDS));
                 return pos;
             }
         }));

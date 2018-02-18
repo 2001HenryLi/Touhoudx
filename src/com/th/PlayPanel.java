@@ -61,8 +61,8 @@ class PlayPanel extends JPanel implements KeyListener, FocusListener, ActionList
             bull.update();
             if(p.takeDamage(bull))
             {
+                for(;i > 0; i--)
                 bossProjectiles.remove(i);
-                i--;
             }
 
             if(!bull.isOnscreen()) bossProjectiles.remove(bull);
