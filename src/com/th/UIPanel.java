@@ -20,7 +20,7 @@ class UIPanel extends JPanel{
     private final int HEIGHT = (int)(960 * MASTER_SCALE);
 	
     public UIPanel(){
-        setBackground(new Color(0,0,0));
+        setBackground(Color.WHITE);
         requestFocus();
         setPreferredSize(new Dimension(WIDTH,HEIGHT));
         power = 2.0;
