@@ -8,9 +8,19 @@ import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
 public class Player {
+    private long startTime = System.nanoTime();
+    private long elapsedTime = 0;
+
+    private long inVulnTime = 0;
+    public boolean isInVuln = false;
+
     public PlayPanel pp;
 
+    public String name = "cirno";
     public BufferedImage sprite;
+    public BufferedImage[] sprites = new BufferedImage[7];
+    public int spriteIndex = 3;
+
     public int spriteWidth = 64;
     public int spriteHeight = 64;
     public BufferedImage hitbox;
@@ -29,7 +39,15 @@ public class Player {
     public Player(PlayPanel p){
         pp = p;
         try {
-            sprite = ImageIO.read(new File("Resources/CharacterSprites/cirno.png"));
+            sprite = ImageIO.read(new File("Resources/CharacterSprites/"+name+".png"));
+            sprites[0] = ImageIO.read(new File("Resources/CharacterSprites/"+name+"Left.png"));
+            sprites[1] = ImageIO.read(new File("Resources/CharacterSprites/"+name+"transitleft2.png"));
+            sprites[2] = ImageIO.read(new File("Resources/CharacterSprites/"+name+"transitleft1.png"));
+            sprites[3] = ImageIO.read(new File("Resources/CharacterSprites/"+name+".png"));
+            sprites[4] = ImageIO.read(new File("Resources/CharacterSprites/"+name+"transitright1.png"));
+            sprites[5] = ImageIO.read(new File("Resources/CharacterSprites/"+name+"transitright2.png"));
+            sprites[6] = ImageIO.read(new File("Resources/CharacterSprites/"+name+"Right.png"));
+
             hitbox = ImageIO.read(new File("Resources/CharacterSprites/hitbox.png"));
         } catch(IOException e) {
             System.out.println("failed");
@@ -37,18 +55,33 @@ public class Player {
         }
     }
     public void update(){
+        elapsedTime = System.nanoTime() - startTime;
+        if(isInVuln && elapsedTime - inVulnTime >= 100000000) isInVuln = false;
         move();
         shoot();
     }
     private void move(){
-        if(pp.keysDown[0]) x -= vx / (pp.keysDown[4] ? 2 : 1);
-        if(pp.keysDown[1]) x += vx / (pp.keysDown[4] ? 2 : 1);
+        if(pp.keysDown[0]){
+            x -= vx / (pp.keysDown[4] ? 2 : 1);
+            spriteIndex--;
+        }
+        if(pp.keysDown[1]){
+            x += vx / (pp.keysDown[4] ? 2 : 1);
+            spriteIndex++;
+        }
         if(pp.keysDown[2]) y -= vy / (pp.keysDown[4] ? 2 : 1);
         if(pp.keysDown[3]) y += vy / (pp.keysDown[4] ? 2 : 1);
+
         x = Math.min(x + spriteWidth/2, 1280 * 3 / 5);
         x = Math.max(x - spriteWidth/2, 0);
         y = Math.min(y + spriteHeight/2, 960);
         y = Math.max(y - spriteHeight/2, 0);
+
+        spriteIndex = Math.max(0, spriteIndex);
+        spriteIndex = Math.min(6, spriteIndex);
+        sprite = sprites[spriteIndex];
+        if(spriteIndex < 3) spriteIndex++;
+        if(spriteIndex > 3) spriteIndex--;
     }
 
     private void shoot(){
@@ -83,6 +116,9 @@ public class Player {
         Rectangle pRect = new Rectangle(getHitboxX(), getHitboxY(), spriteWidth, spriteHeight);
         if(bRect.intersects(pRect)){
             lives--;
+            isInVuln = true;
+            x = 640;
+            y = 960;
             System.out.println("oof");
             return true;
         }
