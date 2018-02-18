@@ -19,7 +19,7 @@ public class Boss {
 
     public String name = "BossStage1";
     public BufferedImage sprite;
-    public double health = 5;
+    public double health = 5000;
     public int x = 1280 * 3 / 5 / 2;
     public int y = 240;
     public int spriteWidth;
