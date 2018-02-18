@@ -24,21 +24,21 @@ class UIPanel extends JPanel{
         requestFocus();
         setPreferredSize(new Dimension(WIDTH,HEIGHT));
         power = 2.0;
-		lives = 4;
-		spells = 3;
-		lifedrop = 0;
-		spelldrop = 0;
+	lives = 4;
+	spells = 3;
+	lifedrop = 0;
+	spelldrop = 0;
     }
 	
-	public void paintComponent(Graphics g){
-		super.paintComponent(g);
-		render(g);
-	}
+    public void paintComponent(Graphics g){
+	super.paintComponent(g);
+	render(g);
+    }
 	
 	public void render(Graphics g){
-		Image back = Toolkit.getDefaultToolkit().getImage("backUI.PNG");
-		Image heart = Toolkit.getDefaultToolkit().getImage("Heart.PNG");
-		Image card = Toolkit.getDefaultToolkit().getImage("Spellcard.PNG");
+		Image back = Toolkit.getDefaultToolkit().getImage(Resources/UISprites/backUI.png);
+		Image heart = Toolkit.getDefaultToolkit().getImage(Resources/UISprites/Heart.png);
+		Image card = Toolkit.getDefaultToolkit().getImage(Resources/UISprites/Spellcard.png);
 		g.drawImage(back, 0,0, WIDTH, HEIGHT, this);
 		g.setFont(new Font(Font.SANS_SERIF, Font.TRUETYPE_FONT, 25));
 		g.drawString("Pwr: "+power+" / "+TOTALPOWER, 10, 60);
