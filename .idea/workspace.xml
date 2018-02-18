@@ -2,7 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a0edc6b3-f861-4023-acd0-71445d476e6b" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/src/com/th/PlayPanel.java" afterPath="$PROJECT_DIR$/src/com/th/PlayPanel.java" />
+      <change beforePath="$PROJECT_DIR$/src/com/th/Boss.java" afterPath="$PROJECT_DIR$/src/com/th/Boss.java" />
+      <change beforePath="$PROJECT_DIR$/src/com/th/Player.java" afterPath="$PROJECT_DIR$/src/com/th/Player.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -39,23 +40,23 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Boss.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="Boss.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/com/th/Boss.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="261">
-              <caret line="109" column="63" lean-forward="false" selection-start-line="109" selection-start-column="63" selection-end-line="109" selection-end-column="63" />
+            <state relative-caret-position="244">
+              <caret line="111" column="31" lean-forward="true" selection-start-line="111" selection-start-column="31" selection-end-line="111" selection-end-column="31" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#820#828#0" expanded="true" />
                 <element signature="e#1829#1837#0" expanded="true" />
                 <element signature="e#3082#3090#0" expanded="true" />
                 <element signature="e#4428#4436#0" expanded="true" />
-                <element signature="e#6740#6741#0" expanded="true" />
-                <element signature="e#6773#6774#0" expanded="true" />
-                <element signature="e#6802#6803#0" expanded="true" />
-                <element signature="e#6842#6843#0" expanded="true" />
-                <element signature="e#6871#6872#0" expanded="true" />
-                <element signature="e#6912#6913#0" expanded="true" />
+                <element signature="e#6736#6737#0" expanded="true" />
+                <element signature="e#6769#6770#0" expanded="true" />
+                <element signature="e#6798#6799#0" expanded="true" />
+                <element signature="e#6838#6839#0" expanded="true" />
+                <element signature="e#6867#6868#0" expanded="true" />
+                <element signature="e#6908#6909#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -71,11 +72,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="PlayPanel.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="PlayPanel.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/th/PlayPanel.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="139">
-              <caret line="64" column="25" lean-forward="false" selection-start-line="64" selection-start-column="25" selection-end-line="64" selection-end-column="25" />
+              <caret line="64" column="36" lean-forward="true" selection-start-line="64" selection-start-column="36" selection-end-line="64" selection-end-column="36" />
               <folding />
             </state>
           </provider>
@@ -84,8 +85,8 @@
       <file leaf-file-name="Player.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/th/Player.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="244">
-              <caret line="156" column="9" lean-forward="true" selection-start-line="156" selection-start-column="9" selection-end-line="156" selection-end-column="9" />
+            <state relative-caret-position="584">
+              <caret line="176" column="19" lean-forward="false" selection-start-line="176" selection-start-column="19" selection-end-line="176" selection-end-column="19" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -178,10 +179,10 @@
         <option value="$PROJECT_DIR$/src/com/th/GameOverPanel.java" />
         <option value="$PROJECT_DIR$/src/com/th/StartPanel.java" />
         <option value="$PROJECT_DIR$/src/com/th/SelectPanel.java" />
-        <option value="$PROJECT_DIR$/src/com/th/Boss.java" />
         <option value="$PROJECT_DIR$/src/com/th/MainFrame.java" />
-        <option value="$PROJECT_DIR$/src/com/th/Player.java" />
         <option value="$PROJECT_DIR$/src/com/th/PlayPanel.java" />
+        <option value="$PROJECT_DIR$/src/com/th/Player.java" />
+        <option value="$PROJECT_DIR$/src/com/th/Boss.java" />
       </list>
     </option>
   </component>
@@ -228,12 +229,6 @@
               <item name="Touhoudx" type="b2602c69:ProjectViewProjectNode" />
               <item name="Touhoudx" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Touhoudx" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Touhoudx" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="th" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -600,7 +595,7 @@
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2391775" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2391775" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32896176" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -1000,26 +995,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/th/Boss.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="261">
-          <caret line="109" column="63" lean-forward="false" selection-start-line="109" selection-start-column="63" selection-end-line="109" selection-end-column="63" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#820#828#0" expanded="true" />
-            <element signature="e#1829#1837#0" expanded="true" />
-            <element signature="e#3082#3090#0" expanded="true" />
-            <element signature="e#4428#4436#0" expanded="true" />
-            <element signature="e#6740#6741#0" expanded="true" />
-            <element signature="e#6773#6774#0" expanded="true" />
-            <element signature="e#6802#6803#0" expanded="true" />
-            <element signature="e#6842#6843#0" expanded="true" />
-            <element signature="e#6871#6872#0" expanded="true" />
-            <element signature="e#6912#6913#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/th/GameOverPanel.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="285">
@@ -1045,21 +1020,41 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/th/PlayPanel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="139">
+          <caret line="64" column="36" lean-forward="true" selection-start-line="64" selection-start-column="36" selection-end-line="64" selection-end-column="36" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/th/Player.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="244">
-          <caret line="156" column="9" lean-forward="true" selection-start-line="156" selection-start-column="9" selection-end-line="156" selection-end-column="9" />
+        <state relative-caret-position="584">
+          <caret line="176" column="19" lean-forward="false" selection-start-line="176" selection-start-column="19" selection-end-line="176" selection-end-column="19" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/th/PlayPanel.java">
+    <entry file="file://$PROJECT_DIR$/src/com/th/Boss.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="139">
-          <caret line="64" column="25" lean-forward="false" selection-start-line="64" selection-start-column="25" selection-end-line="64" selection-end-column="25" />
-          <folding />
+        <state relative-caret-position="244">
+          <caret line="111" column="31" lean-forward="true" selection-start-line="111" selection-start-column="31" selection-end-line="111" selection-end-column="31" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#820#828#0" expanded="true" />
+            <element signature="e#1829#1837#0" expanded="true" />
+            <element signature="e#3082#3090#0" expanded="true" />
+            <element signature="e#4428#4436#0" expanded="true" />
+            <element signature="e#6736#6737#0" expanded="true" />
+            <element signature="e#6769#6770#0" expanded="true" />
+            <element signature="e#6798#6799#0" expanded="true" />
+            <element signature="e#6838#6839#0" expanded="true" />
+            <element signature="e#6867#6868#0" expanded="true" />
+            <element signature="e#6908#6909#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

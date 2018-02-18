@@ -110,7 +110,7 @@ public class Boss {
                     double offset = Math.random()* 2 * Math.PI;
                     double radians = 2 * Math.PI * i / 16 + offset;
                     int j0 = j;
-                    pattern.add(new Bullet("Resources\\ProjectileSprites\\BasicShot.png", x - 16, y - 16, 32, 32, new MovePath() {
+                    pattern.add(new Bullet("Resources\\ProjectileSprites\\plusc.png", x - 16, y - 16, 32, 32, new MovePath() {
                         @Override
                         public int[] move(long t, int x0, int y0) {
                             int[] pos = {x0, y0};
