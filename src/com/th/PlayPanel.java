@@ -89,6 +89,7 @@ class PlayPanel extends JPanel implements KeyListener, FocusListener, ActionList
         else{
         	f.chooseRandom();
         	points.clear();
+            fofx = 0;
         }
         repaint();
     }
