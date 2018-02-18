@@ -48,7 +48,7 @@ public class Player {
             sprites[5] = ImageIO.read(new File("Resources/CharacterSprites/"+name+"transitright2.png"));
             sprites[6] = ImageIO.read(new File("Resources/CharacterSprites/"+name+"Right.png"));
 
-            hitbox = ImageIO.read(new File("Resources/CharacterSprites/hitbox.png"));
+            hitbox = ImageIO.read(new File("Resources/CharacterSprites/hitbox2.png"));
         } catch(IOException e) {
             System.out.println("failed");
             System.exit(-1);
@@ -116,7 +116,7 @@ public class Player {
 
     public boolean takeDamage(Bullet b){
         Rectangle bRect = new Rectangle(b.getSpriteX(), b.getSpriteY(), b.spriteWidth, b.spriteHeight);
-        Rectangle pRect = new Rectangle(getHitboxX(), getHitboxY(), spriteWidth, spriteHeight);
+        Rectangle pRect = new Rectangle(getHitboxX(), getHitboxY(), hitboxWidth, hitboxHeight);
         if(bRect.intersects(pRect)){
             lives--;
             isInVuln = true;

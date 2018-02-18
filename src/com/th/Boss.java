@@ -31,7 +31,7 @@ public class Boss {
             ArrayList<Bullet> pattern = new ArrayList<Bullet>();
             for(int i = 0; i < 16; i++){
                 double radians = 2*Math.PI * i / 16;
-                pattern.add(new Bullet("Resources\\ProjectileSprites\\BasicShot.png", x, y, 32, 32, new MovePath() {
+                pattern.add(new Bullet("Resources\\ProjectileSprites\\BasicSQUARE.png", x - 16, y - 16, 32, 32, new MovePath() {
                     @Override
                     public int[] move(long t, int x0, int y0) {
                         int[] pos = {x0, y0};
