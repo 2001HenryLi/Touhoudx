@@ -19,6 +19,7 @@ public class Player {
 
     public final String SPRITE_DIRECTORY = "Resources/CharacterSprites/";
     public String name;
+    public String bulletType;
     public BufferedImage sprite;
     public BufferedImage[] sprites = new BufferedImage[7];
     public int spriteIndex = 3;
@@ -28,7 +29,8 @@ public class Player {
     public BufferedImage hitbox;
     public int hitboxWidth = 16;
     public int hitboxHeight = 16;
-    String bulletPath = "Resources/ProjectileSprites/Cusp.png";
+    String bulletPath = "Resources/ProjectileSprites/";
+    String bombPath = "Resources/ProjectileSprites/CircleLarge.png";
 
     public int x = 1280 * 3 / 5 / 2;
     public int y = 900;
@@ -45,7 +47,7 @@ public class Player {
             double offset = Math.random()* 2 * Math.PI;
             for(int i = 0; i < 16; i++){
                 double radians = 2 * Math.PI * i / 16 + offset;
-                pattern.add(new Bomb("Resources\\ProjectileSprites\\CircleLarge.png", x - 32, y - 32, 64, 64, new MovePath() {
+                pattern.add(new Bomb(bombPath, x - 32, y - 32, 64, 64, new MovePath() {
                     @Override
                     public int[] move(long t, int x0, int y0) {
                         int[] pos = {x0, y0};
@@ -62,6 +64,8 @@ public class Player {
 
     public Player(String n){
         name = n;
+        if(name.equals("cirno")) bulletType = "Cusp.png";
+        else bulletType = "VertTangent.png";
         startTime = System.nanoTime();
         try {
             sprite = ImageIO.read(new File(SPRITE_DIRECTORY+name+".png"));
@@ -124,7 +128,7 @@ public class Player {
 
     private void shoot(){
         if(pp.keysDown[5]){
-            pp.projectiles.add(new Bullet(bulletPath, x + spriteWidth/2, y, 32, 32, new MovePath() {
+            pp.projectiles.add(new Bullet(bulletPath+bulletType, x + spriteWidth/2, y, 32, 32, new MovePath() {
                 @Override
                 public int[] move(long t, int x0, int y0) {
                     int[] pos = {x0, y0};
@@ -133,7 +137,7 @@ public class Player {
                     return pos;
                 }
             }));
-            pp.projectiles.add(new Bullet(bulletPath, x - spriteWidth/2, y, 32, 32, new MovePath() {
+            pp.projectiles.add(new Bullet(bulletPath+bulletType, x - spriteWidth/2, y, 32, 32, new MovePath() {
                 @Override
                 public int[] move(long t, int x0, int y0) {
                     int[] pos = {x0, y0};

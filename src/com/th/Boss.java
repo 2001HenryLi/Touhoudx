@@ -101,7 +101,33 @@ public class Boss {
         }
     };
 
-    private BulletPattern[] bps = {circle, circle2, circle3};
+    private BulletPattern sweep = new BulletPattern() {
+        @Override
+        public ArrayList<Bullet> makePattern() {
+            ArrayList<Bullet> pattern = new ArrayList<Bullet>();
+            for(int j = 0; j < 3; j++) {
+                for (int i = 0; i < 16; i++) {
+                    double offset = Math.random()* 2 * Math.PI;
+                    double radians = 2 * Math.PI * i / 16 + offset;
+                    int j0 = j;
+                    pattern.add(new Bullet("Resources\\ProjectileSprites\\BasicShot.png", x - 16, y - 16, 32, 32, new MovePath() {
+                        @Override
+                        public int[] move(long t, int x0, int y0) {
+                            int[] pos = {x0, y0};
+                            long tMilli = TimeUnit.MILLISECONDS.convert(t, TimeUnit.NANOSECONDS);
+                            long tDiff = Math.max(tMilli - 400*j0, 0);
+                            pos[0] = x0 + (int) (Math.sin(radians) * tDiff / 1.5);
+                            pos[1] = y0 + (int) (tDiff / 3);
+                            return pos;
+                        }
+                    }));
+                }
+            }
+            return pattern;
+        }
+    };
+
+    private BulletPattern[] bps = {circle, circle2, circle3, sweep};
     public Boss(PlayPanel p){
         pp = p;
         try {
