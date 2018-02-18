@@ -105,7 +105,7 @@ class PlayPanel extends JPanel implements KeyListener, FocusListener, ActionList
             if(p.takeDamage(bull)){
                 bossProjectiles = new ArrayList<Bullet>();
                 points = new ArrayList<Coordinate>();
-                fofx = 10;
+                fofx = 100000;
                 if(!p.isAlive()) gameOver = true;
             }
         }
@@ -119,7 +119,7 @@ class PlayPanel extends JPanel implements KeyListener, FocusListener, ActionList
             if(p.takeDamage(bull)){
                 bossProjectiles = new ArrayList<Bullet>();
                 points = new ArrayList<Coordinate>();
-                fofx = 10;
+                fofx = 100000;
                 if(!p.isAlive()) gameOver = true;
             }
         }
@@ -147,7 +147,8 @@ class PlayPanel extends JPanel implements KeyListener, FocusListener, ActionList
         }
 
         fofx += 0.04;
-        if(fofx < WIDTH / 100 + 4.2) {
+        if(fofx < WIDTH / 40 + 1) {
+            System.out.println(fofx+" "+(WIDTH / 40 + 1));
             try {
                 BufferedImage b = ImageIO.read(new File("Resources/ProjectileSprites/BasicShot.png"));
                 points.add(new Coordinate(b, (int) (fofx * 100), HEIGHT - 40 - (int) (f.getValue(fofx)), 16, 16, new MovePath() {
@@ -162,7 +163,7 @@ class PlayPanel extends JPanel implements KeyListener, FocusListener, ActionList
                 System.exit(-1);
             }
 
-            if(points.size() > 420) points.remove(0);
+            if(points.size() > 400) points.remove(0);
         }
         else{
             f.chooseRandom();
