@@ -7,6 +7,7 @@ import java.awt.event.*;
 class StartPanel extends JPanel implements KeyListener, FocusListener, ActionListener{
 
     public Image pic;
+    public Image side;
     private double ang;
     private BGMusic bgm = new BGMusic();
     private final double MASTER_SCALE = 1.0;  //scale for the whole thing
@@ -30,13 +31,15 @@ class StartPanel extends JPanel implements KeyListener, FocusListener, ActionLis
 
     public void render(Graphics g){
         pic = Toolkit.getDefaultToolkit().getImage("Resources/Background/titlebackground.PNG");
-        g.drawImage(pic, 0, 0, 960, 1280, this);
+        side = Toolkit.getDefaultToolkit().getImage("Resources/Background/titleside.png");
+        g.drawImage(pic, 0, 0,  this);
+        g.drawImage(side,770,0,520,930,this);
     }
 
     public void doText(Graphics g){
-        g.setFont(new Font(Font.SANS_SERIF, Font.TRUETYPE_FONT, 30));
-        double ypos = Math.sin(ang*0.75)*20+700;
-        g.drawString("Press Enter to Play", 500, (int)ypos);
+        g.setFont(new Font(Font.SANS_SERIF, Font.TRUETYPE_FONT, 46));
+        double ypos = Math.sin(ang*0.75)*20+550;
+        g.drawString("Press Enter to Play", 850, (int)ypos);
     }
 
     public void update(){

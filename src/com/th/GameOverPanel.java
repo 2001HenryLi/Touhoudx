@@ -19,10 +19,13 @@ public class GameOverPanel extends JPanel implements KeyListener, FocusListener,
     private Image img;
 
     public GameOverPanel(){
+        requestFocus();
         setBackground(new Color(255,255,255));
         setPreferredSize(new Dimension(WIDTH,HEIGHT));
+        addKeyListener(this);
+        addFocusListener(this);
         try {
-            img = ImageIO.read(new File("Resources/Background/GameOverPlaceholder.png"));
+            img = ImageIO.read(new File("Resources/Background/gameoverscreen.png"));
         } catch(IOException e) {
             System.out.println("failed");
             System.exit(-1);
@@ -31,7 +34,7 @@ public class GameOverPanel extends JPanel implements KeyListener, FocusListener,
 
     public void paintComponent(Graphics g){
         super.paintComponent(g);
-        g.drawImage(img,0,0,this);
+        g.drawImage(img,330,50,700,800,this);
     }
 
     public void update(){
@@ -41,9 +44,15 @@ public class GameOverPanel extends JPanel implements KeyListener, FocusListener,
     public void actionPerformed(ActionEvent e) {}
     public void focusGained(FocusEvent e) {}
     public void focusLost(FocusEvent e) {}
-    public void keyTyped(KeyEvent e) {}
+    public void keyTyped(KeyEvent e) {
+        System.out.println(e.getKeyCode());
+        if(e.getKeyCode() == KeyEvent.VK_ENTER){
+            restart = true;
+            System.out.println("woof");
+        }
+    }
     public void keyPressed(KeyEvent e) {
-        if(e.getKeyCode() == KeyEvent.VK_ENTER) restart = true;
+
     }
     public void keyReleased(KeyEvent e) {}
 }

@@ -79,6 +79,8 @@ public class MainFrame extends JFrame {
     }
 
     public void update(){
+        if(tdx.gp.restart)
+            restartSwitch = true;
         if(!gameOverSwitch && tdx.pp.gameOver) gameOver();
         if(!restartSwitch && tdx.gp.restart) restart();
         tdx.update();
@@ -99,6 +101,8 @@ public class MainFrame extends JFrame {
         tdx = new TouhouDX();
         sp = new StartPanel();
         mainPanel.add(sp);
+        mainPanel.add(tdx.UI);
+        mainPanel.add(tdx.pp);
         mainPanel.setVisible(true);
         restartSwitch = true;
         gameOverSwitch = false;
