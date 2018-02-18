@@ -53,7 +53,7 @@ public class Player {
 
     private void shoot(){
         if(pp.keysDown[5]){
-            pp.projectiles.add(new Bullet(bulletPath, x + spriteWidth/2, y, new MovePath() {
+            pp.projectiles.add(new Bullet(bulletPath, x + spriteWidth/2, y, 32, 32, new MovePath() {
                 @Override
                 public int[] move(long t, int x0, int y0) {
                     int[] pos = {x0, y0};
@@ -62,7 +62,7 @@ public class Player {
                     return pos;
                 }
             }));
-            pp.projectiles.add(new Bullet(bulletPath, x - spriteWidth/2, y, new MovePath() {
+            pp.projectiles.add(new Bullet(bulletPath, x - spriteWidth/2, y, 32, 32, new MovePath() {
                 @Override
                 public int[] move(long t, int x0, int y0) {
                     int[] pos = {x0, y0};
@@ -83,6 +83,7 @@ public class Player {
         Rectangle pRect = new Rectangle(getHitboxX(), getHitboxY(), spriteWidth, spriteHeight);
         if(bRect.intersects(pRect)){
             lives--;
+            System.out.println("oof");
             return true;
         }
         return false;

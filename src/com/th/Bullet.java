@@ -18,13 +18,15 @@ public class Bullet {
     private int y;
     private MovePath mp;
 
-    public Bullet(String path, int X, int Y, MovePath MP){
+    public Bullet(String path, int X, int Y, int w, int h, MovePath MP){
         try {
             sprite = ImageIO.read(new File(path));
         } catch(IOException e) {
             System.out.println("failed");
             System.exit(-1);
         }
+        spriteWidth = w;
+        spriteHeight = h;
         x = X;
         x0 = X;
         y = Y;
