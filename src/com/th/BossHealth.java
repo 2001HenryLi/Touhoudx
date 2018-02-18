@@ -1,3 +1,5 @@
+package com.th;
+
 import java.awt.*;
 import javax.swing.JPanel;
 
