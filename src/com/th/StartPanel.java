@@ -24,24 +24,28 @@ class StartPanel extends JPanel implements KeyListener, FocusListener, ActionLis
     }
     public void paintComponent(Graphics g){
         super.paintComponent(g);
-        
-        //this prints the title
         render(g);
         doText(g);
-        updategraphic();
-        //Image border = Toolkit.getDefaultToolkit().getImage("resources\\board\\start_menu\\border.png");
-        //g.drawImage(border,-bo,-bo,WIDTH+2*bo,HEIGHT+2*bo,this);
     }
 
-    public void updategraphic(){ //ryan calls this method
+    public void render(Graphics g){
+        pic = Toolkit.getDefaultToolkit().getImage("Resources/misc/titleresized.PNG");
+        g.drawImage(pic, 225, 100, 500, 140, this);
+    }
+
+    public void doText(Graphics g){
+        g.setFont(new Font(Font.SANS_SERIF, Font.TRUETYPE_FONT, 30));
+        double ypos = Math.sin(ang*0.75)*20+700;
+        g.drawString("Press Enter to Play", 360, (int)ypos);
+    }
+
+    public void update(){
         ang += (Math.PI/90);
         repaint();
     }
-
-    public boolean waitForInput(){
+    public void waitForInput(){
         while(!gotInput){requestFocus();}
         bgm.stop();
-        return true;
     }
     public void keyTyped(KeyEvent e) {}
     public void keyPressed(KeyEvent e) {
@@ -51,16 +55,4 @@ class StartPanel extends JPanel implements KeyListener, FocusListener, ActionLis
     public void focusGained(FocusEvent e) {}
     public void focusLost(FocusEvent e) {}
     public void actionPerformed(ActionEvent e){}
-
-    public void render(Graphics g){
-        pic = Toolkit.getDefaultToolkit().getImage("titleresized.PNG");
-        double ypos = Math.cos(ang)*70+140;
-        g.drawImage(pic, 225, (int)ypos, 500, 140, this);
-    }
-
-    public void doText(Graphics g){
-        g.setFont(new Font(Font.SANS_SERIF, Font.TRUETYPE_FONT, 30));
-        double ypos = Math.sin(ang)*20+700;
-        g.drawString("Press Enter to Play", 360, (int)ypos);
-    }
 }

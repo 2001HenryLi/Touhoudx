@@ -3,6 +3,7 @@ package com.th;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.util.ArrayList;
 
 class PlayPanel extends JPanel implements KeyListener, FocusListener, ActionListener{
     private int backgroundScroll = 0;
@@ -10,10 +11,11 @@ class PlayPanel extends JPanel implements KeyListener, FocusListener, ActionList
     private final int WIDTH = (int)(1280 * 3 / 5 * MASTER_SCALE);
     private final int HEIGHT = (int)(960 * MASTER_SCALE);
 
-    private final int[] INPUT_CODES = {KeyEvent.VK_LEFT, KeyEvent.VK_RIGHT, KeyEvent.VK_UP, KeyEvent.VK_DOWN, KeyEvent.VK_SHIFT};
+    private final int[] INPUT_CODES = {KeyEvent.VK_LEFT, KeyEvent.VK_RIGHT, KeyEvent.VK_UP, KeyEvent.VK_DOWN, KeyEvent.VK_SHIFT, KeyEvent.VK_Z, KeyEvent.VK_X};
     private boolean[] keysDown = new boolean[INPUT_CODES.length];
 
     private Player p;
+    private ArrayList<Bullet> projectiles = new ArrayList<>();
 
     public PlayPanel(Player p){
         setBackground(new Color(255,255,255));
@@ -27,27 +29,26 @@ class PlayPanel extends JPanel implements KeyListener, FocusListener, ActionList
     public void paintComponent(Graphics g){
         super.paintComponent(g);
         makeBackground(g);
+
         g.drawImage(p.sprite, p.getSpriteX(), p.getSpriteY(), p.spriteWidth, p.spriteHeight,this);
         if(keysDown[4]) g.drawImage(p.hitbox, p.getHitboxX(), p.getHitboxY(), p.hitboxWidth, p.hitboxHeight,this);
-        backgroundScroll += 10;
-        if(backgroundScroll >= 1280)
-            backgroundScroll = 0;
+
+        backgroundScroll = (backgroundScroll+5) % 1280;
     }
 
-    public void makeBackground(Graphics g)
-    {
-        g.drawImage(Toolkit.getDefaultToolkit().getImage("background.png"),0,backgroundScroll,960,1280,this);
-        g.drawImage(Toolkit.getDefaultToolkit().getImage("background.png"),0,0,960,backgroundScroll,this);
+    public void makeBackground(Graphics g) {
+        g.drawImage(Toolkit.getDefaultToolkit().getImage("background.png"),0, backgroundScroll,960,1280,this);
+        g.drawImage(Toolkit.getDefaultToolkit().getImage("background.png"),0,0,960, backgroundScroll,this);
         g.drawImage(Toolkit.getDefaultToolkit().getImage("Resources/misc/lines.PNG"),0,0,960,1280,this);
-
     }
-
 
     public void update(){
         if(!isFocusOwner()) requestFocus();
-        p.move(keysDown);
+        p.update(keysDown);
+        for(Bullet b : projectiles) b.update();
         repaint();
     }
+
     public void keyTyped(KeyEvent e) {}
     public void keyPressed(KeyEvent e){
         int key = e.getKeyCode();

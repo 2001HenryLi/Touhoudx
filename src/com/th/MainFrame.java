@@ -3,12 +3,16 @@ package com.th;
 import java.util.*;
 import java.io.*;
 import java.awt.*;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 import javax.swing.*;
 
 public class MainFrame extends JFrame {
     private final double MASTER_SCALE = 1.0;
     private final int WIDTH = 1280;
     private final int HEIGHT = 960;
+    public static final int FPS = 60;
 
     private StartPanel sp = null;
     private GlassPanel gp = new GlassPanel();
@@ -38,15 +42,30 @@ public class MainFrame extends JFrame {
         mainPanel.add(sp);
         setContentPane(mainPanel);
         setVisible(true);
+
+        ScheduledExecutorService exe = Executors.newSingleThreadScheduledExecutor();
+        exe.scheduleAtFixedRate(new Runnable() {
+            @Override
+            public void run() {
+                sp.update();
+            }
+        }, 0 , 1000/FPS, TimeUnit.MILLISECONDS);
         sp.waitForInput();
+        exe.shutdown();
     }
     public void run(){
         mainPanel.remove(sp);
         mainPanel.add(tdx.pp);
         mainPanel.add(tdx.UI);
-        //pack();
         getGlassPane().setVisible(true);
         setVisible(true);
-        tdx.startGame();
+
+        ScheduledExecutorService exe = Executors.newSingleThreadScheduledExecutor();
+        exe.scheduleAtFixedRate(new Runnable() {
+            @Override
+            public void run() {
+                tdx.update();
+            }
+        }, 0 , 1000/FPS, TimeUnit.MILLISECONDS);
     }
 }
