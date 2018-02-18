@@ -61,10 +61,6 @@ class PlayPanel extends JPanel implements KeyListener, FocusListener, ActionList
         for(Bomb bomb : bombProjectiles) g.drawImage(bomb.sprite, bomb.getSpriteX(), bomb.getSpriteY(), bomb.spriteWidth, bomb.spriteHeight,this);
         for(Coordinate c : points) g.drawImage(c.sprite, c.getSpriteX(), c.getSpriteY(), c.spriteWidth, c.spriteHeight,this);
 
-        g.setColor(Color.BLUE);
-        g.setFont(new Font(Font.SANS_SERIF, Font.TRUETYPE_FONT, 40));
-        g.drawString(f.getFunction(), 550, HEIGHT-40);
-
         g.drawRect(10, 10, 250, 50);
         g.setColor(Color.WHITE);
         g.fillRect(12, 12, 250-4, 50-4);
@@ -150,8 +146,8 @@ class PlayPanel extends JPanel implements KeyListener, FocusListener, ActionList
             }
         }
 
-        fofx += 0.03;
-        if(fofx < 10) {
+        fofx += 0.04;
+        if(fofx < WIDTH / 100 + 4.2) {
             try {
                 BufferedImage b = ImageIO.read(new File("Resources/ProjectileSprites/BasicShot.png"));
                 points.add(new Coordinate(b, (int) (fofx * 100), HEIGHT - 40 - (int) (f.getValue(fofx)), 16, 16, new MovePath() {
@@ -166,7 +162,7 @@ class PlayPanel extends JPanel implements KeyListener, FocusListener, ActionList
                 System.exit(-1);
             }
 
-            if(points.size() > 5000) points.remove(0);
+            if(points.size() > 420) points.remove(0);
         }
         else{
             f.chooseRandom();
