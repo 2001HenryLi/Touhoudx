@@ -37,8 +37,8 @@ public class Boss {
                     public int[] move(long t, int x0, int y0) {
                         int[] pos = {x0, y0};
                         long tMilli = TimeUnit.MILLISECONDS.convert(t, TimeUnit.NANOSECONDS);
-                        pos[0] = x0 + (int)(Math.sin(radians) * tMilli);
-                        pos[1] = y0 + (int)(Math.cos(radians) * tMilli);
+                        pos[0] = x0 + (int)(Math.sin(radians) * tMilli / 1.5);
+                        pos[1] = y0 + (int)(Math.cos(radians) * tMilli / 1.5);
                         return pos;
                     }
                 }));
@@ -78,7 +78,7 @@ public class Boss {
         public ArrayList<Bullet> makePattern() {
             ArrayList<Bullet> pattern = new ArrayList<Bullet>();
             double offset = Math.random()* 2 * Math.PI;
-            System.out.println(Math.random() * 2);
+
             int dir = Math.random() >= 0.5 ? -1 : 1;
             for(int j = 0; j < 16; j++) {
                 for (int i = 0; i < 4; i++) {
@@ -90,8 +90,8 @@ public class Boss {
                             int[] pos = {x0, y0};
                             long tMilli = TimeUnit.MILLISECONDS.convert(t, TimeUnit.NANOSECONDS);
                             long tDiff = Math.max(tMilli - j0*10, 0);
-                            pos[0] = x0 + (int) (Math.sin(radians + tDiff/1000.0) * tDiff/Math.pow(tMilli, 0.2)) * dir;
-                            pos[1] = y0 + (int) (Math.cos(radians + tDiff/1000.0) * tDiff/Math.pow(tMilli, 0.2)) * dir;
+                            pos[0] = x0 + (int) (Math.sin(radians + tDiff/1000.0 * dir) * tDiff/Math.pow(tMilli, 0.2)) ;
+                            pos[1] = y0 + (int) (Math.cos(radians + tDiff/1000.0 * dir) * tDiff/Math.pow(tMilli, 0.2));
                             return pos;
                         }
                     }));
