@@ -5,29 +5,17 @@ import java.awt.*;
 import java.awt.event.*;
 
 class UIPanel extends JPanel{
-
-    private double power;
-    private int lives;
-    private int spells;
-    private int lifedrop;
-    private int spelldrop;
 	
-    private final double TOTALPOWER = 2.0;
-    private final int NEWLIFE = 3; //amount needed for another life
-    private final int NEWSPELL = 8; //need this many for a new spell
+    private Player guy;
     private final double MASTER_SCALE = 1.0;  //scale for the whole thing
     private final int WIDTH = (int)(1280 * 2 / 5 * MASTER_SCALE);
     private final int HEIGHT = (int)(960 * MASTER_SCALE);
 	
-    public UIPanel(){
+    public UIPanel(Player p){
         setBackground(Color.WHITE);
         requestFocus();
         setPreferredSize(new Dimension(WIDTH,HEIGHT));
-        power = 2.0;
-	lives = 4;
-	spells = 3;
-	lifedrop = 0;
-	spelldrop = 0;
+	guy = p;
     }
 	
     public void paintComponent(Graphics g){
@@ -41,13 +29,10 @@ class UIPanel extends JPanel{
 		Image card = Toolkit.getDefaultToolkit().getImage("Resources/UISprites/Spellcard.png");
 		g.drawImage(back, 0,0, WIDTH, HEIGHT, this);
 		g.setFont(new Font(Font.SANS_SERIF, Font.TRUETYPE_FONT, 35));
-		g.drawString("Pwr: "+power+" / "+TOTALPOWER, 10, 160);
 		g.drawImage(heart, 10, 195, 45, 45,this);
-		g.drawString(""+lives, 50, 218);
-		g.drawString(lifedrop+" / "+NEWLIFE, 90, 218);
+		g.drawString(""+guy.lives, 50, 218);
 		g.drawImage(card, 10, 255, 45, 45,this);
-		g.drawString(""+spells, 50, 270);
-		g.drawString(spelldrop+" / "+NEWSPELL, 90, 270);
+		g.drawString(""+guy.bombs, 50, 270);
 	}
 	
 	//getters and setters
