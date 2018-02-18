@@ -2,18 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a0edc6b3-f861-4023-acd0-71445d476e6b" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/out/production/Touhoudx/com/th/Boss$2.class" afterPath="$PROJECT_DIR$/out/production/Touhoudx/com/th/Boss$2.class" />
-      <change beforePath="$PROJECT_DIR$/out/production/Touhoudx/com/th/Boss.class" afterPath="$PROJECT_DIR$/out/production/Touhoudx/com/th/Boss.class" />
-      <change beforePath="$PROJECT_DIR$/out/production/Touhoudx/com/th/Coordinate.class" afterPath="$PROJECT_DIR$/out/production/Touhoudx/com/th/Coordinate.class" />
-      <change beforePath="$PROJECT_DIR$/out/production/Touhoudx/com/th/Function.class" afterPath="$PROJECT_DIR$/out/production/Touhoudx/com/th/Function.class" />
-      <change beforePath="$PROJECT_DIR$/out/production/Touhoudx/com/th/PlayPanel.class" afterPath="$PROJECT_DIR$/out/production/Touhoudx/com/th/PlayPanel.class" />
-      <change beforePath="$PROJECT_DIR$/out/production/Touhoudx/com/th/SelectPanel.class" afterPath="$PROJECT_DIR$/out/production/Touhoudx/com/th/SelectPanel.class" />
-      <change beforePath="$PROJECT_DIR$/src/com/th/Boss.java" afterPath="$PROJECT_DIR$/src/com/th/Boss.java" />
-      <change beforePath="$PROJECT_DIR$/src/com/th/Coordinate.java" afterPath="$PROJECT_DIR$/src/com/th/Coordinate.java" />
-      <change beforePath="$PROJECT_DIR$/src/com/th/Function.java" afterPath="$PROJECT_DIR$/src/com/th/Function.java" />
       <change beforePath="$PROJECT_DIR$/src/com/th/PlayPanel.java" afterPath="$PROJECT_DIR$/src/com/th/PlayPanel.java" />
-      <change beforePath="$PROJECT_DIR$/src/com/th/SelectPanel.java" afterPath="$PROJECT_DIR$/src/com/th/SelectPanel.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -44,7 +33,7 @@
       <file leaf-file-name="PlayPanel.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/com/th/PlayPanel.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="343">
+            <state relative-caret-position="391">
               <caret line="30" column="27" lean-forward="false" selection-start-line="30" selection-start-column="27" selection-end-line="30" selection-end-column="27" />
               <folding />
             </state>
@@ -1030,7 +1019,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/th/PlayPanel.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="343">
+        <state relative-caret-position="391">
           <caret line="30" column="27" lean-forward="false" selection-start-line="30" selection-start-column="27" selection-end-line="30" selection-end-column="27" />
           <folding />
         </state>

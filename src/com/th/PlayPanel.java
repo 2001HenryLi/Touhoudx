@@ -28,7 +28,7 @@ class PlayPanel extends JPanel implements KeyListener, FocusListener, ActionList
     public volatile ArrayList<Bomb> bombProjectiles = new ArrayList<>();
 
     public Function f = new Function();
-    private double fofx = 1;
+    private double fofx = -1;
     public volatile ArrayList<Coordinate> points = new ArrayList<>();
 
     public int pixels = 0;
