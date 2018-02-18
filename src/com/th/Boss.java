@@ -25,6 +25,8 @@ public class Boss {
     public int spriteWidth;
     public int spriteHeight;
 
+    private BufferedImage[] shots = new BufferedImage[3];
+
     private BulletPattern circle = new BulletPattern() {
         @Override
         public ArrayList<Bullet> makePattern() {
@@ -32,7 +34,7 @@ public class Boss {
             double offset = Math.random()* 2 * Math.PI;
             for(int i = 0; i < 16; i++){
                 double radians = 2 * Math.PI * i / 16 + offset;
-                pattern.add(new Bullet("Resources\\ProjectileSprites\\BasicShot.png", x - 16, y - 16, 32, 32, new MovePath() {
+                pattern.add(new Bullet(shots[2], x - 16, y - 16, 32, 32, new MovePath() {
                     @Override
                     public int[] move(long t, int x0, int y0) {
                         int[] pos = {x0, y0};
@@ -56,7 +58,7 @@ public class Boss {
                 for (int i = 0; i < 32; i++) {
                     double radians = 2 * Math.PI * i / 32 + offset;
                     int j0 = j;
-                    pattern.add(new Bullet("Resources\\ProjectileSprites\\BasicShot.png", x - 16, y - 16, 32, 32, new MovePath() {
+                    pattern.add(new Bullet(shots[0], x - 16, y - 16, 32, 32, new MovePath() {
                         @Override
                         public int[] move(long t, int x0, int y0) {
                             int[] pos = {x0, y0};
@@ -84,7 +86,7 @@ public class Boss {
                 for (int i = 0; i < 4; i++) {
                     double radians = 2 * Math.PI * i / 4 + offset;
                     int j0 = j;
-                    pattern.add(new Bullet("Resources\\ProjectileSprites\\BasicShot.png", x - 16, y - 16, 32, 32, new MovePath() {
+                    pattern.add(new Bullet(shots[0], x - 16, y - 16, 32, 32, new MovePath() {
                         @Override
                         public int[] move(long t, int x0, int y0) {
                             int[] pos = {x0, y0};
@@ -110,7 +112,7 @@ public class Boss {
                     double offset = Math.random()* 2 * Math.PI;
                     double radians = 2 * Math.PI * i / 16 + offset;
                     int j0 = j;
-                    pattern.add(new Bullet("Resources\\ProjectileSprites\\plusc.png", x - 16, y - 16, 32, 32, new MovePath() {
+                    pattern.add(new Bullet(shots[1], x - 16, y - 16, 32, 32, new MovePath() {
                         @Override
                         public int[] move(long t, int x0, int y0) {
                             int[] pos = {x0, y0};
@@ -132,6 +134,9 @@ public class Boss {
         pp = p;
         try {
             sprite = ImageIO.read(new File("Resources/BossSprites/"+name+".png"));
+            shots[0] = ImageIO.read(new File("Resources\\ProjectileSprites\\BasicShot.png"));
+            shots[1] = ImageIO.read(new File("Resources\\ProjectileSprites\\plusc.png"));
+            shots[2] = ImageIO.read(new File("Resources\\ProjectileSprites\\PotatoProjectile.png"));
         } catch(IOException e) {
             System.out.println("failed");
             System.exit(-1);

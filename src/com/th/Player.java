@@ -31,6 +31,7 @@ public class Player {
     public int hitboxHeight = 16;
     String bulletPath = "Resources/ProjectileSprites/";
     String bombPath = "Resources/ProjectileSprites/CircleLarge.png";
+    private BufferedImage[] bullets = new BufferedImage[2];
 
     public int x = 1280 * 3 / 5 / 2;
     public int y = 900;
@@ -47,7 +48,7 @@ public class Player {
             double offset = Math.random()* 2 * Math.PI;
             for(int i = 0; i < 16; i++){
                 double radians = 2 * Math.PI * i / 16 + offset;
-                pattern.add(new Bomb(bombPath, x - 32, y - 32, 64, 64, new MovePath() {
+                pattern.add(new Bomb(bullets[1], x - 32, y - 32, 64, 64, new MovePath() {
                     @Override
                     public int[] move(long t, int x0, int y0) {
                         int[] pos = {x0, y0};
@@ -76,7 +77,8 @@ public class Player {
             sprites[4] = ImageIO.read(new File(SPRITE_DIRECTORY+name+"transitright1.png"));
             sprites[5] = ImageIO.read(new File(SPRITE_DIRECTORY+name+"transitright2.png"));
             sprites[6] = ImageIO.read(new File(SPRITE_DIRECTORY+name+"Right.png"));
-
+            bullets[0] = ImageIO.read(new File(bulletPath+bulletType));
+            bullets[1] = ImageIO.read(new File(bombPath));
             hitbox = ImageIO.read(new File("Resources/CharacterSprites/hitbox.png"));
         } catch(IOException e) {
             System.out.println("failed");
@@ -128,7 +130,7 @@ public class Player {
 
     private void shoot(){
         if(pp.keysDown[5]){
-            pp.projectiles.add(new Bullet(bulletPath+bulletType, x + spriteWidth/2, y, 32, 32, new MovePath() {
+            pp.projectiles.add(new Bullet(bullets[0], x + spriteWidth/2, y, 32, 32, new MovePath() {
                 @Override
                 public int[] move(long t, int x0, int y0) {
                     int[] pos = {x0, y0};
@@ -137,7 +139,7 @@ public class Player {
                     return pos;
                 }
             }));
-            pp.projectiles.add(new Bullet(bulletPath+bulletType, x - spriteWidth/2, y, 32, 32, new MovePath() {
+            pp.projectiles.add(new Bullet(bullets[0], x - spriteWidth/2, y, 32, 32, new MovePath() {
                 @Override
                 public int[] move(long t, int x0, int y0) {
                     int[] pos = {x0, y0};
