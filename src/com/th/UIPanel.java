@@ -40,14 +40,14 @@ class UIPanel extends JPanel{
 		Image heart = Toolkit.getDefaultToolkit().getImage("Resources/UISprites/Heart.png");
 		Image card = Toolkit.getDefaultToolkit().getImage("Resources/UISprites/Spellcard.png");
 		g.drawImage(back, 0,0, WIDTH, HEIGHT, this);
-		g.setFont(new Font(Font.SANS_SERIF, Font.TRUETYPE_FONT, 25));
-		g.drawString("Pwr: "+power+" / "+TOTALPOWER, 10, 60);
-		g.drawImage(heart, 10, 80, 30, 30,this);
-		g.drawString(""+lives, 50, 103);
-		g.drawString(lifedrop+" / "+NEWLIFE, 90, 103);
-		g.drawImage(card, 10, 120, 30, 30,this);
-		g.drawString(""+spells, 50, 145);
-		g.drawString(spelldrop+" / "+NEWSPELL, 90, 145);
+		g.setFont(new Font(Font.SANS_SERIF, Font.TRUETYPE_FONT, 35));
+		g.drawString("Pwr: "+power+" / "+TOTALPOWER, 10, 140);
+		g.drawImage(heart, 10, 175, 45, 45,this);
+		g.drawString(""+lives, 50, 198);
+		g.drawString(lifedrop+" / "+NEWLIFE, 90, 198);
+		g.drawImage(card, 10, 215, 45, 45,this);
+		g.drawString(""+spells, 50, 240);
+		g.drawString(spelldrop+" / "+NEWSPELL, 90, 240);
 	}
 	
 	//getters and setters
