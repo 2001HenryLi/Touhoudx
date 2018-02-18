@@ -56,7 +56,10 @@ public class Player {
     }
     public void update(){
         elapsedTime = System.nanoTime() - startTime;
-        if(isInVuln && elapsedTime - inVulnTime >= 100000000) isInVuln = false;
+        if(isInVuln && elapsedTime - inVulnTime >= 1000000000){
+            isInVuln = false;
+            System.out.println("ree");
+        }
         move();
         shoot();
     }
@@ -117,7 +120,7 @@ public class Player {
         if(bRect.intersects(pRect)){
             lives--;
             isInVuln = true;
-            x = 1280 * 3 / 5;
+            x = 1280 * 3 / 5 / 2;
             y = 960;
             return true;
         }
@@ -131,12 +134,12 @@ public class Player {
         return x - spriteWidth/2;
     }
     public int getSpriteY(){
-        return y - spriteWidth/2;
+        return y - spriteHeight/2;
     }
     public int getHitboxX(){
         return x - hitboxWidth/2;
     }
     public int getHitboxY(){
-        return y - hitboxWidth/2;
+        return y - hitboxHeight/2;
     }
 }

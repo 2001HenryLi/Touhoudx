@@ -44,7 +44,7 @@ public class Bullet {
         return x - spriteWidth/2;
     }
     public int getSpriteY(){
-        return y - spriteWidth/2;
+        return y - spriteHeight/2;
     }
 
     public boolean isOnscreen(){
