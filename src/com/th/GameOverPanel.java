@@ -11,41 +11,39 @@ import java.io.IOException;
  * Created by henry on 2/17/2018.
  */
 public class GameOverPanel extends JPanel implements KeyListener, FocusListener, ActionListener {
+    private final double MASTER_SCALE = 1.0;
+    private final int WIDTH = (int)(1280 * MASTER_SCALE);
+    private final int HEIGHT = (int)(960 * MASTER_SCALE);
 
-    public boolean restart;
-    private Image img = null;
+    public boolean restart = false;
+    private Image img;
 
-    public GameOverPanel()
-    {
-        restart = false;
-    }
-
-    public void paintComponent(Graphics g)
-    {
-        super.paintComponent(g);
+    public GameOverPanel(){
+        setBackground(new Color(255,255,255));
+        setPreferredSize(new Dimension(WIDTH,HEIGHT));
         try {
             img = ImageIO.read(new File("Resources/Background/GameOverPlaceholder.png"));
         } catch(IOException e) {
             System.out.println("failed");
             System.exit(-1);
         }
+    }
+
+    public void paintComponent(Graphics g){
+        super.paintComponent(g);
         g.drawImage(img,0,0,this);
     }
 
-    @Override
-    public void actionPerformed(ActionEvent e) {}
-    @Override
-    public void focusGained(FocusEvent e) {}
-    @Override
-    public void focusLost(FocusEvent e) {}
-    @Override
-    public void keyTyped(KeyEvent e) {}
-    @Override
-    public void keyPressed(KeyEvent e)
-    {
-        if(e.getKeyCode() == KeyEvent.VK_ENTER)
-            restart =true;
+    public void update(){
+        repaint();
     }
-    @Override
+
+    public void actionPerformed(ActionEvent e) {}
+    public void focusGained(FocusEvent e) {}
+    public void focusLost(FocusEvent e) {}
+    public void keyTyped(KeyEvent e) {}
+    public void keyPressed(KeyEvent e) {
+        if(e.getKeyCode() == KeyEvent.VK_ENTER) restart = true;
+    }
     public void keyReleased(KeyEvent e) {}
 }

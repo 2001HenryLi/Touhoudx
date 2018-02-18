@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
 
 public class Boss {
-    private long startTime;
+    private long startTime = -1;
     private long elapsedTime = 0;
     private long previousShot = 0;
 
@@ -47,7 +47,6 @@ public class Boss {
 
     public Boss(PlayPanel p){
         pp = p;
-        startTime = System.nanoTime();
         try {
             sprite = ImageIO.read(new File("Resources/BossSprites/"+name+".png"));
         } catch(IOException e) {
@@ -60,6 +59,7 @@ public class Boss {
     }
 
     public void update(){
+        if(startTime == -1) startTime = System.nanoTime();
         elapsedTime = System.nanoTime()-startTime;
         if(elapsedTime > previousShot+1000000000){
             previousShot += 1000000000;

@@ -8,7 +8,7 @@ import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
 public class Player {
-    private long startTime = System.nanoTime();
+    private long startTime = -1;
     private long elapsedTime = 0;
 
     private long inVulnTime = 0;
@@ -37,6 +37,7 @@ public class Player {
     public int lives = 3;
 
     public Player(PlayPanel p){
+        startTime = System.nanoTime();
         pp = p;
         try {
             sprite = ImageIO.read(new File("Resources/CharacterSprites/"+name+".png"));
@@ -55,6 +56,7 @@ public class Player {
         }
     }
     public void update(){
+        if(startTime == -1) startTime = System.nanoTime();
         elapsedTime = System.nanoTime() - startTime;
         if(isInVuln && elapsedTime - inVulnTime >= 1000000000){
             isInVuln = false;

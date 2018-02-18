@@ -5,7 +5,7 @@ import java.awt.image.*;
 import java.io.*;
 
 public class Bullet {
-    private long startTime = System.nanoTime();
+    private long startTime = -1;
     private long elapsedTime = 0;
 
     public BufferedImage sprite;
@@ -19,6 +19,7 @@ public class Bullet {
     private MovePath mp;
 
     public Bullet(String path, int X, int Y, int w, int h, MovePath MP){
+
         try {
             sprite = ImageIO.read(new File(path));
         } catch(IOException e) {
@@ -34,6 +35,7 @@ public class Bullet {
         mp = MP;
     }
     public void update(){
+        if(startTime == -1) startTime = System.nanoTime();
         elapsedTime = System.nanoTime() - startTime;
         int[] pos = mp.move(elapsedTime, x0, y0);
         x = pos[0];

@@ -34,20 +34,6 @@ class UIPanel extends JPanel{
 		g.drawImage(card, 10, 255, 45, 45,this);
 		g.drawString(""+guy.bombs, 50, 270);
 	}
-	
-	//getters and setters
-	
-	public double getPower(){ return power; }
-	public int getLives(){ return lives; }
-	public int getSpells(){ return spells; }
-	public int getLifeDrop(){ return lifedrop; }
-	public int getSpellDrop(){ return spelldrop; }
-	
-	public void setPower(double p){ power = p; }
-	public void setLives(int h){ lives = h; }
-	public void setSpells(int s){ spells = s; }
-	public void setLifeDrop(int hd){ lifedrop = hd; }
-	public void setSpellDrop(int sd){ spelldrop = sd; }
 
     public void update(){
         repaint();

@@ -15,11 +15,14 @@ public class MainFrame extends JFrame {
     public static final int FPS = 60;
 
     ScheduledExecutorService exe;
-    private StartPanel sp = null;
+    private StartPanel sp;
     private GlassPanel gp = new GlassPanel();
     private JPanel mainPanel = new JPanel();
 
     private TouhouDX tdx = new TouhouDX();
+    private boolean gameOverSwitch = false;
+    private boolean restartSwitch = false;
+
     public MainFrame(){
         super("Touhou DX");
         mainPanel.setPreferredSize(new Dimension(WIDTH, HEIGHT));
@@ -34,11 +37,13 @@ public class MainFrame extends JFrame {
 
         sp = new StartPanel();
     }
+
     public static void main(String[] args){
         MainFrame mf = new MainFrame();
         mf.start();
         mf.run();
     }
+
     public void start(){
         mainPanel.add(sp);
         setContentPane(mainPanel);
@@ -54,10 +59,13 @@ public class MainFrame extends JFrame {
         sp.waitForInput();
         exe.shutdown();
     }
+
     public void run(){
+        mainPanel.setVisible(false);
         mainPanel.remove(sp);
         mainPanel.add(tdx.pp);
         mainPanel.add(tdx.UI);
+        mainPanel.setVisible(true);
         getGlassPane().setVisible(true);
         setVisible(true);
 
@@ -70,29 +78,30 @@ public class MainFrame extends JFrame {
         }, 0 , 1000/FPS, TimeUnit.MILLISECONDS);
     }
 
-    public void update()
-    {
+    public void update(){
+        if(!gameOverSwitch && tdx.pp.gameOver) gameOver();
+        if(!restartSwitch && tdx.gp.restart) restart();
         tdx.update();
-        if(tdx.pp.gameOver)
-        {
-            mainPanel.remove(tdx.pp);
-            mainPanel.remove(tdx.UI);
-            mainPanel.add(tdx.gp);
-            exe.shutdown();
-            gameOver();
-        }
-
     }
-
-    public void gameOver()
-    {
+    public void gameOver(){
         mainPanel.setVisible(false);
         mainPanel.remove(tdx.pp);
         mainPanel.remove(tdx.UI);
         mainPanel.add(tdx.gp);
-        tdx.gp.setVisible(true);
         mainPanel.setVisible(true);
-        update();
+        gameOverSwitch = true;
+        restartSwitch = false;
+    }
+
+    public void restart(){
+        mainPanel.setVisible(false);
+        mainPanel.remove(tdx.gp);
+        tdx = new TouhouDX();
+        sp = new StartPanel();
+        mainPanel.add(sp);
+        mainPanel.setVisible(true);
+        restartSwitch = true;
+        gameOverSwitch = false;
     }
 
 }

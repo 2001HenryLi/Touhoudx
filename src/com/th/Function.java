@@ -34,7 +34,6 @@ public class Function {
 	public void chooseRandom(){
 		functiontype = (int)(Math.random()*9+1);
 		constant = (int)(Math.random()*5+1);
-		System.out.println(getFunction());
 	}
 	
 	//returns values in pixels

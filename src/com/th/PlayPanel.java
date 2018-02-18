@@ -6,7 +6,7 @@ import java.util.ArrayList;
 
 class PlayPanel extends JPanel implements KeyListener, FocusListener, ActionListener{
     private int backgroundScroll = 0;
-    private int fofx = 0;
+
     private final double MASTER_SCALE = 1.0;
     private final int WIDTH = (int)(1280 * 3 / 5 * MASTER_SCALE);
     private final int HEIGHT = (int)(960 * MASTER_SCALE);
@@ -16,11 +16,13 @@ class PlayPanel extends JPanel implements KeyListener, FocusListener, ActionList
     private final int[] INPUT_CODES = {KeyEvent.VK_LEFT, KeyEvent.VK_RIGHT, KeyEvent.VK_UP, KeyEvent.VK_DOWN, KeyEvent.VK_SHIFT, KeyEvent.VK_Z, KeyEvent.VK_X};
     public boolean[] keysDown = new boolean[INPUT_CODES.length];
 
-    public Function f;
     private Player p;
     private Boss b;
     public volatile ArrayList<Bullet> projectiles = new ArrayList<>();
     public volatile ArrayList<Bullet> bossProjectiles = new ArrayList<>();
+
+    public Function f;
+    private int fofx = 0;
     public volatile ArrayList<Coordinate> points = new ArrayList<>();
 
     public PlayPanel(Player p, Boss b){
@@ -32,6 +34,7 @@ class PlayPanel extends JPanel implements KeyListener, FocusListener, ActionList
         addFocusListener(this);
         this.p = p;
         this.b = b;
+
         f.chooseRandom();
         requestFocus();
     }
@@ -47,6 +50,7 @@ class PlayPanel extends JPanel implements KeyListener, FocusListener, ActionList
 
         for(Bullet bull : projectiles) g.drawImage(bull.sprite, bull.getSpriteX(), bull.getSpriteY(), bull.spriteWidth, bull.spriteHeight,this);
         for(Bullet bull : bossProjectiles) g.drawImage(bull.sprite, bull.getSpriteX(), bull.getSpriteY(), bull.spriteWidth, bull.spriteHeight,this);
+
         g.setColor(Color.BLACK);
         g.setFont(new Font(Font.SANS_SERIF, Font.TRUETYPE_FONT, 40));
         g.drawString(f.getFunction(), 10, 50);
@@ -79,10 +83,11 @@ class PlayPanel extends JPanel implements KeyListener, FocusListener, ActionList
             bull.update();
             if(!bull.isOnscreen()) bossProjectiles.remove(bull);
             if(p.takeDamage(bull)){
-                if(!p.isAlive()) gameOver = true;
                 bossProjectiles = new ArrayList<Bullet>();
+                if(!p.isAlive()) gameOver = true;
             }
         }
+
         fofx+= 0.1;
         if(fofx<10)
         	points.add(new Coordinate((int)(fofx*96),(int)(f.getValue(fofx))));
@@ -91,6 +96,7 @@ class PlayPanel extends JPanel implements KeyListener, FocusListener, ActionList
         	points.clear();
             fofx = 0;
         }
+
         repaint();
     }
 
