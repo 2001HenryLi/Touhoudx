@@ -26,6 +26,7 @@ public class Boss {
     public int spriteHeight;
 
     private BufferedImage[] shots = new BufferedImage[4];
+    private String[] sfx = {"Resources\\SFX\\ATTACK3.wav", "Resources\\SFX\\ATTACK2.wav", "Resources\\SFX\\ATTACK.wav", "Resources\\SFX\\ATTACK4.wav"};
 
     private BulletPattern circle = new BulletPattern() {
         @Override
@@ -151,10 +152,8 @@ public class Boss {
     }
 
     public void update(){
-        if(health > 2500)
-            name = "BossStage1";
-        else
-            name = "BossStage2";
+        if(health > 2500) name = "BossStage1";
+        else name = "BossStage2";
         if(startTime == -1) startTime = System.nanoTime();
         elapsedTime = System.nanoTime() - startTime;
 
@@ -165,7 +164,9 @@ public class Boss {
         }
         if(elapsedTime > previousShot + 1000000000){
             previousShot += 1000000000;
-            ArrayList<Bullet> addProjectiles = bps[(int)(Math.random() * bps.length)].makePattern();
+            int rand = (int)(Math.random() * bps.length);
+            ArrayList<Bullet> addProjectiles = bps[rand].makePattern();
+            pp.sfx.playFX(sfx[rand]);
             for(Bullet b : addProjectiles) pp.bossProjectiles.add(b);
         }
     }

@@ -12,6 +12,8 @@ public class MainFrame extends JFrame {
     private final int HEIGHT = 960;
     public static final int FPS = 60;
 
+    private BGMusic bgm = new BGMusic();
+
     ScheduledExecutorService exe;
     private SelectPanel slp;
     private StartPanel sp;
@@ -24,8 +26,7 @@ public class MainFrame extends JFrame {
     private boolean winSwitch = false;
 
     public MainFrame(){
-        super("Touhou DX");
-
+        super("L' TouHoupital DX");
         mainPanel.setPreferredSize(new Dimension(WIDTH, HEIGHT));
         mainPanel.setLayout(new FlowLayout(FlowLayout.LEFT,0,0));
 
@@ -47,6 +48,7 @@ public class MainFrame extends JFrame {
     }
 
     public void start(){
+        bgm.playBGMusic("Resources\\BGM\\Title Theme - Super Mario World.wav", 0);
         mainPanel.add(sp);
         setContentPane(mainPanel);
         setVisible(true);
@@ -60,9 +62,11 @@ public class MainFrame extends JFrame {
         }, 0 , 1000/FPS, TimeUnit.MILLISECONDS);
         sp.waitForInput();
         exe.shutdown();
+        bgm.stop();
     }
 
     public void run(){
+        bgm.playBGMusic("Resources\\BGM\\Mint Espresso - Kirby Cafe.wav", 0);
         slp = new SelectPanel();
         mainPanel.setVisible(false);
         mainPanel.remove(sp);
@@ -79,6 +83,7 @@ public class MainFrame extends JFrame {
         mainPanel.setVisible(true);
         tdx = new TouhouDX(slp.waitForFocus());
         exe.shutdown();
+        bgm.stop();
 
         mainPanel.remove(slp);
         mainPanel.add(tdx.pp);
@@ -128,6 +133,7 @@ public class MainFrame extends JFrame {
 
     public void restart(){
         exe.shutdown();
+        bgm.playBGMusic("Resources\\BGM\\Title Theme - Super Mario World.wav", 0);
         mainPanel.setVisible(false);
         if(gameOverSwitch) mainPanel.remove(tdx.gp);
         else if(winSwitch) mainPanel.remove(tdx.wp);
@@ -141,7 +147,7 @@ public class MainFrame extends JFrame {
         restartSwitch = true;
         gameOverSwitch = false;
         winSwitch = false;
-
+        bgm.stop();
         run();
     }
 

@@ -28,7 +28,7 @@ class SFX {  //this plays the background music. no changes needed here unless fu
             System.exit(-4);
         }
         FloatControl gainControl = (FloatControl) mus.getControl(FloatControl.Type.MASTER_GAIN);
-        gainControl.setValue(6.0206f);
+        gainControl.setValue(-10f);
         mus.start();
     }
     public void stop(){ mus.stop(); }

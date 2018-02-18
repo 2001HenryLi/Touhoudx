@@ -153,6 +153,7 @@ public class Player {
 
     public void bomb(){
         if(bombs > 0){
+            pp.sfx.playFX("Resources\\SFX\\SPELLCARD.wav");
             ArrayList<Bullet> addProjectiles = BOMB.makePattern();
             for(Bullet b : addProjectiles) pp.bombProjectiles.add((Bomb)b);
             bombs--;

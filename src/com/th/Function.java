@@ -27,7 +27,7 @@ public class Function {
 	
 	public void chooseRandom(){
 		functiontype = (int)(Math.random()*9+1);
-		constant = (int)(Math.random()*5+1);
+		constant = (int)(Math.random()*2+1);
 		constant2 = (int)(Math.random()*2+1);
 	}
 	

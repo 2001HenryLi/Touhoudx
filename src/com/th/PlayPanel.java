@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.logging.LogManager;
 
 class PlayPanel extends JPanel implements KeyListener, FocusListener, ActionListener{
+    public SFX sfx = new SFX();
     private int backgroundScroll = 0;
 
     private final double MASTER_SCALE = 1.0;
@@ -93,8 +94,10 @@ class PlayPanel extends JPanel implements KeyListener, FocusListener, ActionList
             else if(b.takeDamage(bull)){
                 projectiles.remove(bull);
                 i--;
-                if(!b.isAlive())
+                if(!b.isAlive()){
                     win = true;
+                    sfx.playFX("Resources\\SFX\\DEFEATED.wav");
+                }
             }
         }
         for(int i = 0; i < bossProjectiles.size(); i++){
@@ -122,7 +125,10 @@ class PlayPanel extends JPanel implements KeyListener, FocusListener, ActionList
                 bossProjectiles = new ArrayList<Bullet>();
                 points = new ArrayList<Coordinate>();
                 fofx = 100000;
-                if(!p.isAlive()) gameOver = true;
+                if(!p.isAlive()){
+                    gameOver = true;
+                    sfx.stop();
+                }
             }
         }
         for(int i = 0; i < bombProjectiles.size(); i++){
@@ -170,6 +176,7 @@ class PlayPanel extends JPanel implements KeyListener, FocusListener, ActionList
             f.chooseRandom();
             points.clear();
             fofx = -1;
+            sfx.playFX("Resources\\SFX\\TWINKLE2.wav");
         }
         pixels = (int)((b.health/5000)*(250));
         repaint();

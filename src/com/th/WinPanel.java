@@ -11,6 +11,9 @@ import java.io.IOException;
  * Created by henry on 2/17/2018.
  */
 public class WinPanel extends JPanel implements KeyListener, FocusListener, ActionListener {
+    private BGMusic bgm = new BGMusic();
+    private boolean music = false;
+
     private final double MASTER_SCALE = 1.0;
     private final int WIDTH = (int)(1280 * MASTER_SCALE);
     private final int HEIGHT = (int)(960 * MASTER_SCALE);
@@ -38,6 +41,10 @@ public class WinPanel extends JPanel implements KeyListener, FocusListener, Acti
     }
 
     public void update(){
+        if(!music){
+            bgm.playBGMusic("Resources\\BGM\\Battle Victory - Mario & Luigi Bowser's Inside Story.wav", (int)(3.010 * 44100));
+            music = true;
+        }
         if(!isFocusOwner()) requestFocus();
         repaint();
     }
@@ -49,6 +56,8 @@ public class WinPanel extends JPanel implements KeyListener, FocusListener, Acti
     public void keyPressed(KeyEvent e) {
         if( e.getKeyCode() == KeyEvent.VK_ENTER){
             restart = true;
+            music = false;
+            bgm.stop();
         }
     }
     public void keyReleased(KeyEvent e) {}

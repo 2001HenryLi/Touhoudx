@@ -30,7 +30,7 @@ class BGMusic {  //this plays the background music. no changes needed here unles
             System.exit(-4);
         }
         FloatControl gainControl = (FloatControl) mus.getControl(FloatControl.Type.MASTER_GAIN);
-        gainControl.setValue(-6.0206f);
+        gainControl.setValue(-2.0206f);
         mus.start();  //start from the beginning
         mus.setLoopPoints(loopStart,-1);  //loop the correct parts
         mus.loop(Clip.LOOP_CONTINUOUSLY);  //tell it to loop
