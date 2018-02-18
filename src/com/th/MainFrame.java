@@ -14,6 +14,7 @@ public class MainFrame extends JFrame {
     private final int HEIGHT = 960;
     public static final int FPS = 60;
 
+    ScheduledExecutorService exe;
     private StartPanel sp = null;
     private GlassPanel gp = new GlassPanel();
     private JPanel mainPanel = new JPanel();
@@ -43,7 +44,7 @@ public class MainFrame extends JFrame {
         setContentPane(mainPanel);
         setVisible(true);
 
-        ScheduledExecutorService exe = Executors.newSingleThreadScheduledExecutor();
+        exe = Executors.newSingleThreadScheduledExecutor();
         exe.scheduleAtFixedRate(new Runnable() {
             @Override
             public void run() {
@@ -60,7 +61,7 @@ public class MainFrame extends JFrame {
         getGlassPane().setVisible(true);
         setVisible(true);
 
-        ScheduledExecutorService exe = Executors.newSingleThreadScheduledExecutor();
+        exe = Executors.newSingleThreadScheduledExecutor();
         exe.scheduleAtFixedRate(new Runnable() {
             @Override
             public void run() {
@@ -74,8 +75,22 @@ public class MainFrame extends JFrame {
         tdx.update();
         if(tdx.pp.gameOver)
         {
-            mainPanel.remove(tdx.pp);
-            mainPanel.remove(tdx.UI);
+
+            exe.shutdown();
+            gameOver();
         }
+
     }
+
+    public void gameOver()
+    {
+        mainPanel.remove(tdx.pp);
+        mainPanel.remove(tdx.UI);
+        tdx.pp.setVisible(false);
+        mainPanel.setVisible(false);
+        mainPanel.add(tdx.gp);
+        mainPanel.setVisible(true);
+        update();
+    }
+
 }

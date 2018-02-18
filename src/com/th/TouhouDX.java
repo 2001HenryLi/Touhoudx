@@ -6,6 +6,7 @@ public class TouhouDX {
     public Boss b;
     public PlayPanel pp;
     public UIPanel UI = new UIPanel();
+    public GameOverPanel gp = new GameOverPanel();
 
     public TouhouDX () {
         p = new Player(pp);

@@ -24,6 +24,7 @@ class PlayPanel extends JPanel implements KeyListener, FocusListener, ActionList
     public volatile ArrayList<Coordinate> points = new ArrayList<>();
 
     public PlayPanel(Player p, Boss b){
+        f = new Function(1,1);
         gameOver = false;
         setBackground(new Color(255,255,255));
         setPreferredSize(new Dimension(WIDTH,HEIGHT));

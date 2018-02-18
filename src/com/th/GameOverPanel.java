@@ -11,11 +11,12 @@ public class GameOverPanel extends JPanel implements KeyListener, FocusListener,
 
     public GameOverPanel()
     {
-
+        repaint();
     }
 
     public void paintComponent(Graphics g)
     {
+        super.paintComponent(g);
         g.drawImage(Toolkit.getDefaultToolkit().getImage("Resources/Background/GameOverPlaceholder.png"),0,0,this);
     }
 
