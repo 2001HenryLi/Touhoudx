@@ -76,7 +76,12 @@ class PlayPanel extends JPanel implements KeyListener, FocusListener, ActionList
             if(p.takeDamage(bull)) bossProjectiles = new ArrayList<Bullet>();
         }
         fofx+= 0.01;
-        points.add(new Coordinate((int)(fofx*96),(int)(f.getValue(fofx)));
+        if(fofx<10)
+        	points.add(new Coordinate((int)(fofx*96),(int)(f.getValue(fofx)));
+        else{
+        	f.chooseRandom();
+        	points.clear();
+        }
         repaint();
     }
 
