@@ -3,8 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="a0edc6b3-f861-4023-acd0-71445d476e6b" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/out/production/Touhoudx/com/th/PlayPanel.class" afterPath="$PROJECT_DIR$/out/production/Touhoudx/com/th/PlayPanel.class" />
-      <change beforePath="$PROJECT_DIR$/out/production/Touhoudx/com/th/Player.class" afterPath="$PROJECT_DIR$/out/production/Touhoudx/com/th/Player.class" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -47,18 +45,30 @@
       <file leaf-file-name="PlayPanel.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/th/PlayPanel.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="102">
-              <caret line="8" column="48" lean-forward="false" selection-start-line="8" selection-start-column="36" selection-end-line="8" selection-end-column="48" />
+            <state relative-caret-position="255">
+              <caret line="17" column="46" lean-forward="true" selection-start-line="17" selection-start-column="46" selection-end-line="17" selection-end-column="46" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Player.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Bullet.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/com/th/Bullet.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="340">
+              <caret line="29" column="40" lean-forward="true" selection-start-line="29" selection-start-column="40" selection-end-line="29" selection-end-column="40" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Player.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/th/Player.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="52">
-              <caret line="20" column="22" lean-forward="true" selection-start-line="20" selection-start-column="22" selection-end-line="20" selection-end-column="22" />
+            <state relative-caret-position="154">
+              <caret line="24" column="8" lean-forward="true" selection-start-line="24" selection-start-column="8" selection-end-line="30" selection-end-column="9" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -116,8 +126,9 @@
         <option value="$PROJECT_DIR$/src/com/th/MainFrame.java" />
         <option value="$PROJECT_DIR$/src/com/th/TouhouDX.java" />
         <option value="$PROJECT_DIR$/src/com/th/UIPanel.java" />
-        <option value="$PROJECT_DIR$/src/com/th/PlayPanel.java" />
         <option value="$PROJECT_DIR$/src/com/th/Player.java" />
+        <option value="$PROJECT_DIR$/src/com/th/PlayPanel.java" />
+        <option value="$PROJECT_DIR$/src/com/th/Bullet.java" />
       </list>
     </option>
   </component>
@@ -342,7 +353,14 @@
       <option name="project" value="LOCAL" />
       <updated>1518911967594</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="working on bullets">
+      <created>1518912927779</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1518912927779</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -412,7 +430,8 @@
     <MESSAGE value="made the thing actually appaer lul" />
     <MESSAGE value="working on player movement" />
     <MESSAGE value="Curro can move now with shift" />
-    <option name="LAST_COMMIT_MESSAGE" value="Curro can move now with shift" />
+    <MESSAGE value="working on bullets" />
+    <option name="LAST_COMMIT_MESSAGE" value="working on bullets" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -721,11 +740,6 @@
         <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Resources/CharacterSprites/cirno.png">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/th/UIPanel.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="102">
@@ -736,6 +750,29 @@
             <element signature="e#569#570#0" expanded="true" />
             <element signature="e#594#595#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Resources/CharacterSprites/cirno.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/th/Player.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="154">
+          <caret line="24" column="8" lean-forward="true" selection-start-line="24" selection-start-column="8" selection-end-line="30" selection-end-column="9" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/th/PlayPanel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="17" column="46" lean-forward="true" selection-start-line="17" selection-start-column="46" selection-end-line="17" selection-end-column="46" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -750,18 +787,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/th/PlayPanel.java">
+    <entry file="file://$PROJECT_DIR$/src/com/th/Bullet.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="8" column="48" lean-forward="false" selection-start-line="8" selection-start-column="36" selection-end-line="8" selection-end-column="48" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/th/Player.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="52">
-          <caret line="20" column="22" lean-forward="true" selection-start-line="20" selection-start-column="22" selection-end-line="20" selection-end-column="22" />
+        <state relative-caret-position="340">
+          <caret line="29" column="40" lean-forward="true" selection-start-line="29" selection-start-column="40" selection-end-line="29" selection-end-column="40" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
