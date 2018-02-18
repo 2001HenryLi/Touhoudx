@@ -41,13 +41,13 @@ class UIPanel extends JPanel{
 		Image card = Toolkit.getDefaultToolkit().getImage("Resources/UISprites/Spellcard.png");
 		g.drawImage(back, 0,0, WIDTH, HEIGHT, this);
 		g.setFont(new Font(Font.SANS_SERIF, Font.TRUETYPE_FONT, 35));
-		g.drawString("Pwr: "+power+" / "+TOTALPOWER, 10, 140);
-		g.drawImage(heart, 10, 175, 45, 45,this);
-		g.drawString(""+lives, 50, 198);
-		g.drawString(lifedrop+" / "+NEWLIFE, 90, 198);
-		g.drawImage(card, 10, 215, 45, 45,this);
-		g.drawString(""+spells, 50, 240);
-		g.drawString(spelldrop+" / "+NEWSPELL, 90, 240);
+		g.drawString("Pwr: "+power+" / "+TOTALPOWER, 10, 160);
+		g.drawImage(heart, 10, 195, 45, 45,this);
+		g.drawString(""+lives, 50, 218);
+		g.drawString(lifedrop+" / "+NEWLIFE, 90, 218);
+		g.drawImage(card, 10, 255, 45, 45,this);
+		g.drawString(""+spells, 50, 270);
+		g.drawString(spelldrop+" / "+NEWSPELL, 90, 270);
 	}
 	
 	//getters and setters
