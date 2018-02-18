@@ -64,7 +64,7 @@ public class MainFrame extends JFrame {
     }
 
     public void run(){
-
+        slp = new SelectPanel(tdx.p);
         mainPanel.setVisible(false);
         mainPanel.remove(sp);
         mainPanel.add(slp);
@@ -77,12 +77,13 @@ public class MainFrame extends JFrame {
                 slp.update();
             }
         }, 0 , 1000/FPS, TimeUnit.MILLISECONDS);
+        mainPanel.setVisible(true);
         slp.waitForFocus();
         exe.shutdown();
         System.out.println("boi");
-        //mainPanel.add(tdx.pp);
-        //mainPanel.add(tdx.UI);
-        mainPanel.setVisible(true);
+        mainPanel.remove(slp);
+        mainPanel.add(tdx.pp);
+        mainPanel.add(tdx.UI);
         getGlassPane().setVisible(true);
         setVisible(true);
 

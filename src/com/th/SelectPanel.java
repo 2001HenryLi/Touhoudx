@@ -54,11 +54,11 @@ public class SelectPanel extends JPanel implements KeyListener, FocusListener{
 	}
 	public void keyPressed(KeyEvent e) {
 		System.out.println(e.getKeyChar());
-		if(e.getKeyChar() == '1') {
+		if(e.getKeyCode() == KeyEvent.VK_1) {
 			guy.name = "cirno";
 			gotInput = true;
 		}
-		if(e.getKeyChar() == '2') {
+		if(e.getKeyCode() == KeyEvent.VK_2) {
 			guy.name = "reimu";
 			gotInput = true;
 		}
