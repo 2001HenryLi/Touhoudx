@@ -79,8 +79,6 @@ public class MainFrame extends JFrame {
     }
 
     public void update(){
-        if(tdx.gp.restart)
-            restartSwitch = true;
         if(!gameOverSwitch && tdx.pp.gameOver) gameOver();
         if(!restartSwitch && tdx.gp.restart) restart();
         tdx.update();

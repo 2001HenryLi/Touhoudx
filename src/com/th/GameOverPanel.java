@@ -34,25 +34,22 @@ public class GameOverPanel extends JPanel implements KeyListener, FocusListener,
 
     public void paintComponent(Graphics g){
         super.paintComponent(g);
-        g.drawImage(img,330,50,700,800,this);
+        g.drawImage(img,0,0,this);
     }
 
     public void update(){
+        requestFocus();
         repaint();
     }
 
     public void actionPerformed(ActionEvent e) {}
     public void focusGained(FocusEvent e) {}
     public void focusLost(FocusEvent e) {}
-    public void keyTyped(KeyEvent e) {
-        System.out.println(e.getKeyCode());
-        if(e.getKeyCode() == KeyEvent.VK_ENTER){
-            restart = true;
-            System.out.println("woof");
-        }
-    }
+    public void keyTyped(KeyEvent e) {}
     public void keyPressed(KeyEvent e) {
-
+        if( e.getKeyCode() == KeyEvent.VK_ENTER){
+            restart = true;
+        }
     }
     public void keyReleased(KeyEvent e) {}
 }
