@@ -9,6 +9,7 @@ public class TouhouDX {
     public GameOverPanel gp = new GameOverPanel();
 
     public TouhouDX () {
+        gp.setVisible(false);
         p = new Player(pp);
         b = new Boss(pp);
         pp = new PlayPanel(p, b);
@@ -18,7 +19,15 @@ public class TouhouDX {
     }
 
     public void update(){
-        pp.update();
-        UI.update();
+        if(!pp.gameOver)
+        {
+            pp.update();
+            UI.update();
+        }
+        else
+        {
+            gp.setVisible(true);
+            gp.repaint();
+        }
     }
 }

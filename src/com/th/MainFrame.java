@@ -75,7 +75,9 @@ public class MainFrame extends JFrame {
         tdx.update();
         if(tdx.pp.gameOver)
         {
-
+            mainPanel.remove(tdx.pp);
+            mainPanel.remove(tdx.UI);
+            mainPanel.add(tdx.gp);
             exe.shutdown();
             gameOver();
         }
@@ -84,11 +86,11 @@ public class MainFrame extends JFrame {
 
     public void gameOver()
     {
+        mainPanel.setVisible(false);
         mainPanel.remove(tdx.pp);
         mainPanel.remove(tdx.UI);
-        tdx.pp.setVisible(false);
-        mainPanel.setVisible(false);
         mainPanel.add(tdx.gp);
+        tdx.gp.setVisible(true);
         mainPanel.setVisible(true);
         update();
     }
