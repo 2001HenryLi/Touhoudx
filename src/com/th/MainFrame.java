@@ -94,14 +94,16 @@ public class MainFrame extends JFrame {
     }
 
     public void restart(){
+        exe.shutdown();
         mainPanel.setVisible(false);
         mainPanel.remove(tdx.gp);
         tdx = new TouhouDX();
         sp = new StartPanel();
         mainPanel.add(sp);
-        mainPanel.add(tdx.UI);
-        mainPanel.add(tdx.pp);
         mainPanel.setVisible(true);
+        sp.requestFocus();
+        sp.waitForInput();
+        run();
         restartSwitch = true;
         gameOverSwitch = false;
     }

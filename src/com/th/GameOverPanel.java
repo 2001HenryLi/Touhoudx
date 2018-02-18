@@ -34,7 +34,7 @@ public class GameOverPanel extends JPanel implements KeyListener, FocusListener,
 
     public void paintComponent(Graphics g){
         super.paintComponent(g);
-        g.drawImage(img,0,0,this);
+        g.drawImage(img,0,0, 1280, 930, this);
     }
 
     public void update(){

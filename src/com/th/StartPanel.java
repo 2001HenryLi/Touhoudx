@@ -43,6 +43,7 @@ class StartPanel extends JPanel implements KeyListener, FocusListener, ActionLis
     }
 
     public void update(){
+        requestFocus();
         ang += (Math.PI/90);
         repaint();
     }
