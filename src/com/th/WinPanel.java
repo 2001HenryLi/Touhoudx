@@ -38,7 +38,7 @@ public class WinPanel extends JPanel implements KeyListener, FocusListener, Acti
     }
 
     public void update(){
-        requestFocus();
+        if(!isFocusOwner()) requestFocus();
         repaint();
     }
 

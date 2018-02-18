@@ -38,7 +38,7 @@ public class GameOverPanel extends JPanel implements KeyListener, FocusListener,
     }
 
     public void update(){
-        requestFocus();
+        if(!isFocusOwner()) requestFocus();
         repaint();
     }
 

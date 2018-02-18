@@ -19,8 +19,7 @@ public class TouhouDX {
     }
 
     public void update(){
-        if(pp.win)
-        {
+        if(pp.win){
             wp.update();
         }
         else if(!pp.gameOver && !pp.win){

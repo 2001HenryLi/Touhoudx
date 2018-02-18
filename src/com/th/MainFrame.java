@@ -69,6 +69,7 @@ public class MainFrame extends JFrame {
         mainPanel.remove(sp);
         mainPanel.add(slp);
         slp.setVisible(true);
+
         exe = Executors.newSingleThreadScheduledExecutor();
         exe.scheduleAtFixedRate(new Runnable() {
             @Override
@@ -79,6 +80,7 @@ public class MainFrame extends JFrame {
         mainPanel.setVisible(true);
         tdx = new TouhouDX(slp.waitForFocus());
         exe.shutdown();
+
         mainPanel.remove(slp);
         mainPanel.add(tdx.pp);
         mainPanel.add(tdx.UI);
@@ -96,8 +98,8 @@ public class MainFrame extends JFrame {
 
     public void update(){
         if(!gameOverSwitch && tdx.pp.gameOver) gameOver();
-        if(!restartSwitch && tdx.gp.restart) restart();
-        if(!winSwitch && tdx.pp.win) win();
+        else if(!winSwitch && tdx.pp.win) win();
+        else if(!restartSwitch && (tdx.gp.restart || tdx.wp.restart)) restart();
         tdx.update();
     }
 
@@ -107,6 +109,7 @@ public class MainFrame extends JFrame {
         mainPanel.remove(tdx.UI);
         mainPanel.add(tdx.wp);
         mainPanel.setVisible(true);
+
         winSwitch = true;
         gameOverSwitch = false;
         restartSwitch = false;
@@ -118,6 +121,7 @@ public class MainFrame extends JFrame {
         mainPanel.remove(tdx.UI);
         mainPanel.add(tdx.gp);
         mainPanel.setVisible(true);
+
         gameOverSwitch = true;
         restartSwitch = false;
         winSwitch = false;
@@ -126,7 +130,8 @@ public class MainFrame extends JFrame {
     public void restart(){
         exe.shutdown();
         mainPanel.setVisible(false);
-        mainPanel.remove(tdx.gp);
+        if(gameOverSwitch) mainPanel.remove(tdx.gp);
+        else if(winSwitch) mainPanel.remove(tdx.wp);
 
         sp = new StartPanel();
         mainPanel.add(sp);
@@ -134,6 +139,7 @@ public class MainFrame extends JFrame {
         sp.requestFocus();
         sp.waitForInput();
         run();
+
         restartSwitch = true;
         gameOverSwitch = false;
         winSwitch = false;
