@@ -69,7 +69,6 @@ public class MainFrame extends JFrame {
         mainPanel.remove(sp);
         mainPanel.add(slp);
         slp.setVisible(true);
-        System.out.println("boi");
         exe = Executors.newSingleThreadScheduledExecutor();
         exe.scheduleAtFixedRate(new Runnable() {
             @Override
@@ -80,7 +79,6 @@ public class MainFrame extends JFrame {
         mainPanel.setVisible(true);
         slp.waitForFocus();
         exe.shutdown();
-        System.out.println("boi");
         mainPanel.remove(slp);
         mainPanel.add(tdx.pp);
         mainPanel.add(tdx.UI);
