@@ -50,7 +50,7 @@ class PlayPanel extends JPanel implements KeyListener, FocusListener, ActionList
         g.setColor(Color.BLACK);
         g.setFont(new Font(Font.SANS_SERIF, Font.TRUETYPE_FONT, 40));
         g.drawString(f.getFunction(), 10, 50);
-        for(Coordinate c : points) g.fillRect(c.getX(), c.getY(), 3,3);
+        for(Coordinate c : points) g.fillRect(HEIGHT- c.getX(), c.getY(), 10,10);
         
         backgroundScroll = (backgroundScroll+5) % 1280;
     }
@@ -83,7 +83,7 @@ class PlayPanel extends JPanel implements KeyListener, FocusListener, ActionList
                 bossProjectiles = new ArrayList<Bullet>();
             }
         }
-        fofx+= 0.01;
+        fofx+= 0.1;
         if(fofx<10)
         	points.add(new Coordinate((int)(fofx*96),(int)(f.getValue(fofx))));
         else{
