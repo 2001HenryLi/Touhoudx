@@ -19,7 +19,7 @@ public class Boss {
 
     public String name = "BossStage1";
     public BufferedImage sprite;
-    public double health;
+    public double health = 1000;
     public int x = 1280 * 3 / 5 / 2;
     public int y = 240;
     public int spriteWidth;
@@ -110,7 +110,6 @@ public class Boss {
             System.out.println("failed");
             System.exit(-1);
         }
-        health = 10.0;
         spriteWidth = sprite.getWidth();
         spriteHeight = sprite.getHeight();
     }
@@ -130,12 +129,15 @@ public class Boss {
         Rectangle bRect = new Rectangle(b.getSpriteX(), b.getSpriteY(), b.spriteWidth, b.spriteHeight);
         Rectangle pRect = new Rectangle(getSpriteX(), getSpriteY(), spriteWidth, spriteHeight);
         if(bRect.intersects(pRect)){
-            //oof
+            health--;
+            System.out.println(health);
             return true;
         }
         return false;
     }
-
+    public boolean isAlive(){
+        return health > 0;
+    }
     public int getSpriteX(){
         return x - spriteWidth/2;
     }

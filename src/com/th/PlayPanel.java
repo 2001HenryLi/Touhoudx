@@ -25,6 +25,8 @@ class PlayPanel extends JPanel implements KeyListener, FocusListener, ActionList
     private int fofx = 0;
     public volatile ArrayList<Coordinate> points = new ArrayList<>();
 
+    public int pixels = 0;
+
     public PlayPanel(Player p, Boss b){
         f = new Function(1,1);
         gameOver = false;
@@ -67,7 +69,7 @@ class PlayPanel extends JPanel implements KeyListener, FocusListener, ActionList
 			g.setColor(Color.YELLOW);
 		else
 			g.setColor(Color.GREEN);
-		g.fillRect(12, 12, pixels, HEIGHT-4);
+		g.fillRect(12, 12, pixels, 50);
         
         backgroundScroll = (backgroundScroll+5) % 1280;
     }
@@ -82,7 +84,7 @@ class PlayPanel extends JPanel implements KeyListener, FocusListener, ActionList
         if(!isFocusOwner()) requestFocus();
         p.update();
         b.update();
-        pixels = (int)((b.getHealth()/1000)*(WIDTH-4));
+        pixels = (int)((b.health/1000)*(250));
         for(int i = 0; i < projectiles.size(); i++){
             Bullet bull = projectiles.get(i);
             bull.update();
