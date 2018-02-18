@@ -18,9 +18,9 @@ public class Bullet {
     private int y;
     private MovePath mp;
 
-    public Bullet(int X, int Y, MovePath MP){
+    public Bullet(String path, int X, int Y, MovePath MP){
         try {
-            sprite = ImageIO.read(new File("Resources/ProjectileSprites/Cusp.png"));
+            sprite = ImageIO.read(new File(path));
         } catch(IOException e) {
             System.out.println("failed");
             System.exit(-1);

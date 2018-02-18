@@ -16,11 +16,15 @@ public class Player {
     public BufferedImage hitbox;
     public int hitboxWidth = 16;
     public int hitboxHeight = 16;
+    String bulletPath = "Resources/ProjectileSprites/Cusp.png";
 
-    public int x = 100;
-    public int y = 100;
+    public int x = 640;
+    public int y = 900;
     public int vx = 8;
     public int vy = 8;
+
+    int bombs = 3;
+    int lives = 3;
 
     public Player(PlayPanel p){
         pp = p;
@@ -49,7 +53,7 @@ public class Player {
 
     private void shoot(){
         if(pp.keysDown[5]){
-            pp.projectiles.add(new Bullet(x + spriteWidth/2, y, new MovePath() {
+            pp.projectiles.add(new Bullet(bulletPath, x + spriteWidth/2, y, new MovePath() {
                 @Override
                 public int[] move(long t, int x0, int y0) {
                     int[] pos = {x0, y0};
@@ -58,7 +62,7 @@ public class Player {
                     return pos;
                 }
             }));
-            pp.projectiles.add(new Bullet(x - spriteWidth/2, y, new MovePath() {
+            pp.projectiles.add(new Bullet(bulletPath, x - spriteWidth/2, y, new MovePath() {
                 @Override
                 public int[] move(long t, int x0, int y0) {
                     int[] pos = {x0, y0};
@@ -68,10 +72,25 @@ public class Player {
                 }
             }));
         }
-        if(pp.keysDown[6]){
+        if(pp.keysDown[6] && bombs > 0){
+            //shoots a bomb
+            bombs--;
         }
     }
 
+    public boolean takeDamage(Bullet b){
+        Rectangle bRect = new Rectangle(b.getSpriteX(), b.getSpriteY(), b.spriteWidth, b.spriteHeight);
+        Rectangle pRect = new Rectangle(getHitboxX(), getHitboxY(), spriteWidth, spriteHeight);
+        if(bRect.intersects(pRect)){
+            lives--;
+            return true;
+        }
+        return false;
+    }
+
+    public boolean isAlive(){
+        return lives > 0;
+    }
     public int getSpriteX(){
         return x - spriteWidth/2;
     }
