@@ -29,7 +29,7 @@ class PlayPanel extends JPanel implements KeyListener, FocusListener, ActionList
         makeBackground(g);
         g.drawImage(p.sprite, p.getSpriteX(), p.getSpriteY(), p.spriteWidth, p.spriteHeight,this);
         if(keysDown[4]) g.drawImage(p.hitbox, p.getHitboxX(), p.getHitboxY(), p.hitboxWidth, p.hitboxHeight,this);
-        backgroundScroll += 10;
+        backgroundScroll += 5;
         if(backgroundScroll >= 1280)
             backgroundScroll = 0;
     }
