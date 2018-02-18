@@ -17,7 +17,7 @@ public class Boss {
 
     public PlayPanel pp;
 
-    public String name = "BossStage1";
+    public String name;
     public BufferedImage sprite;
     public double health = 5000;
     public int x = 1280 * 3 / 5 / 2;
