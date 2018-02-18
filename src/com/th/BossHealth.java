@@ -1,5 +1,3 @@
-package com.th;
-
 import java.awt.*;
 import javax.swing.JPanel;
 
@@ -11,7 +9,7 @@ public class BossHealth extends JPanel{
 	private final int WIDTH = 500;
 	
 	public BossHealth() {
-		pixels = WIDTH-4;
+		pixels = (WIDTH-4);
 		setBackground(Color.WHITE);
 	}
 
