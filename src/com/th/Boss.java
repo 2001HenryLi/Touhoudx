@@ -14,6 +14,7 @@ public class Boss {
     private long startTime = -1;
     private long elapsedTime = 0;
     private long previousShot = 0;
+    private long previousMove = 0;
 
     public PlayPanel pp;
 
@@ -22,6 +23,8 @@ public class Boss {
     public double health = 5000;
     public int x = 1280 * 3 / 5 / 2;
     public int y = 240;
+    public int x_f = x;
+    public int y_f = y;
     public int spriteWidth;
     public int spriteHeight;
 
@@ -162,6 +165,11 @@ public class Boss {
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+        if(elapsedTime > previousMove + 1000000000 || health <= 2500){
+            move();
+        }
+
         if(elapsedTime > previousShot + 1000000000){
             previousShot += 1000000000;
             int rand = (int)(Math.random() * bps.length);
@@ -171,6 +179,18 @@ public class Boss {
         }
     }
 
+    public void move(){
+        if(x > x_f) x--;
+        if(y > y_f) y--;
+        if(x < x_f) x++;
+        if(y < y_f) y++;
+
+        if(x == x_f && y == y_f){
+            x_f = Math.random() > 0.5 ? (int)(Math.random() * 1080 * 3 / 5 + 100) : 1280 * 3 / 5 / 2;
+            y_f = Math.random() > 0.5 ? (int)(Math.random() * 400 + 40) : 240;
+            previousMove = System.nanoTime() - startTime;
+        }
+    }
     public boolean takeDamage(Bullet b){
         Rectangle bRect = new Rectangle(b.getSpriteX(), b.getSpriteY(), b.spriteWidth, b.spriteHeight);
         Rectangle pRect = new Rectangle(getSpriteX(), getSpriteY(), spriteWidth, spriteHeight);

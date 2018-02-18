@@ -30,7 +30,7 @@ public class Player {
     public int hitboxWidth = 16;
     public int hitboxHeight = 16;
     String bulletPath = "Resources/ProjectileSprites/";
-    String bombPath = "Resources/ProjectileSprites/CircleLarge.png";
+    String bombPath = "Resources/ProjectileSprites/CircleLargeBoss.png";
     private BufferedImage[] bullets = new BufferedImage[2];
 
     public int x = 1280 * 3 / 5 / 2;

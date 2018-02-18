@@ -157,7 +157,7 @@ class PlayPanel extends JPanel implements KeyListener, FocusListener, ActionList
         fofx += 0.04;
         if(fofx < WIDTH / 40 + 1) {
             try {
-                BufferedImage b = ImageIO.read(new File("Resources/ProjectileSprites/BasicShot.png"));
+                BufferedImage b = ImageIO.read(new File("Resources/ProjectileSprites/Graph.png"));
                 points.add(new Coordinate(b, (int) (fofx * 100), HEIGHT - 40 - (int) (f.getValue(fofx)), 16, 16, new MovePath() {
                     @Override
                     public int[] move(long t, int x0, int y0) {
