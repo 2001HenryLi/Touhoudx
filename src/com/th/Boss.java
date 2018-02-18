@@ -131,6 +131,10 @@ public class Boss {
 
     private BulletPattern[] bps = {circle, circle2, circle3, sweep};
     public Boss(PlayPanel p){
+        if(health > 2500)
+            name = "BossStage1";
+        else
+            name = "BossStage2";
         pp = p;
         try {
             sprite = ImageIO.read(new File("Resources/BossSprites/"+name+".png"));
