@@ -1,73 +1,75 @@
-package com.th;
+/*types of functions:
+	 * 1) sinx
+	 * 2) cosx
+	 * 3) tanx
+	 * 4) e^x
+	 * 5) x
+	 * 6) x^2
+	 * 7) x^3
+	 * 8) sqrt(x)
+	 * 9) lnx
+	 * 
+	 * add more if you want to
+	 */
 
-import javax.swing.*;
-import java.awt.*;
-import java.awt.event.*;
-import java.util.ArrayList;
-
-class PlayPanel extends JPanel implements KeyListener, FocusListener, ActionListener{
-    private int backgroundScroll = 0;
-    private final double MASTER_SCALE = 1.0;  //scale for the whole thing
-    private final int WIDTH = (int)(1280 * 3 / 5 * MASTER_SCALE);
-    private final int HEIGHT = (int)(960 * MASTER_SCALE);
-
-    private final int[] INPUT_CODES = {KeyEvent.VK_LEFT, KeyEvent.VK_RIGHT, KeyEvent.VK_UP, KeyEvent.VK_DOWN, KeyEvent.VK_SHIFT, KeyEvent.VK_Z, KeyEvent.VK_X};
-    public boolean[] keysDown = new boolean[INPUT_CODES.length];
-
-    private Player p;
-    private Boss b;
-    public volatile ArrayList<Bullet> projectiles = new ArrayList<>();
-
-    public PlayPanel(Player p, Boss b){
-        setBackground(new Color(255,255,255));
-        setPreferredSize(new Dimension(WIDTH,HEIGHT));
-        addKeyListener(this);
-        addFocusListener(this);
-        this.p = p;
-        this.b = b;
-        requestFocus();
-    }
-    public void paintComponent(Graphics g){
-        super.paintComponent(g);
-        makeBackground(g);
-        g.drawImage(Toolkit.getDefaultToolkit().getImage("Resources/BossSprites/BossStage1.png"),b.getXPos(),b.getYPos(),b.width,b.height,this);
-        g.drawImage(p.sprite, p.getSpriteX(), p.getSpriteY(), p.spriteWidth, p.spriteHeight,this);
-        if(keysDown[4]) g.drawImage(p.hitbox, p.getHitboxX(), p.getHitboxY(), p.hitboxWidth, p.hitboxHeight,this);
-
-        for(Bullet b : projectiles) g.drawImage(b.sprite, b.getSpriteX(), b.getSpriteY(), b.spriteWidth, b.spriteHeight,this);
-
-        backgroundScroll = (backgroundScroll+5) % 1280;
-    }
-
-    public void makeBackground(Graphics g) {
-        g.drawImage(Toolkit.getDefaultToolkit().getImage("Resources/Background/background.png"),0, backgroundScroll,960,1280,this);
-        g.drawImage(Toolkit.getDefaultToolkit().getImage("Resources/Background/background.png"),0,0,960, backgroundScroll,this);
-        g.drawImage(Toolkit.getDefaultToolkit().getImage("Resources/misc/lines.PNG"),0,0,960,1280,this);
-    }
-
-    public void update(){
-        if(!isFocusOwner()) requestFocus();
-        p.update();
-        b.update();
-        for(int i = 0; i < projectiles.size(); i++){
-            Bullet bull = projectiles.get(i);
-            bull.update();
-            p.takeDamage(bull);
-            if(!bull.isOnscreen()) projectiles.remove(bull);
-        }
-        repaint();
-    }
-
-    public void keyTyped(KeyEvent e) {}
-    public void keyPressed(KeyEvent e){
-        int key = e.getKeyCode();
-        for(int i = 0; i < keysDown.length; i++) if(key == INPUT_CODES[i]) keysDown[i] = true;
-    }
-    public void keyReleased(KeyEvent e) {
-        int key = e.getKeyCode();
-        for(int i = 0; i < keysDown.length; i++) if(key == INPUT_CODES[i]) keysDown[i] = false;
-    }
-    public void focusGained(FocusEvent e) {}
-    public void focusLost(FocusEvent e) {}
-    public void actionPerformed(ActionEvent e){}
+public class Function {
+	
+	private int functiontype;
+	private int constant;
+	
+	public Function(int f, int c){
+		functiontype = f;
+		constant = c;
+	}
+	
+	//testing method
+	public static void main(String [] args){
+		Function f = new Function(4,5);
+		System.out.println(f.getFunction());
+		System.out.println(f.onLine(0.3, 4));
+	}
+	
+	//returns values in pixels
+	public double getValue(int xval){
+		if(functiontype == 1) return (int)(Math.sin(constant*xval)*83.3);
+		if(functiontype == 2) return (int)(Math.cos(constant*xval)*83.3);
+		if(functiontype == 3) return (int)(Math.tan(constant*xval)*83.3);
+		if(functiontype == 5) return (int)(constant*xval*83.3);
+		if(functiontype == 6) return (int)(Math.pow(constant*xval, 2)*83.3);
+		if(functiontype == 7) return (int)(Math.pow(constant*xval, 3)*83.3);
+		if(functiontype == 8) return (int)(Math.pow(constant*xval, 0.5)*83.3);
+		if(functiontype == 9) return (int)(Math.log(constant*xval)*83.3);
+		return (int)(Math.pow(Math.E, constant*xval)*83.3);
+	}
+	
+	//detects if coordinates fit function
+	public boolean onLine(double xval, int y){
+		if(functiontype == 1) return y == (int)Math.sin(constant*xval);
+		if(functiontype == 2) return y == (int)Math.cos(constant*xval);
+		if(functiontype == 3) return y == (int)Math.tan(constant*xval);
+		if(functiontype == 5) return y == (int)constant*xval;
+		if(functiontype == 6) return y == (int)Math.pow(constant*xval, 2);
+		if(functiontype == 7) return y == (int)Math.pow(constant*xval, 3);
+		if(functiontype == 8) return y == (int)Math.pow(constant*xval, 0.5);
+		if(functiontype == 9) return y == (int)Math.log(constant*xval);
+		return y == (int)Math.pow(Math.E, constant*xval);
+	}
+	
+	public int getFuncType(){ return functiontype; }
+	public double getConstant(){ return constant; }
+	
+	public String getFunction(){ 
+		String c = ""+constant;
+		if(constant == 1)
+			c = "";
+		if(functiontype == 1) return "y = sin("+c+"x)";
+		if(functiontype == 2) return "y = cos("+c+"x)";
+		if(functiontype == 3) return "y = tan("+c+"x)";
+		if(functiontype == 5) return "y = "+c+"x";
+		if(functiontype == 6) return "y = ("+c+"x)^2";
+		if(functiontype == 7) return "y = ("+c+"x)^3";
+		if(functiontype == 8) return "y = sqrt("+c+"x)";
+		if(functiontype == 9) return "y = ln("+c+"x)";
+		return "y = e^("+c+"x)";
+	}
 }
