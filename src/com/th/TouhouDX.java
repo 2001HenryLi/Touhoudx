@@ -7,18 +7,13 @@ public class TouhouDX {
     public UIPanel UI = new UIPanel();
 
     public TouhouDX () {
-        System.out.println(1);
         p = new Player(pp);
-        System.out.println(2);
         pp = new PlayPanel(p);
-        System.out.println(3);
+        p.pp = pp;
     }
 
     public void update(){
-        System.out.println("up");
         pp.update();
-        System.out.println("date");
         UI.update();
-
     }
 }

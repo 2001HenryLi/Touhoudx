@@ -5,6 +5,7 @@ import java.awt.*;
 import java.awt.image.*;
 import java.io.File;
 import java.io.IOException;
+import java.util.concurrent.TimeUnit;
 
 public class Player {
     public PlayPanel pp;
@@ -32,11 +33,8 @@ public class Player {
         }
     }
     public void update(){
-        System.out.println(pp);
         move();
-        System.out.println("date");
         shoot();
-
     }
     private void move(){
         if(pp.keysDown[0]) x -= vx / (pp.keysDown[4] ? 2 : 1);
@@ -47,34 +45,30 @@ public class Player {
         x = Math.max(x - spriteWidth/2, 0);
         y = Math.min(y + spriteHeight/2, 960);
         y = Math.max(y - spriteHeight/2, 0);
-
     }
 
     private void shoot(){
         if(pp.keysDown[5]){
-
             pp.projectiles.add(new Bullet(x + spriteWidth/2, y, new MovePath() {
                 @Override
                 public int[] move(long t, int x0, int y0) {
-                    int[] pos = {x, y};
-                    pos[x] = x;
-                    pos[y] = (int)t;
+                    int[] pos = {x0, y0};
+                    pos[0] = x0;
+                    pos[1] = y0 - (int)(TimeUnit.MILLISECONDS.convert(t, TimeUnit.NANOSECONDS) * 3);
                     return pos;
                 }
             }));
             pp.projectiles.add(new Bullet(x - spriteWidth/2, y, new MovePath() {
                 @Override
                 public int[] move(long t, int x0, int y0) {
-                    int[] pos = {x, y};
-                    pos[x] = x;
-                    pos[y] = (int)t;
+                    int[] pos = {x0, y0};
+                    pos[0] = x0;
+                    pos[1] = y0 - (int)(TimeUnit.MILLISECONDS.convert(t, TimeUnit.NANOSECONDS) * 3);
                     return pos;
                 }
             }));
-
         }
         if(pp.keysDown[6]){
-
         }
     }
 

@@ -15,7 +15,7 @@ class PlayPanel extends JPanel implements KeyListener, FocusListener, ActionList
     public boolean[] keysDown = new boolean[INPUT_CODES.length];
 
     private Player p;
-    public ArrayList<Bullet> projectiles = new ArrayList<>();
+    public volatile ArrayList<Bullet> projectiles = new ArrayList<>();
 
     public PlayPanel(Player p){
         setBackground(new Color(255,255,255));
@@ -33,6 +33,8 @@ class PlayPanel extends JPanel implements KeyListener, FocusListener, ActionList
         g.drawImage(p.sprite, p.getSpriteX(), p.getSpriteY(), p.spriteWidth, p.spriteHeight,this);
         if(keysDown[4]) g.drawImage(p.hitbox, p.getHitboxX(), p.getHitboxY(), p.hitboxWidth, p.hitboxHeight,this);
 
+        for(Bullet b : projectiles) g.drawImage(b.sprite, b.getSpriteX(), b.getSpriteY(), b.spriteWidth, b.spriteHeight,this);
+
         backgroundScroll = (backgroundScroll+5) % 1280;
     }
 
@@ -44,10 +46,12 @@ class PlayPanel extends JPanel implements KeyListener, FocusListener, ActionList
 
     public void update(){
         if(!isFocusOwner()) requestFocus();
-        System.out.println("up");
         p.update();
-        System.out.println("date");
-        for(Bullet b : projectiles) b.update();
+        for(int i = 0; i < projectiles.size(); i++){
+            Bullet b = projectiles.get(i);
+            b.update();
+            if(!b.isOnscreen()) projectiles.remove(b);
+        }
         repaint();
     }
 
