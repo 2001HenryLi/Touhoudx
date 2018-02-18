@@ -18,7 +18,7 @@ public class Player {
     public PlayPanel pp;
 
     public final String SPRITE_DIRECTORY = "Resources/CharacterSprites/";
-    public String name = "cirno";
+    public String name;
     public BufferedImage sprite;
     public BufferedImage[] sprites = new BufferedImage[7];
     public int spriteIndex = 3;
@@ -60,9 +60,9 @@ public class Player {
         }
     };
 
-    public Player(PlayPanel p){
+    public Player(String n){
+        name = n;
         startTime = System.nanoTime();
-        pp = p;
         try {
             sprite = ImageIO.read(new File(SPRITE_DIRECTORY+name+".png"));
             sprites[0] = ImageIO.read(new File(SPRITE_DIRECTORY+name+"Left.png"));
@@ -143,13 +143,15 @@ public class Player {
                 }
             }));
         }
-        if(pp.keysDown[6] && bombs > 0){
+    }
+
+    public void bomb(){
+        if(bombs > 0){
             ArrayList<Bullet> addProjectiles = BOMB.makePattern();
             for(Bullet b : addProjectiles) pp.bombProjectiles.add((Bomb)b);
             bombs--;
         }
     }
-
     public boolean takeDamage(Bullet b){
         Rectangle bRect = new Rectangle(b.getSpriteX(), b.getSpriteY(), b.spriteWidth, b.spriteHeight);
         Rectangle pRect = new Rectangle(getHitboxX(), getHitboxY(), hitboxWidth, hitboxHeight);

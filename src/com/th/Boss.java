@@ -19,7 +19,7 @@ public class Boss {
 
     public String name = "BossStage1";
     public BufferedImage sprite;
-    public double health = 1000;
+    public double health = 5000;
     public int x = 1280 * 3 / 5 / 2;
     public int y = 240;
     public int spriteWidth;
@@ -129,7 +129,8 @@ public class Boss {
         Rectangle bRect = new Rectangle(b.getSpriteX(), b.getSpriteY(), b.spriteWidth, b.spriteHeight);
         Rectangle pRect = new Rectangle(getSpriteX(), getSpriteY(), spriteWidth, spriteHeight);
         if(bRect.intersects(pRect)){
-            health--;
+            if (b instanceof Bomb) health -= 100;
+            else health--;
             return true;
         }
         return false;

@@ -15,10 +15,9 @@ public class SelectPanel extends JPanel implements KeyListener, FocusListener{
 
 	private Player guy;
 	
-	public SelectPanel(Player p) {
+	public SelectPanel() {
 		gotInput = false;
 		requestFocus();
-		guy = p;
 		setPreferredSize(new Dimension(WIDTH,HEIGHT));
 		addKeyListener(this);
 		addFocusListener(this);
@@ -55,11 +54,11 @@ public class SelectPanel extends JPanel implements KeyListener, FocusListener{
 	}
 	public void keyPressed(KeyEvent e) {
 		if(e.getKeyCode() == KeyEvent.VK_1) {
-			guy.name = "cirno";
+			guy = new Player("cirno");
 			gotInput = true;
 		}
 		if(e.getKeyCode() == KeyEvent.VK_2) {
-			guy.name = "reimu";
+            guy = new Player("reimu");
 			gotInput = true;
 		}
 	}

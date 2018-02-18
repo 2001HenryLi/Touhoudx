@@ -8,8 +8,8 @@ public class TouhouDX {
     public UIPanel UI;
     public GameOverPanel gp = new GameOverPanel();
 
-    public TouhouDX () {
-        p = new Player(pp);
+    public TouhouDX (Player P) {
+        p = P;
         b = new Boss(pp);
         pp = new PlayPanel(p, b);
         p.pp = pp;

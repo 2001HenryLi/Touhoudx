@@ -20,7 +20,7 @@ public class MainFrame extends JFrame {
     private GlassPanel gp = new GlassPanel();
     private JPanel mainPanel = new JPanel();
 
-    private TouhouDX tdx = new TouhouDX();
+    private TouhouDX tdx;
     private boolean gameOverSwitch = false;
     private boolean restartSwitch = false;
 
@@ -37,8 +37,7 @@ public class MainFrame extends JFrame {
         getGlassPane().setVisible(false);
 
         sp = new StartPanel();
-        slp = new SelectPanel(tdx.p);
-
+        slp = new SelectPanel();
     }
 
     public static void main(String[] args){
@@ -64,7 +63,7 @@ public class MainFrame extends JFrame {
     }
 
     public void run(){
-        slp = new SelectPanel(tdx.p);
+        slp = new SelectPanel();
         mainPanel.setVisible(false);
         mainPanel.remove(sp);
         mainPanel.add(slp);
@@ -77,7 +76,7 @@ public class MainFrame extends JFrame {
             }
         }, 0 , 1000/FPS, TimeUnit.MILLISECONDS);
         mainPanel.setVisible(true);
-        slp.waitForFocus();
+        tdx = new TouhouDX(slp.waitForFocus());
         exe.shutdown();
         mainPanel.remove(slp);
         mainPanel.add(tdx.pp);
@@ -113,7 +112,7 @@ public class MainFrame extends JFrame {
         exe.shutdown();
         mainPanel.setVisible(false);
         mainPanel.remove(tdx.gp);
-        tdx = new TouhouDX();
+
         sp = new StartPanel();
         mainPanel.add(sp);
         mainPanel.setVisible(true);

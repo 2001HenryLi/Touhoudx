@@ -13,7 +13,7 @@ class PlayPanel extends JPanel implements KeyListener, FocusListener, ActionList
 
     public boolean gameOver;
 
-    private final int[] INPUT_CODES = {KeyEvent.VK_LEFT, KeyEvent.VK_RIGHT, KeyEvent.VK_UP, KeyEvent.VK_DOWN, KeyEvent.VK_SHIFT, KeyEvent.VK_Z, KeyEvent.VK_X};
+    private final int[] INPUT_CODES = {KeyEvent.VK_LEFT, KeyEvent.VK_RIGHT, KeyEvent.VK_UP, KeyEvent.VK_DOWN, KeyEvent.VK_SHIFT, KeyEvent.VK_Z};
     public boolean[] keysDown = new boolean[INPUT_CODES.length];
 
     private Player p;
@@ -86,7 +86,7 @@ class PlayPanel extends JPanel implements KeyListener, FocusListener, ActionList
         if(!isFocusOwner()) requestFocus();
         p.update();
         b.update();
-        pixels = (int)((b.health/1000)*(250));
+        pixels = (int)((b.health/5000)*(250));
         for(int i = 0; i < projectiles.size(); i++){
             Bullet bull = projectiles.get(i);
             bull.update();
@@ -111,20 +111,20 @@ class PlayPanel extends JPanel implements KeyListener, FocusListener, ActionList
                 if(!p.isAlive()) gameOver = true;
             }
         }
+
         for(int i = 0; i < bombProjectiles.size(); i++){
             Bomb bomb = bombProjectiles.get(i);
             bomb.update();
-            if(!bomb.isOnscreen()){
-                bossProjectiles.remove(bomb);
-                i--;
-            }
-
             for(int j = 0; j < bossProjectiles.size(); j++) {
-                Bullet bull = bossProjectiles.get(i);
+                Bullet bull = bossProjectiles.get(j);
                 if (bomb.collide(bull)) {
                     bossProjectiles.remove(bull);
                     j--;
                 }
+            }
+            if(!bomb.isOnscreen() || b.takeDamage(bomb)){
+                bombProjectiles.remove(bomb);
+                i--;
             }
         }
 
@@ -144,6 +144,7 @@ class PlayPanel extends JPanel implements KeyListener, FocusListener, ActionList
     public void keyPressed(KeyEvent e){
         int key = e.getKeyCode();
         for(int i = 0; i < keysDown.length; i++) if(key == INPUT_CODES[i]) keysDown[i] = true;
+        if(key == KeyEvent.VK_X) p.bomb();
     }
     public void keyReleased(KeyEvent e) {
         int key = e.getKeyCode();
