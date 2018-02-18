@@ -24,12 +24,13 @@ class PlayPanel extends JPanel implements KeyListener, FocusListener, ActionList
     public volatile ArrayList<Bomb> bombProjectiles = new ArrayList<>();
 
     public Function f;
-    private int fofx = 0;
+    private double fofx;
     public volatile ArrayList<Coordinate> points = new ArrayList<>();
 
     public int pixels = 0;
 
     public PlayPanel(Player p, Boss b){
+        fofx = 0;
         f = new Function(1,1);
         gameOver = false;
         win = false;
@@ -43,11 +44,11 @@ class PlayPanel extends JPanel implements KeyListener, FocusListener, ActionList
         f.chooseRandom();
         requestFocus();
     }
-    
+
     public void paintComponent(Graphics g){
         super.paintComponent(g);
         makeBackground(g);
-        
+
         g.drawImage(b.sprite, b.getSpriteX(), b.getSpriteY(), b.spriteWidth, b.spriteHeight,this);
 
         g.drawImage(p.sprite, p.getSpriteX(), p.getSpriteY(), p.spriteWidth, p.spriteHeight,this);
@@ -57,17 +58,17 @@ class PlayPanel extends JPanel implements KeyListener, FocusListener, ActionList
         for(Bullet bull : bossProjectiles) g.drawImage(bull.sprite, bull.getSpriteX(), bull.getSpriteY(), bull.spriteWidth, bull.spriteHeight,this);
         for(Bomb bomb : bombProjectiles) g.drawImage(bomb.sprite, bomb.getSpriteX(), bomb.getSpriteY(), bomb.spriteWidth, bomb.spriteHeight,this);
 
-        g.setColor(Color.BLACK);
+        g.setColor(Color.RED);
         g.setFont(new Font(Font.SANS_SERIF, Font.TRUETYPE_FONT, 40));
         g.drawString(f.getFunction(), 50, HEIGHT-40);
         for(Coordinate c : points){ g.fillRect(c.getX(), HEIGHT- 40- c.getY(), 10,10);}
-        
+
         g.drawRect(10, 10, 250, 50);
-	g.setColor(Color.WHITE);
-	g.fillRect(12, 12, 250-4, 50-4);
-	g.setColor(new Color(255-(int)((b.health/5000)*255), (int)((b.health/5000)*255),0));
-	g.fillRect(12, 12, pixels, 50);
-        
+        g.setColor(Color.WHITE);
+        g.fillRect(12, 12, 250-4, 50-4);
+        g.setColor(new Color(255-(int)((b.health/5000)*255), (int)((b.health/5000)*255),0));
+        g.fillRect(12, 12, pixels, 50);
+
         backgroundScroll = (backgroundScroll+5) % 1280;
     }
 
@@ -92,6 +93,8 @@ class PlayPanel extends JPanel implements KeyListener, FocusListener, ActionList
             else if(b.takeDamage(bull)){
                 projectiles.remove(bull);
                 i--;
+                if(!b.isAlive())
+                    win = true;
             }
         }
         for(int i = 0; i < bossProjectiles.size(); i++){
@@ -125,15 +128,15 @@ class PlayPanel extends JPanel implements KeyListener, FocusListener, ActionList
 
         fofx+= 0.1;
         if(fofx<10)
-        	points.add(new Coordinate((int)(fofx*96),(int)(f.getValue(fofx))));
+        {
+            System.out.println(fofx+" "+f.getValue(fofx));
+            points.add(new Coordinate((int) (fofx * 100), (int) (f.getValue(fofx))));
+        }
         else{
-        	f.chooseRandom();
-        	points.clear();
+            f.chooseRandom();
+            points.clear();
             fofx = 0;
         }
-
-        if(!b.isAlive())
-            win = true;
 
         repaint();
     }
