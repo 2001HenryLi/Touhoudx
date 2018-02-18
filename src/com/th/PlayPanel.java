@@ -1,3 +1,4 @@
+package com.th;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
@@ -77,7 +78,7 @@ class PlayPanel extends JPanel implements KeyListener, FocusListener, ActionList
         }
         fofx+= 0.01;
         if(fofx<10)
-        	points.add(new Coordinate((int)(fofx*96),(int)(f.getValue(fofx)));
+        	points.add(new Coordinate((int)(fofx*96),(int)(f.getValue(fofx))));
         else{
         	f.chooseRandom();
         	points.clear();

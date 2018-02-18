@@ -1,3 +1,5 @@
+package com.th;
+
 /*types of functions:
 	 * 1) sinx
 	 * 2) cosx

@@ -1,3 +1,5 @@
+package com.th;
+
 public class Coordinate {
 	
 	private int x;
