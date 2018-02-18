@@ -118,6 +118,7 @@ public class Player {
         Rectangle bRect = new Rectangle(b.getSpriteX(), b.getSpriteY(), b.spriteWidth, b.spriteHeight);
         Rectangle pRect = new Rectangle(getHitboxX(), getHitboxY(), hitboxWidth, hitboxHeight);
         if(bRect.intersects(pRect)){
+            System.out.println(lives);
             lives--;
             isInVuln = true;
             x = 1280 * 3 / 5 / 2;

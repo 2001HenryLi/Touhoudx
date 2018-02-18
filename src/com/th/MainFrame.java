@@ -64,8 +64,18 @@ public class MainFrame extends JFrame {
         exe.scheduleAtFixedRate(new Runnable() {
             @Override
             public void run() {
-                tdx.update();
+                update();
             }
         }, 0 , 1000/FPS, TimeUnit.MILLISECONDS);
+    }
+
+    public void update()
+    {
+        tdx.update();
+        if(tdx.pp.gameOver)
+        {
+            mainPanel.remove(tdx.pp);
+            mainPanel.remove(tdx.UI);
+        }
     }
 }
