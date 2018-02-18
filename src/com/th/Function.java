@@ -32,8 +32,8 @@ public class Function {
 	}
 	
 	public void chooseRandom(){
-		functiontype = (int)(Math.random()*9+1);
-		constant = (int)(Math.random()*5+1);
+		functiontype = 6;//(int)(Math.random()*9+1);
+		constant = 1;//(int)(Math.random()*5+1);
 	}
 	
 	//returns values in pixels
