@@ -33,8 +33,8 @@ public class Player {
     public int vx = 8;
     public int vy = 8;
 
-    int bombs = 3;
-    int lives = 3;
+    public int bombs = 3;
+    public int lives = 3;
 
     public Player(PlayPanel p){
         pp = p;
