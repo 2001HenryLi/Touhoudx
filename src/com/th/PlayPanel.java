@@ -10,7 +10,9 @@ class PlayPanel extends JPanel implements KeyListener, FocusListener, ActionList
     private final double MASTER_SCALE = 1.0;
     private final int WIDTH = (int)(1280 * 3 / 5 * MASTER_SCALE);
     private final int HEIGHT = (int)(960 * MASTER_SCALE);
-    
+
+    public boolean gameOver;
+
     private final int[] INPUT_CODES = {KeyEvent.VK_LEFT, KeyEvent.VK_RIGHT, KeyEvent.VK_UP, KeyEvent.VK_DOWN, KeyEvent.VK_SHIFT, KeyEvent.VK_Z, KeyEvent.VK_X};
     public boolean[] keysDown = new boolean[INPUT_CODES.length];
 
@@ -22,6 +24,7 @@ class PlayPanel extends JPanel implements KeyListener, FocusListener, ActionList
     public volatile ArrayList<Coordinate> points = new ArrayList<>();
 
     public PlayPanel(Player p, Boss b){
+        gameOver = false;
         setBackground(new Color(255,255,255));
         setPreferredSize(new Dimension(WIDTH,HEIGHT));
         addKeyListener(this);
@@ -74,7 +77,10 @@ class PlayPanel extends JPanel implements KeyListener, FocusListener, ActionList
             Bullet bull = bossProjectiles.get(i);
             bull.update();
             if(!bull.isOnscreen()) bossProjectiles.remove(bull);
-            if(p.takeDamage(bull)) bossProjectiles = new ArrayList<Bullet>();
+            if(p.takeDamage(bull)){
+                if(!p.isAlive()) gameOver = true;
+                bossProjectiles = new ArrayList<Bullet>();
+            }
         }
         fofx+= 0.01;
         if(fofx<10)
