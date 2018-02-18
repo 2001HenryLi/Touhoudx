@@ -29,14 +29,13 @@ class StartPanel extends JPanel implements KeyListener, FocusListener, ActionLis
     }
 
     public void render(Graphics g){
-        pic = Toolkit.getDefaultToolkit().getImage("titleresized.PNG");
-        double ypos = Math.cos(ang)*70+140;
-        g.drawImage(pic, 225, (int)ypos, 500, 140, this);
+        pic = Toolkit.getDefaultToolkit().getImage("Resources/misc/titleresized.PNG");
+        g.drawImage(pic, 225, 100, 500, 140, this);
     }
 
     public void doText(Graphics g){
         g.setFont(new Font(Font.SANS_SERIF, Font.TRUETYPE_FONT, 30));
-        double ypos = Math.sin(ang)*20+700;
+        double ypos = Math.sin(ang*0.75)*20+700;
         g.drawString("Press Enter to Play", 360, (int)ypos);
     }
 
