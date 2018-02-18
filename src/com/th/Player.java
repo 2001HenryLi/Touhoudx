@@ -16,11 +16,10 @@ public class Player {
 
     public int x = 100;
     public int y = 100;
-
-
     public int vx = 8;
     public int vy = 8;
 
+    public boolean[] keysDown;
     public Player(){
         try {
             sprite = ImageIO.read(new File("Resources/CharacterSprites/cirno.png"));
@@ -30,7 +29,12 @@ public class Player {
             System.exit(-1);
         }
     }
-    public void move(boolean[] keysDown){
+    public void update(boolean[] kd){
+        keysDown = kd;
+        move();
+        shoot();
+    }
+    private void move(){
         if(keysDown[0]) x -= vx / (keysDown[4] ? 2 : 1);
         if(keysDown[1]) x += vx / (keysDown[4] ? 2 : 1);
         if(keysDown[2]) y -= vy / (keysDown[4] ? 2 : 1);
@@ -39,6 +43,13 @@ public class Player {
         x = Math.max(x - spriteWidth/2, 0);
         y = Math.min(y + spriteHeight/2, 960);
         y = Math.max(y - spriteHeight/2, 0);
+
+    }
+
+    private void shoot(){
+        if(keysDown[5]){
+
+        }
     }
 
     public int getSpriteX(){
