@@ -9,9 +9,10 @@ class PlayPanel extends JPanel implements KeyListener, FocusListener, ActionList
     private final int WIDTH = (int)(1280 * 3 / 5 * MASTER_SCALE);
     private final int HEIGHT = (int)(960 * MASTER_SCALE);
 
-    private Player p;
     private final int[] INPUT_CODES = {KeyEvent.VK_LEFT, KeyEvent.VK_RIGHT, KeyEvent.VK_UP, KeyEvent.VK_DOWN, KeyEvent.VK_SHIFT};
     private boolean[] keysDown = new boolean[INPUT_CODES.length];
+
+    private Player p;
 
     public PlayPanel(Player p){
         setBackground(new Color(255,255,255));
