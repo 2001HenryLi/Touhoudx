@@ -55,7 +55,7 @@ class PlayPanel extends JPanel implements KeyListener, FocusListener, ActionList
 
         g.setColor(Color.BLACK);
         g.setFont(new Font(Font.SANS_SERIF, Font.TRUETYPE_FONT, 40));
-        g.drawString(f.getFunction(), 10, 50);
+        g.drawString(f.getFunction(), HEIGHT-20, 50);
         for(Coordinate c : points) g.fillRect(HEIGHT- c.getX(), c.getY(), 10,10);
         
         g.drawRect(10, 10, 250, 50);
