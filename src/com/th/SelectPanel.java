@@ -43,9 +43,10 @@ public class SelectPanel extends JPanel implements KeyListener, FocusListener{
 		repaint();
 	}
 
-	public void waitForFocus()
+	public Player waitForFocus()
 	{
 		while(!gotInput){requestFocus();}
+		return guy;
 	}
 	
 	public void focusGained(FocusEvent e) {
