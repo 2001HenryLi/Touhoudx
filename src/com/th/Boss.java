@@ -130,7 +130,6 @@ public class Boss {
         Rectangle pRect = new Rectangle(getSpriteX(), getSpriteY(), spriteWidth, spriteHeight);
         if(bRect.intersects(pRect)){
             health--;
-            System.out.println(health);
             return true;
         }
         return false;
