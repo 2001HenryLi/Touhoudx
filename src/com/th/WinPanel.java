@@ -25,7 +25,7 @@ public class WinPanel extends JPanel implements KeyListener, FocusListener, Acti
         addKeyListener(this);
         addFocusListener(this);
         try {
-            img = ImageIO.read(new File("Resources/Background/GameOverPlaceholder.png"));
+            img = ImageIO.read(new File("Resources/Background/winscreen.png"));
         } catch(IOException e) {
             System.out.println("failed");
             System.exit(-1);

@@ -2,11 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a0edc6b3-f861-4023-acd0-71445d476e6b" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Touhoudx/com/th/PlayPanel.class" afterPath="$PROJECT_DIR$/out/production/Touhoudx/com/th/PlayPanel.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Touhoudx/com/th/SelectPanel.class" afterPath="$PROJECT_DIR$/out/production/Touhoudx/com/th/SelectPanel.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Touhoudx/com/th/UIPanel.class" afterPath="$PROJECT_DIR$/out/production/Touhoudx/com/th/UIPanel.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/th/UIPanel.java" afterPath="$PROJECT_DIR$/src/com/th/UIPanel.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/th/WinPanel.java" afterPath="$PROJECT_DIR$/src/com/th/WinPanel.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -25,12 +21,9 @@
       <file leaf-file-name="Function.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/th/Function.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="726">
-              <caret line="33" column="32" lean-forward="false" selection-start-line="33" selection-start-column="32" selection-end-line="33" selection-end-column="32" />
-              <folding>
-                <element signature="e#318#319#0" expanded="true" />
-                <element signature="e#339#340#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="130">
+              <caret line="25" column="4" lean-forward="true" selection-start-line="25" selection-start-column="4" selection-end-line="25" selection-end-column="4" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -40,6 +33,16 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="352">
               <caret line="65" column="54" lean-forward="true" selection-start-line="65" selection-start-column="54" selection-end-line="65" selection-end-column="54" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="WinPanel.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/com/th/WinPanel.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="229">
+              <caret line="27" column="71" lean-forward="false" selection-start-line="27" selection-start-column="71" selection-end-line="27" selection-end-column="71" />
               <folding />
             </state>
           </provider>
@@ -131,11 +134,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="UIPanel.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="UIPanel.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/th/UIPanel.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="814">
-              <caret line="39" column="5" lean-forward="true" selection-start-line="39" selection-start-column="5" selection-end-line="39" selection-end-column="5" />
+              <caret line="39" column="5" lean-forward="false" selection-start-line="39" selection-start-column="5" selection-end-line="39" selection-end-column="5" />
               <folding />
             </state>
           </provider>
@@ -189,7 +192,6 @@
         <option value="$PROJECT_DIR$/src/com/th/Player.java" />
         <option value="$PROJECT_DIR$/src/com/th/TouhouDX.java" />
         <option value="$PROJECT_DIR$/src/com/th/GameOverPanel.java" />
-        <option value="$PROJECT_DIR$/src/com/th/WinPanel.java" />
         <option value="$PROJECT_DIR$/src/com/th/MainFrame.java" />
         <option value="$PROJECT_DIR$/src/com/th/Function.java" />
         <option value="$PROJECT_DIR$/src/com/th/SelectPanel.java" />
@@ -197,6 +199,7 @@
         <option value="$PROJECT_DIR$/src/com/th/Boss.java" />
         <option value="$PROJECT_DIR$/src/com/th/PlayPanel.java" />
         <option value="$PROJECT_DIR$/src/com/th/UIPanel.java" />
+        <option value="$PROJECT_DIR$/src/com/th/WinPanel.java" />
       </list>
     </option>
   </component>
@@ -249,6 +252,38 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="th" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Touhoudx" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Touhoudx" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Resources" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Touhoudx" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Touhoudx" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Resources" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Background" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -883,14 +918,6 @@
         <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/th/WinPanel.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="595">
-          <caret line="40" column="43" lean-forward="false" selection-start-line="40" selection-start-column="43" selection-end-line="40" selection-end-column="43" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/th/GameOverPanel.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="595">
@@ -953,17 +980,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/th/Function.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="726">
-          <caret line="33" column="32" lean-forward="false" selection-start-line="33" selection-start-column="32" selection-end-line="33" selection-end-column="32" />
-          <folding>
-            <element signature="e#318#319#0" expanded="true" />
-            <element signature="e#339#340#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/th/Boss.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2816">
@@ -1015,14 +1031,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/th/PlayPanel.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="352">
-          <caret line="65" column="54" lean-forward="true" selection-start-line="65" selection-start-column="54" selection-end-line="65" selection-end-column="54" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/th/Player.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2920">
@@ -1036,7 +1044,31 @@
     <entry file="file://$PROJECT_DIR$/src/com/th/UIPanel.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="814">
-          <caret line="39" column="5" lean-forward="true" selection-start-line="39" selection-start-column="5" selection-end-line="39" selection-end-column="5" />
+          <caret line="39" column="5" lean-forward="false" selection-start-line="39" selection-start-column="5" selection-end-line="39" selection-end-column="5" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/th/PlayPanel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="352">
+          <caret line="65" column="54" lean-forward="true" selection-start-line="65" selection-start-column="54" selection-end-line="65" selection-end-column="54" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/th/Function.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="130">
+          <caret line="25" column="4" lean-forward="true" selection-start-line="25" selection-start-column="4" selection-end-line="25" selection-end-column="4" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/th/WinPanel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="229">
+          <caret line="27" column="71" lean-forward="false" selection-start-line="27" selection-start-column="71" selection-end-line="27" selection-end-column="71" />
           <folding />
         </state>
       </provider>
