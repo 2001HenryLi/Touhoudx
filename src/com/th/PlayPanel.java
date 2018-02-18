@@ -56,20 +56,20 @@ class PlayPanel extends JPanel implements KeyListener, FocusListener, ActionList
         g.setColor(Color.BLACK);
         g.setFont(new Font(Font.SANS_SERIF, Font.TRUETYPE_FONT, 40));
         g.drawString(f.getFunction(), HEIGHT-20, 50);
-        for(Coordinate c : points) g.fillRect(HEIGHT- c.getX(), c.getY(), 10,10);
+        for(Coordinate c : points){ g.fillRect(c.getX(), HEIGHT- c.getY(), 10,10);}
         
         g.drawRect(10, 10, 250, 50);
-		g.setColor(Color.WHITE);
-		g.fillRect(12, 12, 250-4, 50-4);
-		if(pixels < 62)
-			g.setColor(Color.RED);
-		else if(pixels< 125)
-			g.setColor(Color.ORANGE);
-		else if(pixels< 190)
-			g.setColor(Color.YELLOW);
-		else
-			g.setColor(Color.GREEN);
-		g.fillRect(12, 12, pixels, 50);
+	g.setColor(Color.WHITE);
+	g.fillRect(12, 12, 250-4, 50-4);
+	if(pixels < 62)
+		g.setColor(Color.RED);
+	else if(pixels< 125)
+		g.setColor(Color.ORANGE);
+	else if(pixels< 190)
+		g.setColor(Color.YELLOW);
+	else
+		g.setColor(Color.GREEN);
+	g.fillRect(12, 12, pixels, 50);
         
         backgroundScroll = (backgroundScroll+5) % 1280;
     }
