@@ -28,7 +28,7 @@ public class Player {
     public int hitboxHeight = 16;
     String bulletPath = "Resources/ProjectileSprites/Cusp.png";
 
-    public int x = 640;
+    public int x = 1280 * 3 / 5 / 2;
     public int y = 900;
     public int vx = 8;
     public int vy = 8;
@@ -117,9 +117,8 @@ public class Player {
         if(bRect.intersects(pRect)){
             lives--;
             isInVuln = true;
-            x = 640;
+            x = 1280 * 3 / 5;
             y = 960;
-            System.out.println("oof");
             return true;
         }
         return false;

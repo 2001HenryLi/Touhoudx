@@ -20,29 +20,40 @@ public class Boss {
     public String name = "BossStage1";
     public BufferedImage sprite;
     public double health;
-    public int x;
-    public int y;
-    public int spriteWidth, spriteHeight;
+    public int x = 1280 * 3 / 5 / 2;
+    public int y = 240;
+    public int spriteWidth;
+    public int spriteHeight;
 
     private BulletPattern circle = new BulletPattern() {
         @Override
         public ArrayList<Bullet> makePattern() {
             ArrayList<Bullet> pattern = new ArrayList<Bullet>();
+            for(int i = 0; i < 16; i++){
+                double radians = 2*Math.PI * i / 16;
+                pattern.add(new Bullet("Resources\\ProjectileSprites\\BasicShot.png", x, y, 32, 32, new MovePath() {
+                    @Override
+                    public int[] move(long t, int x0, int y0) {
+                        int[] pos = {x0, y0};
+                        pos[0] = x0 + (int)(Math.sin(radians) * TimeUnit.MILLISECONDS.convert(t, TimeUnit.NANOSECONDS));
+                        pos[1] = y0 + (int)(Math.cos(radians) * TimeUnit.MILLISECONDS.convert(t, TimeUnit.NANOSECONDS));
+                        return pos;
+                    }
+                }));
+            }
             return pattern;
         }
     };
 
     public Boss(PlayPanel p){
+        pp = p;
         try {
             sprite = ImageIO.read(new File("Resources/BossSprites/"+name+".png"));
         } catch(IOException e) {
             System.out.println("failed");
             System.exit(-1);
         }
-        pp = p;
         health = 10.0;
-        x = 500;
-        y= 30;
         spriteWidth = sprite.getWidth();
         spriteHeight = sprite.getHeight();
     }
