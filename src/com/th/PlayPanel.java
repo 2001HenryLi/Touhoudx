@@ -12,10 +12,10 @@ class PlayPanel extends JPanel implements KeyListener, FocusListener, ActionList
     private final int HEIGHT = (int)(960 * MASTER_SCALE);
 
     private final int[] INPUT_CODES = {KeyEvent.VK_LEFT, KeyEvent.VK_RIGHT, KeyEvent.VK_UP, KeyEvent.VK_DOWN, KeyEvent.VK_SHIFT, KeyEvent.VK_Z, KeyEvent.VK_X};
-    private boolean[] keysDown = new boolean[INPUT_CODES.length];
+    public boolean[] keysDown = new boolean[INPUT_CODES.length];
 
     private Player p;
-    private ArrayList<Bullet> projectiles = new ArrayList<>();
+    public ArrayList<Bullet> projectiles = new ArrayList<>();
 
     public PlayPanel(Player p){
         setBackground(new Color(255,255,255));
@@ -44,7 +44,9 @@ class PlayPanel extends JPanel implements KeyListener, FocusListener, ActionList
 
     public void update(){
         if(!isFocusOwner()) requestFocus();
-        p.update(keysDown);
+        System.out.println("up");
+        p.update();
+        System.out.println("date");
         for(Bullet b : projectiles) b.update();
         repaint();
     }

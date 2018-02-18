@@ -12,6 +12,8 @@ public class Bullet {
     public int spriteWidth = 8;
     public int spriteHeight = 8;
 
+    private int x0;
+    private int y0;
     private int x;
     private int y;
     private MovePath mp;
@@ -24,11 +26,15 @@ public class Bullet {
             System.exit(-1);
         }
         x = X;
+        x0 = X;
         y = Y;
+        y0 = Y;
         mp = MP;
     }
     public void update(){
         elapsedTime = System.nanoTime() - startTime;
-        mp.move(elapsedTime, x, y);
+        int[] pos = mp.move(elapsedTime, x0, y0);
+        x = pos[0];
+        y = pos[1];
     }
 }

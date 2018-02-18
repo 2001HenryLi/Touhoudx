@@ -7,6 +7,8 @@ import java.io.File;
 import java.io.IOException;
 
 public class Player {
+    public PlayPanel pp;
+
     public BufferedImage sprite;
     public int spriteWidth = 64;
     public int spriteHeight = 64;
@@ -19,8 +21,8 @@ public class Player {
     public int vx = 8;
     public int vy = 8;
 
-    public boolean[] keysDown;
-    public Player(){
+    public Player(PlayPanel p){
+        pp = p;
         try {
             sprite = ImageIO.read(new File("Resources/CharacterSprites/cirno.png"));
             hitbox = ImageIO.read(new File("Resources/CharacterSprites/hitbox.png"));
@@ -29,16 +31,18 @@ public class Player {
             System.exit(-1);
         }
     }
-    public void update(boolean[] kd){
-        keysDown = kd;
+    public void update(){
+        System.out.println(pp);
         move();
+        System.out.println("date");
         shoot();
+
     }
     private void move(){
-        if(keysDown[0]) x -= vx / (keysDown[4] ? 2 : 1);
-        if(keysDown[1]) x += vx / (keysDown[4] ? 2 : 1);
-        if(keysDown[2]) y -= vy / (keysDown[4] ? 2 : 1);
-        if(keysDown[3]) y += vy / (keysDown[4] ? 2 : 1);
+        if(pp.keysDown[0]) x -= vx / (pp.keysDown[4] ? 2 : 1);
+        if(pp.keysDown[1]) x += vx / (pp.keysDown[4] ? 2 : 1);
+        if(pp.keysDown[2]) y -= vy / (pp.keysDown[4] ? 2 : 1);
+        if(pp.keysDown[3]) y += vy / (pp.keysDown[4] ? 2 : 1);
         x = Math.min(x + spriteWidth/2, 1280 * 3 / 5);
         x = Math.max(x - spriteWidth/2, 0);
         y = Math.min(y + spriteHeight/2, 960);
@@ -47,7 +51,29 @@ public class Player {
     }
 
     private void shoot(){
-        if(keysDown[5]){
+        if(pp.keysDown[5]){
+
+            pp.projectiles.add(new Bullet(x + spriteWidth/2, y, new MovePath() {
+                @Override
+                public int[] move(long t, int x0, int y0) {
+                    int[] pos = {x, y};
+                    pos[x] = x;
+                    pos[y] = (int)t;
+                    return pos;
+                }
+            }));
+            pp.projectiles.add(new Bullet(x - spriteWidth/2, y, new MovePath() {
+                @Override
+                public int[] move(long t, int x0, int y0) {
+                    int[] pos = {x, y};
+                    pos[x] = x;
+                    pos[y] = (int)t;
+                    return pos;
+                }
+            }));
+
+        }
+        if(pp.keysDown[6]){
 
         }
     }
