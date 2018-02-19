@@ -172,7 +172,9 @@ public class Boss {
 
         if(elapsedTime > previousShot + 1000000000){
             previousShot += 1000000000;
-            int rand = (int)(Math.random() * bps.length);
+            int rand = 0;
+            if(health > 2500) rand = (int)(Math.random() * bps.length/2);
+            else rand = (int)(Math.random() * bps.length/2+ bps.length/2);
             ArrayList<Bullet> addProjectiles = bps[rand].makePattern();
             pp.sfx.playFX(sfx[rand]);
             for(Bullet b : addProjectiles) pp.bossProjectiles.add(b);
