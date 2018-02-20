@@ -17,7 +17,7 @@ public class TouhouDX {
         p.pp = pp;
         b.pp = pp;
         UI = new UIPanel(p);
-        if(Math.random() > 0.5) bgm.playBGMusic("Resources\\BGM\\Beloved Tomboyish Girl (Alpha Mix) - Touhou 6_ the Embodiment of Scarlet Devil.wav", 0);
+        if(b.health > 2500) bgm.playBGMusic("Resources\\BGM\\Beloved Tomboyish Girl (Alpha Mix) - Touhou 6_ the Embodiment of Scarlet Devil.wav", 0);
         else bgm.playBGMusic("Resources\\BGM\\Lunatic EyesInvisible Full Moon - Touhou 14.5- Urban Legend in Limbo.wav", 0);
         music = true;
     }
