@@ -5,21 +5,17 @@ import java.awt.*;
 import java.awt.event.*;
 
 class StartPanel extends JPanel implements KeyListener, FocusListener, ActionListener{
-
     public Image pic;
     public Image side;
     private double ang;
     private BGMusic bgm = new BGMusic();
-    private final double MASTER_SCALE = 1.0;  //scale for the whole thing
-    private final int WIDTH = (int)(1280 * MASTER_SCALE);
-    private final int HEIGHT = (int)(960 * MASTER_SCALE);
 
     private volatile boolean gotInput = false;
 
     public StartPanel(){
         setBackground(new Color(200,191,231));
         requestFocus();
-        setPreferredSize(new Dimension(WIDTH,HEIGHT));
+        setPreferredSize(new Dimension(ScaleDimentions.WIDTH, ScaleDimentions.HEIGHT));
         addKeyListener(this);
         addFocusListener(this);
     }
@@ -43,7 +39,7 @@ class StartPanel extends JPanel implements KeyListener, FocusListener, ActionLis
     }
 
     public void update(){
-        requestFocus();
+        if(!isFocusOwner()) requestFocus();
         ang += (Math.PI/90);
         repaint();
     }

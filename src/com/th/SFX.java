@@ -5,13 +5,16 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
-class SFX {  //this plays the background music. no changes needed here unless further notice
-    private Clip mus = null;
-    public SFX(){}
-    public void playFX(String file){
+class SFX {  //this plays the sound effects. no changes needed here unless further notice
+    private static Clip sfx = null;
+    private static String f = "";
+    private static float volume;
+
+    private static void openFile(String file){
+        f = file;
         try {
-            mus = AudioSystem.getClip();
-            mus.open(AudioSystem.getAudioInputStream(new File(file)));
+            sfx = AudioSystem.getClip();
+            sfx.open(AudioSystem.getAudioInputStream(new File(file)));
         }catch(LineUnavailableException e){
             e.printStackTrace();
             System.exit(-1);
@@ -27,9 +30,22 @@ class SFX {  //this plays the background music. no changes needed here unless fu
             e.printStackTrace();
             System.exit(-4);
         }
-        FloatControl gainControl = (FloatControl) mus.getControl(FloatControl.Type.MASTER_GAIN);
-        gainControl.setValue(-10f);
-        mus.start();
     }
-    public void stop(){ mus.stop(); }
+    public static void playOnce(String file){
+        openFile(file);
+        sfx.start();  //start from the beginning
+        sfx.loop(0);
+    }
+
+    public static String getMusic(){
+        return f;
+    }
+    public static void setVolume(float v){
+        volume = v;
+        FloatControl gainControl = (FloatControl) sfx.getControl(FloatControl.Type.MASTER_GAIN);
+        gainControl.setValue(volume);
+    }
+    public static float getVolume(){
+        return volume;
+    }
 }

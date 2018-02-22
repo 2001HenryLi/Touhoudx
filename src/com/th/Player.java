@@ -127,10 +127,9 @@ public class Player {
         if(spriteIndex < 3) spriteIndex++;
         if(spriteIndex > 3) spriteIndex--;
     }
-
     private void shoot(){
         if(pp.keysDown[5]){
-            pp.projectiles.add(new Bullet(bullets[0], x + spriteWidth/2, y, 32, 32, new MovePath() {
+            pp.playerProjectiles.add(new Bullet(bullets[0], x + spriteWidth/2, y, 32, 32, new MovePath() {
                 @Override
                 public int[] move(long t, int x0, int y0) {
                     int[] pos = {x0, y0};
@@ -139,7 +138,7 @@ public class Player {
                     return pos;
                 }
             }));
-            pp.projectiles.add(new Bullet(bullets[0], x - spriteWidth/2, y, 32, 32, new MovePath() {
+            pp.playerProjectiles.add(new Bullet(bullets[0], x - spriteWidth/2, y, 32, 32, new MovePath() {
                 @Override
                 public int[] move(long t, int x0, int y0) {
                     int[] pos = {x0, y0};
@@ -153,7 +152,7 @@ public class Player {
 
     public void bomb(){
         if(bombs > 0){
-            pp.sfx.playFX("Resources\\SFX\\SPELLCARD.wav");
+            SFX.playOnce("Resources\\SFX\\SPELLCARD.wav");
             ArrayList<Bullet> addProjectiles = BOMB.makePattern();
             for(Bullet b : addProjectiles) pp.bombProjectiles.add((Bomb)b);
             bombs--;

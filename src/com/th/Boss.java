@@ -18,7 +18,7 @@ public class Boss {
 
     public PlayPanel pp;
 
-    public String name;
+    public String name = "BossStage1";
     public BufferedImage sprite;
     public double health = 5000;
     public int x = 1280 * 3 / 5 / 2;
@@ -135,11 +135,8 @@ public class Boss {
 
     private BulletPattern[] bps = {circle, circle2, circle3, sweep};
     public Boss(PlayPanel p){
-        if(health > 2500)
-            name = "BossStage1";
-        else
-            name = "BossStage2";
         pp = p;
+
         try {
             sprite = ImageIO.read(new File("Resources/BossSprites/"+name+".png"));
             shots[0] = ImageIO.read(new File("Resources\\ProjectileSprites\\BasicShot.png"));
@@ -147,7 +144,6 @@ public class Boss {
             shots[2] = ImageIO.read(new File("Resources\\ProjectileSprites\\PotatoProjectile.png"));
             shots[3] = ImageIO.read(new File("Resources\\ProjectileSprites\\CircleLarge.png"));
         } catch(IOException e) {
-            System.out.println("failed");
             System.exit(-1);
         }
         spriteWidth = sprite.getWidth();
@@ -155,28 +151,26 @@ public class Boss {
     }
 
     public void update(){
-        if(health > 2500) name = "BossStage1";
-        else name = "BossStage2";
         if(startTime == -1) startTime = System.nanoTime();
         elapsedTime = System.nanoTime() - startTime;
 
+        if(health > 2500) name = "BossStage1";
+        else name = "BossStage2";
         try {
             sprite = ImageIO.read(new File("Resources/BossSprites/"+name+".png"));
         } catch (IOException e) {
             e.printStackTrace();
+            System.exit(-1);
         }
 
-        if(elapsedTime > previousMove + 1000000000 || health <= 2500){
-            move();
-        }
+        if(elapsedTime > previousMove + 1000000000 || health <= 2500) move();
 
         if(elapsedTime > previousShot + 1000000000){
             previousShot += 1000000000;
-            int rand = 0;
+            int rand;
             if(health > 2500) rand = (int)(Math.random() * bps.length/2);
             else rand = (int)(Math.random() * bps.length/2+ bps.length/2);
             ArrayList<Bullet> addProjectiles = bps[rand].makePattern();
-            pp.sfx.playFX(sfx[rand]);
             for(Bullet b : addProjectiles) pp.bossProjectiles.add(b);
         }
     }
@@ -193,6 +187,7 @@ public class Boss {
             previousMove = System.nanoTime() - startTime;
         }
     }
+
     public boolean takeDamage(Bullet b){
         Rectangle bRect = new Rectangle(b.getSpriteX(), b.getSpriteY(), b.spriteWidth, b.spriteHeight);
         Rectangle pRect = new Rectangle(getSpriteX(), getSpriteY(), spriteWidth, spriteHeight);
@@ -204,6 +199,7 @@ public class Boss {
         }
         return false;
     }
+
     public boolean isAlive(){
         return health > 0;
     }

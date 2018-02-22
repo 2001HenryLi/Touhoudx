@@ -7,15 +7,13 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.logging.LogManager;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Collections;
 
 class PlayPanel extends JPanel implements KeyListener, FocusListener, ActionListener{
-    public SFX sfx = new SFX();
+    private final int WIDTH = ScaleDimentions.WIDTH * 3 / 5;
     private int backgroundScroll = 0;
-
-    private final double MASTER_SCALE = 1.0;
-    private final int WIDTH = (int)(1280 * 3 / 5 * MASTER_SCALE);
-    private final int HEIGHT = (int)(960 * MASTER_SCALE);
 
     public boolean gameOver;
     public boolean win;
@@ -25,22 +23,18 @@ class PlayPanel extends JPanel implements KeyListener, FocusListener, ActionList
 
     private Player p;
     private Boss b;
-    public volatile ArrayList<Bullet> projectiles = new ArrayList<>();
-    public volatile ArrayList<Bullet> bossProjectiles = new ArrayList<>();
-    public volatile ArrayList<Bomb> bombProjectiles = new ArrayList<>();
+    public volatile List<Bullet> playerProjectiles = Collections.synchronizedList(new ArrayList<Bullet>());
+    public volatile List<Bullet> bossProjectiles = Collections.synchronizedList(new ArrayList<Bullet>());
+    public volatile List<Bomb> bombProjectiles = Collections.synchronizedList(new ArrayList<Bomb>());
 
     public Function f = new Function();
     private double fofx = -1;
     public volatile ArrayList<Coordinate> points = new ArrayList<>();
-
     public int pixels = 0;
 
     public PlayPanel(Player p, Boss b){
-        LogManager.getLogManager().reset();
-        gameOver = false;
-        win = false;
         setBackground(new Color(255,255,255));
-        setPreferredSize(new Dimension(WIDTH,HEIGHT));
+        setPreferredSize(new Dimension(WIDTH, ScaleDimentions.HEIGHT));
         addKeyListener(this);
         addFocusListener(this);
         this.p = p;
@@ -59,10 +53,10 @@ class PlayPanel extends JPanel implements KeyListener, FocusListener, ActionList
         g.drawImage(p.sprite, p.getSpriteX(), p.getSpriteY(), p.spriteWidth, p.spriteHeight,this);
         if(keysDown[4]) g.drawImage(p.hitbox, p.getHitboxX(), p.getHitboxY(), p.hitboxWidth, p.hitboxHeight,this);
 
-        for(Bullet bull : projectiles) g.drawImage(bull.sprite, bull.getSpriteX(), bull.getSpriteY(), bull.spriteWidth, bull.spriteHeight,this);
-        for(Bullet bull : bossProjectiles) g.drawImage(bull.sprite, bull.getSpriteX(), bull.getSpriteY(), bull.spriteWidth, bull.spriteHeight,this);
-        for(Bomb bomb : bombProjectiles) g.drawImage(bomb.sprite, bomb.getSpriteX(), bomb.getSpriteY(), bomb.spriteWidth, bomb.spriteHeight,this);
-        for(Coordinate c : points) g.drawImage(c.sprite, c.getSpriteX(), c.getSpriteY(), c.spriteWidth, c.spriteHeight,this);
+        drawProjectiles(playerProjectiles, g);
+        drawProjectiles(bossProjectiles, g);
+        drawProjectiles(points, g);
+        drawProjectiles(bombProjectiles, g);
 
         g.drawRect(10, 10, 250, 50);
         g.setColor(Color.WHITE);
@@ -79,86 +73,89 @@ class PlayPanel extends JPanel implements KeyListener, FocusListener, ActionList
         g.drawImage(Toolkit.getDefaultToolkit().getImage("Resources/misc/lines.PNG"),0,0,960,1280,this);
     }
 
+    public void drawProjectiles(List l, Graphics g){
+        synchronized (l){
+            Iterator iterator = l.iterator();
+            while (iterator.hasNext()) {
+                Bullet bull = (Bullet)iterator.next();
+                g.drawImage(bull.sprite, bull.getSpriteX(), bull.getSpriteY(), bull.spriteWidth, bull.spriteHeight,this);
+            }
+        }
+    }
+
     public void update(){
         if(!isFocusOwner()) requestFocus();
         p.update();
         b.update();
+        updateAllProjectiles();
+        updateFunction();
+        repaint();
+    }
 
-        for(int i = 0; i < projectiles.size(); i++){
-            Bullet bull = projectiles.get(i);
-            bull.update();
-            if(!bull.isOnscreen()){
-                projectiles.remove(bull);
-                i--;
-            }
-            else if(b.takeDamage(bull)){
-                projectiles.remove(bull);
-                i--;
-                if(!b.isAlive()){
-                    win = true;
-                    sfx.playFX("Resources\\SFX\\DEFEATED.wav");
+    public void updateAllProjectiles(){
+        synchronized (playerProjectiles) {
+            Iterator<Bullet> iterator = playerProjectiles.iterator();
+            while (iterator.hasNext()) {
+                Bullet bull = iterator.next();
+                bull.update();
+                if(!bull.isOnscreen()) iterator.remove();
+                else if(b.takeDamage(bull)){
+                    iterator.remove();
+                    if(!b.isAlive()) win = true;
                 }
             }
         }
-        for(int i = 0; i < bossProjectiles.size(); i++){
-            Bullet bull = bossProjectiles.get(i);
-            bull.update();
-            if(!bull.isOnscreen()){
-                bossProjectiles.remove(bull);
-                i--;
-            }
-            if(p.takeDamage(bull)){
-                bossProjectiles = new ArrayList<Bullet>();
-                points = new ArrayList<Coordinate>();
-                fofx = 100000;
-                if(!p.isAlive()) gameOver = true;
-            }
-        }
-        for(int i = 0; i < points.size(); i++){
-            Bullet bull = points.get(i);
-            bull.update();
-            if(!bull.isOnscreen()){
-                points.remove(bull);
-                i--;
-            }
-            if(p.takeDamage(bull)){
-                bossProjectiles = new ArrayList<Bullet>();
-                points = new ArrayList<Coordinate>();
-                fofx = 100000;
-                if(!p.isAlive()){
-                    gameOver = true;
-                    sfx.stop();
+        synchronized (bossProjectiles) {
+            Iterator<Bullet> iterator = bossProjectiles.iterator();
+            while (iterator.hasNext()) {
+                Bullet bull = iterator.next();
+                bull.update();
+                if(!bull.isOnscreen()) iterator.remove();
+                if(p.takeDamage(bull)){
+                    bossProjectiles = new ArrayList<Bullet>();
+                    points = new ArrayList<Coordinate>();
+                    fofx = 100000;
+                    if(!p.isAlive()) gameOver = true;
                 }
             }
         }
-        for(int i = 0; i < bombProjectiles.size(); i++){
-            Bomb bomb = bombProjectiles.get(i);
-            bomb.update();
-            for(int j = 0; j < bossProjectiles.size(); j++) {
-                Bullet bull = bossProjectiles.get(j);
-                if (bomb.collide(bull)) {
-                    bossProjectiles.remove(bull);
-                    j--;
+        synchronized (points) {
+            Iterator<Coordinate> iterator = points.iterator();
+            while (iterator.hasNext()) {
+                Bullet bull = iterator.next();
+                bull.update();
+                if(!bull.isOnscreen()) iterator.remove();
+                if(p.takeDamage(bull)){
+                    bossProjectiles = new ArrayList<Bullet>();
+                    points = new ArrayList<Coordinate>();
+                    fofx = 100000;
+                    if(!p.isAlive()) gameOver = true;
                 }
-            }
-            for(int j = 0; j < points.size(); j++) {
-                Bullet bull = points.get(j);
-                if (bomb.collide(bull)) {
-                    points.remove(bull);
-                    j--;
-                }
-            }
-            if(!bomb.isOnscreen() || b.takeDamage(bomb)){
-                bombProjectiles.remove(bomb);
-                i--;
             }
         }
-
+        synchronized (bombProjectiles) {
+            Iterator<Bomb> iterator = bombProjectiles.iterator();
+            while (iterator.hasNext()) {
+                Bomb bomb = iterator.next();
+                bomb.update();
+                synchronized (bossProjectiles){
+                    Iterator<Bullet> iterator2 = bossProjectiles.iterator();
+                    while (iterator2.hasNext()) if (bomb.collide(iterator2.next())) iterator2.remove();
+                }
+                synchronized (points){
+                    Iterator<Coordinate> iterator2 = points.iterator();
+                    while (iterator2.hasNext()) if (bomb.collide(iterator2.next())) iterator2.remove();
+                }
+                if(!bomb.isOnscreen() || b.takeDamage(bomb)) iterator.remove();
+            }
+        }
+    }
+    public void updateFunction(){
         fofx += 0.04;
         if(fofx < WIDTH / 40 + 1) {
             try {
                 BufferedImage b = ImageIO.read(new File("Resources/ProjectileSprites/Graph.png"));
-                points.add(new Coordinate(b, (int) (fofx * 100), HEIGHT - 40 - (int) (f.getValue(fofx)), 16, 16, new MovePath() {
+                points.add(new Coordinate(b, (int) (fofx * 100), ScaleDimentions.HEIGHT - 40 - (int) (f.getValue(fofx)), 16, 16, new MovePath() {
                     @Override
                     public int[] move(long t, int x0, int y0) {
                         int[] pos = {x0, y0};
@@ -176,10 +173,8 @@ class PlayPanel extends JPanel implements KeyListener, FocusListener, ActionList
             f.chooseRandom();
             points.clear();
             fofx = -1;
-            sfx.playFX("Resources\\SFX\\TWINKLE2.wav");
         }
         pixels = (int)((b.health/5000)*(250));
-        repaint();
     }
 
     public void keyTyped(KeyEvent e) {}
