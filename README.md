@@ -13,4 +13,6 @@ Calculus-Based Shoot-em-up for Code Day
 ## Links
 [Music](https://moriyashrine.org/official-soundtracks/)
 
-[Drootr Website](https://drootr.com)
+[Drootr Website](http://drootr.com/)
+
+[Cirno's Perfect Math Class](https://www.youtube.com/watch?v=qrN3EC5_dA8)
