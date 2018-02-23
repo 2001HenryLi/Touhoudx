@@ -3,11 +3,14 @@ Calculus-Based Shoot-em-up for Code Day
 
 ## TO DO
 1. Enemies (Non-bosses)
-2. Optimization (in progress)
-3. Drootr boss
-4. Some type of level progression
-5. Pause menu
-6. More options in starting screen
+2. Fix concurrentModificationException if it can be fixed (Still happens even with synchronized list)
+3. Optimization (in progress)
+4. Drootr boss
+5. Some type of level progression
+6. Pause menu
+7. More options in starting screen
 
 ## Links
 [Music](https://moriyashrine.org/official-soundtracks/)
+
+[Drootr Website](https://drootr.com)
