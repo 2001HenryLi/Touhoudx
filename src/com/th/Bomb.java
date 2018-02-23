@@ -10,8 +10,6 @@ public class Bomb extends Bullet {
     }
 
     public boolean collide(Bullet b){
-        Rectangle bRect = new Rectangle(b.getSpriteX(), b.getSpriteY(), b.spriteWidth, b.spriteHeight);
-        Rectangle pRect = new Rectangle(getSpriteX(), getSpriteY(), spriteWidth, spriteHeight);
-        return bRect.intersects(pRect);
+        return b.getRect().intersects(getRect());
     }
 }

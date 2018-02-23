@@ -33,7 +33,6 @@ class PlayPanel extends JPanel implements KeyListener, FocusListener, ActionList
     public int pixels = 0;
 
     public PlayPanel(Player p, Boss b){
-        setBackground(new Color(255,255,255));
         setPreferredSize(new Dimension(WIDTH, ScaleDimentions.HEIGHT));
         addKeyListener(this);
         addFocusListener(this);
@@ -42,45 +41,6 @@ class PlayPanel extends JPanel implements KeyListener, FocusListener, ActionList
 
         f.chooseRandom();
         requestFocus();
-    }
-
-    public void paintComponent(Graphics g){
-        super.paintComponent(g);
-        makeBackground(g);
-
-        g.drawImage(b.sprite, b.getSpriteX(), b.getSpriteY(), b.spriteWidth, b.spriteHeight,this);
-
-        g.drawImage(p.sprite, p.getSpriteX(), p.getSpriteY(), p.spriteWidth, p.spriteHeight,this);
-        if(keysDown[4]) g.drawImage(p.hitbox, p.getHitboxX(), p.getHitboxY(), p.hitboxWidth, p.hitboxHeight,this);
-
-        drawProjectiles(playerProjectiles, g);
-        drawProjectiles(bossProjectiles, g);
-        drawProjectiles(points, g);
-        drawProjectiles(bombProjectiles, g);
-
-        g.drawRect(10, 10, 250, 50);
-        g.setColor(Color.WHITE);
-        g.fillRect(12, 12, 250-4, 50-4);
-        g.setColor(new Color(255-(int)((Math.abs(b.health/5000))*255), (int)((Math.abs(b.health/5000))*255),0));
-        g.fillRect(12, 12, pixels, 50);
-
-        backgroundScroll = (backgroundScroll+5) % 1280;
-    }
-
-    public void makeBackground(Graphics g){
-        g.drawImage(Toolkit.getDefaultToolkit().getImage("Resources/Background/background.png"),0, backgroundScroll,960,1280,this);
-        g.drawImage(Toolkit.getDefaultToolkit().getImage("Resources/Background/background.png"),0,0,960, backgroundScroll,this);
-        g.drawImage(Toolkit.getDefaultToolkit().getImage("Resources/misc/lines.PNG"),0,0,960,1280,this);
-    }
-
-    public void drawProjectiles(List l, Graphics g){
-        synchronized (l){
-            Iterator iterator = l.iterator();
-            while (iterator.hasNext()) {
-                Bullet bull = (Bullet)iterator.next();
-                g.drawImage(bull.sprite, bull.getSpriteX(), bull.getSpriteY(), bull.spriteWidth, bull.spriteHeight,this);
-            }
-        }
     }
 
     public void update(){
@@ -92,7 +52,42 @@ class PlayPanel extends JPanel implements KeyListener, FocusListener, ActionList
         repaint();
     }
 
-    public void updateAllProjectiles(){
+    public void paintComponent(Graphics g){
+        super.paintComponent(g);
+        makeBackground(g);
+
+        b.draw(g, this);
+        p.drawSprite(g, this);
+        if(keysDown[4]) p.drawHitbox(g, this);
+
+        drawProjectiles(playerProjectiles, g);
+        drawProjectiles(bossProjectiles, g);
+        drawProjectiles(points, g);
+        drawProjectiles(bombProjectiles, g);
+
+        g.drawRect(10, 10, 250, 50);
+        g.setColor(Color.WHITE);
+        g.fillRect(12, 12, 250-4, 50-4);
+        g.setColor(new Color(255-(int)((Math.abs(b.health/b.maxHealth))*255), (int)((Math.abs(b.health/5000))*255),0));
+        g.fillRect(12, 12, pixels, 50);
+
+        backgroundScroll = (backgroundScroll+5) % ScaleDimentions.HEIGHT;
+    }
+
+    private void makeBackground(Graphics g){
+        g.drawImage(Toolkit.getDefaultToolkit().getImage("Resources/Background/background.png"),0, backgroundScroll, ScaleDimentions.WIDTH, ScaleDimentions.HEIGHT,this);
+        g.drawImage(Toolkit.getDefaultToolkit().getImage("Resources/Background/background.png"),0,0, ScaleDimentions.WIDTH, backgroundScroll,this);
+        g.drawImage(Toolkit.getDefaultToolkit().getImage("Resources/misc/lines.PNG"),0,0, ScaleDimentions.WIDTH,ScaleDimentions.HEIGHT,this);
+    }
+
+    private void drawProjectiles(List list, Graphics g){
+        synchronized (list){
+            Iterator iterator = list.iterator();
+            while (iterator.hasNext()) ((Bullet)iterator.next()).draw(g, this);
+        }
+    }
+
+    private void updateAllProjectiles(){
         synchronized (playerProjectiles) {
             Iterator<Bullet> iterator = playerProjectiles.iterator();
             while (iterator.hasNext()) {
@@ -150,7 +145,7 @@ class PlayPanel extends JPanel implements KeyListener, FocusListener, ActionList
             }
         }
     }
-    public void updateFunction(){
+    private void updateFunction(){
         fofx += 0.04;
         if(fofx < WIDTH / 40 + 1) {
             try {
@@ -163,10 +158,8 @@ class PlayPanel extends JPanel implements KeyListener, FocusListener, ActionList
                     }
                 }));
             } catch(IOException e) {
-                System.out.println("failed");
                 System.exit(-1);
             }
-
             if(points.size() > 400) points.remove(0);
         }
         else{
@@ -174,7 +167,7 @@ class PlayPanel extends JPanel implements KeyListener, FocusListener, ActionList
             points.clear();
             fofx = -1;
         }
-        pixels = (int)((b.health/5000)*(250));
+        pixels = (int)((b.health/b.maxHealth)*(250));
     }
 
     public void keyTyped(KeyEvent e) {}
@@ -186,6 +179,7 @@ class PlayPanel extends JPanel implements KeyListener, FocusListener, ActionList
     public void keyReleased(KeyEvent e) {
         int key = e.getKeyCode();
         for(int i = 0; i < keysDown.length; i++) if(key == INPUT_CODES[i]) keysDown[i] = false;
+        if(key == KeyEvent.VK_X) p.canBomb = true;
     }
     public void focusGained(FocusEvent e) {}
     public void focusLost(FocusEvent e) {}

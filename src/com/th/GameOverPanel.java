@@ -13,7 +13,6 @@ public class GameOverPanel extends JPanel implements KeyListener, FocusListener,
 
     public GameOverPanel(){
         requestFocus();
-        setBackground(new Color(255,255,255));
         setPreferredSize(new Dimension(ScaleDimentions.WIDTH, ScaleDimentions.HEIGHT));
         addKeyListener(this);
         addFocusListener(this);
@@ -27,7 +26,7 @@ public class GameOverPanel extends JPanel implements KeyListener, FocusListener,
 
     public void paintComponent(Graphics g){
         super.paintComponent(g);
-        g.drawImage(img,0,0, 1280, 930, this);
+        g.drawImage(img,0,0, ScaleDimentions.WIDTH, ScaleDimentions.HEIGHT, this);
     }
 
     public void update(){

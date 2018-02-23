@@ -8,13 +8,11 @@ import java.io.File;
 import java.io.IOException;
 
 public class WinPanel extends JPanel implements KeyListener, FocusListener, ActionListener {
-
     public boolean restart = false;
     private Image img;
 
     public WinPanel(){
         requestFocus();
-        setBackground(new Color(255,255,255));
         setPreferredSize(new Dimension(ScaleDimentions.WIDTH, ScaleDimentions.HEIGHT));
         addKeyListener(this);
         addFocusListener(this);
@@ -28,7 +26,7 @@ public class WinPanel extends JPanel implements KeyListener, FocusListener, Acti
 
     public void paintComponent(Graphics g){
         super.paintComponent(g);
-        g.drawImage(img,0,0, 1280, 930, this);
+        g.drawImage(img,0,0, ScaleDimentions.WIDTH, ScaleDimentions.HEIGHT, this);
     }
 
     public void update(){

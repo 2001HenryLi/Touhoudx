@@ -1,6 +1,7 @@
 package com.th;
 
 import javax.imageio.ImageIO;
+import java.awt.*;
 import java.awt.image.*;
 import java.io.*;
 import java.util.concurrent.TimeUnit;
@@ -9,9 +10,9 @@ public class Bullet {
     private long startTime = -1;
     private long elapsedTime = 0;
 
-    public BufferedImage sprite;
-    public int spriteWidth = 32;
-    public int spriteHeight = 32;
+    private BufferedImage sprite;
+    private int spriteWidth = 32;
+    private int spriteHeight = 32;
 
     private int x0;
     private int y0;
@@ -44,13 +45,15 @@ public class Bullet {
         return y - spriteHeight/2;
     }
 
-    /*
     public boolean isOnscreen(){
-        return x >= 0 && x <= (1280 * 3 / 5) && y >= 0 && y <= 960;
+        //return x >= 0 && x <= (1280 * 3 / 5) && y >= 0 && y <= 960;
+        return startTime != -1 && TimeUnit.SECONDS.convert(System.nanoTime() - startTime, TimeUnit.NANOSECONDS) <= 5;
     }
-    */
 
-    public boolean isOnscreen(){
-        return startTime != -1 && TimeUnit.SECONDS.convert(System.nanoTime() - startTime, TimeUnit.NANOSECONDS) <= 3;
+    public void draw(Graphics g, ImageObserver imageObserver){
+        g.drawImage(sprite, getSpriteX(), getSpriteY(), spriteWidth, spriteHeight, imageObserver);
+    }
+    public Rectangle getRect(){
+        return new Rectangle(getSpriteX(), getSpriteY(), spriteWidth, spriteHeight);
     }
 }

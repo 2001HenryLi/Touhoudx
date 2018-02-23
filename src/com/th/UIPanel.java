@@ -8,15 +8,14 @@ class UIPanel extends JPanel{
     private Player guy;
 	private final int WIDTH = ScaleDimentions.WIDTH * 2 / 5;
     public UIPanel(Player p){
-        setBackground(Color.WHITE);
         requestFocus();
 		setPreferredSize(new Dimension(WIDTH, ScaleDimentions.HEIGHT));
 	    guy = p;
     }
 	
     public void paintComponent(Graphics g){
-	super.paintComponent(g);
-	render(g);
+		super.paintComponent(g);
+		render(g);
     }
 	
 	public void render(Graphics g){

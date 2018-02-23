@@ -5,6 +5,7 @@ import sun.awt.image.BufferedImageGraphicsConfig;
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.awt.image.ImageObserver;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -18,15 +19,18 @@ public class Boss {
 
     public PlayPanel pp;
 
-    public String name = "BossStage1";
-    public BufferedImage sprite;
-    public double health = 5000;
-    public int x = 1280 * 3 / 5 / 2;
-    public int y = 240;
-    public int x_f = x;
-    public int y_f = y;
-    public int spriteWidth;
-    public int spriteHeight;
+    private String name = "BossStage1";
+    private BufferedImage sprite;
+    private int spriteWidth;
+    private int spriteHeight;
+
+    public final double maxHealth = 5000;
+    public double health = maxHealth;
+
+    private int x = 1280 * 3 / 5 / 2;
+    private int y = 240;
+    private int x_f = x;
+    private int y_f = y;
 
     private BufferedImage[] shots = new BufferedImage[4];
     private String[] sfx = {"Resources\\SFX\\ATTACK3.wav", "Resources\\SFX\\ATTACK2.wav", "Resources\\SFX\\ATTACK.wav", "Resources\\SFX\\ATTACK4.wav"};
@@ -113,8 +117,7 @@ public class Boss {
             ArrayList<Bullet> pattern = new ArrayList<Bullet>();
             for(int j = 0; j < 3; j++) {
                 for (int i = 0; i < 16; i++) {
-                    double offset = Math.random()* 2 * Math.PI;
-                    double radians = 2 * Math.PI * i / 16 + offset;
+                    int i0 = i;
                     int j0 = j;
                     pattern.add(new Bullet(shots[1], x - 16, y - 16, 32, 32, new MovePath() {
                         @Override
@@ -122,7 +125,7 @@ public class Boss {
                             int[] pos = {x0, y0};
                             long tMilli = TimeUnit.MILLISECONDS.convert(t, TimeUnit.NANOSECONDS);
                             long tDiff = Math.max(tMilli - 400*j0, 0);
-                            pos[0] = x0 + (int) (Math.sin(radians) * tDiff / 1.5);
+                            pos[0] = x0 + (int) ((i0-8) * tDiff / 10);
                             pos[1] = y0 + (int) (tDiff / 3);
                             return pos;
                         }
@@ -169,7 +172,7 @@ public class Boss {
             previousShot += 1000000000;
             int rand;
             if(health > 2500) rand = (int)(Math.random() * bps.length/2);
-            else rand = (int)(Math.random() * bps.length/2+ bps.length/2);
+            else rand = (int)(Math.random() * bps.length/2 + bps.length/2);
             ArrayList<Bullet> addProjectiles = bps[rand].makePattern();
             for(Bullet b : addProjectiles) pp.bossProjectiles.add(b);
         }
@@ -189,10 +192,7 @@ public class Boss {
     }
 
     public boolean takeDamage(Bullet b){
-        Rectangle bRect = new Rectangle(b.getSpriteX(), b.getSpriteY(), b.spriteWidth, b.spriteHeight);
-        Rectangle pRect = new Rectangle(getSpriteX(), getSpriteY(), spriteWidth, spriteHeight);
-
-        if(bRect.intersects(pRect)){
+        if(b.getRect().intersects(getRect())){
             if (b instanceof Bomb) health -= 100;
             else health--;
             return true;
@@ -200,6 +200,9 @@ public class Boss {
         return false;
     }
 
+    public void draw(Graphics g, ImageObserver imageObserver){
+        g.drawImage(sprite, getSpriteX(), getSpriteY(), spriteWidth, spriteHeight, imageObserver);
+    }
     public boolean isAlive(){
         return health > 0;
     }
@@ -208,5 +211,8 @@ public class Boss {
     }
     public int getSpriteY(){
         return y - spriteHeight/2;
+    }
+    public Rectangle getRect(){
+        return new Rectangle(getSpriteX(), getSpriteY(), spriteWidth, spriteHeight);
     }
 }

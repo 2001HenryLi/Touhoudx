@@ -13,32 +13,34 @@ public class Player {
     private long elapsedTime = 0;
 
     private long inVulnTime = 0;
-    public boolean isInVuln = false;
+    private boolean isInVuln = false;
 
     public PlayPanel pp;
 
-    public final String SPRITE_DIRECTORY = "Resources/CharacterSprites/";
-    public String name;
-    public String bulletType;
-    public BufferedImage sprite;
-    public BufferedImage[] sprites = new BufferedImage[7];
-    public int spriteIndex = 3;
+    private final String SPRITE_DIRECTORY = "Resources/CharacterSprites/";
+    private String name;
+    private String bulletType;
 
-    public int spriteWidth = 64;
-    public int spriteHeight = 64;
-    public BufferedImage hitbox;
-    public int hitboxWidth = 16;
-    public int hitboxHeight = 16;
-    String bulletPath = "Resources/ProjectileSprites/";
-    String bombPath = "Resources/ProjectileSprites/CircleLargeBoss.png";
+    private BufferedImage sprite;
+    private BufferedImage[] sprites = new BufferedImage[7];
+    private int spriteIndex = 3;
+    private int spriteWidth = 64;
+    private int spriteHeight = 64;
+    private BufferedImage hitbox;
+    private int hitboxWidth = 16;
+    private int hitboxHeight = 16;
+
+    private String bulletPath = "Resources/ProjectileSprites/";
+    private String bombPath = "Resources/ProjectileSprites/CircleLargeBoss.png";
     private BufferedImage[] bullets = new BufferedImage[2];
 
-    public int x = 1280 * 3 / 5 / 2;
-    public int y = 900;
-    public int vx = 8;
-    public int vy = 8;
+    private int x = 1280 * 3 / 5 / 2;
+    private int y = 900;
+    private int vx = 8;
+    private int vy = 8;
 
     public int bombs = 3;
+    public volatile boolean canBomb = true;
     public int lives = 3;
 
     private BulletPattern BOMB = new BulletPattern() {
@@ -81,7 +83,6 @@ public class Player {
             bullets[1] = ImageIO.read(new File(bombPath));
             hitbox = ImageIO.read(new File("Resources/CharacterSprites/hitbox.png"));
         } catch(IOException e) {
-            System.out.println("failed");
             System.exit(-1);
         }
     }
@@ -96,7 +97,6 @@ public class Player {
                 sprites[3] = ImageIO.read(new File(SPRITE_DIRECTORY+name+".png"));
                 sprites[6] = ImageIO.read(new File(SPRITE_DIRECTORY+name+"Right.png"));
             } catch(IOException e) {
-                System.out.println("failed");
                 System.exit(-1);
             }
         }
@@ -149,19 +149,18 @@ public class Player {
             }));
         }
     }
-
     public void bomb(){
-        if(bombs > 0){
+        if(bombs > 0 && canBomb){
             SFX.playOnce("Resources\\SFX\\SPELLCARD.wav");
             ArrayList<Bullet> addProjectiles = BOMB.makePattern();
             for(Bullet b : addProjectiles) pp.bombProjectiles.add((Bomb)b);
             bombs--;
+            canBomb = false;
         }
     }
+
     public boolean takeDamage(Bullet b){
-        Rectangle bRect = new Rectangle(b.getSpriteX(), b.getSpriteY(), b.spriteWidth, b.spriteHeight);
-        Rectangle pRect = new Rectangle(getHitboxX(), getHitboxY(), hitboxWidth, hitboxHeight);
-        if(bRect.intersects(pRect) && !isInVuln){
+        if(b.getRect().intersects(getRect()) && !isInVuln){
             inVulnTime = System.nanoTime() - startTime;
             lives--;
             isInVuln = true;
@@ -170,18 +169,25 @@ public class Player {
                 sprites[3] = ImageIO.read(new File(SPRITE_DIRECTORY+name+"hit.png"));
                 sprites[6] = ImageIO.read(new File(SPRITE_DIRECTORY+name+"Righthit.png"));
             } catch(IOException e) {
-                System.out.println("failed");
                 System.exit(-1);
             }
             x = 1280 * 3 / 5 / 2;
             y = 960;
             bombs = 4;
+            canBomb = true;
             bomb();
+            canBomb = true;
             return true;
         }
         return false;
     }
 
+    public void drawSprite(Graphics g, ImageObserver imageObserver){
+        g.drawImage(sprite, getSpriteX(), getSpriteY(), spriteWidth, spriteHeight, imageObserver);
+    }
+    public void drawHitbox(Graphics g, ImageObserver imageObserver){
+        g.drawImage(hitbox, getHitboxX(), getHitboxY(), hitboxWidth, hitboxHeight, imageObserver);
+    }
     public boolean isAlive(){
         return lives > 0;
     }
@@ -196,5 +202,8 @@ public class Player {
     }
     public int getHitboxY(){
         return y - hitboxHeight/2;
+    }
+    public Rectangle getRect(){
+        return new Rectangle(getHitboxX(), getHitboxY(), hitboxWidth, hitboxHeight);
     }
 }

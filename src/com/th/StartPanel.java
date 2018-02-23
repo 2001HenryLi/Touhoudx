@@ -5,15 +5,13 @@ import java.awt.*;
 import java.awt.event.*;
 
 class StartPanel extends JPanel implements KeyListener, FocusListener, ActionListener{
-    public Image pic;
-    public Image side;
+    private Image pic;
+    private Image side;
     private double ang;
-    private BGMusic bgm = new BGMusic();
 
     private volatile boolean gotInput = false;
 
     public StartPanel(){
-        setBackground(new Color(200,191,231));
         requestFocus();
         setPreferredSize(new Dimension(ScaleDimentions.WIDTH, ScaleDimentions.HEIGHT));
         addKeyListener(this);
@@ -34,10 +32,9 @@ class StartPanel extends JPanel implements KeyListener, FocusListener, ActionLis
 
     public void doText(Graphics g){
         g.setFont(new Font(Font.SANS_SERIF, Font.TRUETYPE_FONT, 46));
-        double ypos = Math.sin(ang*0.75)*20+550;
+        double ypos = Math.sin(ang * 0.75) * 20 + 550;
         g.drawString("Press Enter to Play", 850, (int)ypos);
     }
-
     public void update(){
         if(!isFocusOwner()) requestFocus();
         ang += (Math.PI/90);
@@ -45,7 +42,6 @@ class StartPanel extends JPanel implements KeyListener, FocusListener, ActionLis
     }
     public void waitForInput(){
         while(!gotInput){requestFocus();}
-        bgm.stop();
     }
     public void keyTyped(KeyEvent e) {}
     public void keyPressed(KeyEvent e) {
