@@ -130,6 +130,7 @@ public class Player {
     private void shoot(){
         if(pp.keysDown[5]){
             synchronized (pp.playerProjectiles) {
+                SFX.playOnce("Resources/SfX/se_etbreak.wav");
                 pp.playerProjectiles.add(new Bullet(bullets[0], x + spriteWidth / 2, y, 32, 32, new MovePath() {
                     @Override
                     public int[] move(long t, int x0, int y0) {
