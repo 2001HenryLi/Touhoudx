@@ -27,8 +27,8 @@ public class MainFrame extends JFrame {
 
     public static void main(String[] args){
         MainFrame mf = new MainFrame();
-        BGMusic.setVolume(-80f);
-        SFX.setVolume(-80f);
+        BGMusic.setVolume(2f);
+        SFX.setVolume(2f);
         while(true) {
             mf.start();
             mf.run();
@@ -74,8 +74,7 @@ public class MainFrame extends JFrame {
         mainPanel.add(tdx.UI);
         getGlassPane().setVisible(true);
         setVisible(true);
-        if(Math.random() >= 0.5) BGMusic.playLoop("Resources\\BGM\\Lunatic Eyes Invisible Full Moon - Touhou 14.5- Urban Legend in Limbo.wav", 0, -1);
-        else BGMusic.playLoop("Resources\\BGM\\Beloved Tomboyish Girl (Alpha Mix) - Touhou 6_ the Embodiment of Scarlet Devil.wav", 0, -1);
+        BGMusic.playLoop("Resources\\BGM\\corno.wav", 0, -1);
         UpdateRunner.run(new Runnable() {
             @Override
             public void run() {
