@@ -10,9 +10,7 @@ public class MainFrame extends JFrame {
     private JPanel mainPanel = new JPanel();
 
     private TouhouDX tdx;
-    private volatile boolean gameOverSwitch;
     private volatile boolean restartSwitch;
-    private volatile boolean winSwitch;
 
     public MainFrame(){
         super("L' TouHoupital DX");
@@ -29,6 +27,8 @@ public class MainFrame extends JFrame {
 
     public static void main(String[] args){
         MainFrame mf = new MainFrame();
+        BGMusic.setVolume(-80f);
+        SFX.setVolume(-80f);
         while(true) {
             mf.start();
             mf.run();
@@ -36,9 +36,7 @@ public class MainFrame extends JFrame {
     }
 
     public void start(){
-        gameOverSwitch = false;
-        winSwitch = false;
-        restartSwitch = false;
+        BGMusic.playLoop("Resources\\BGM\\Title Theme - Super Mario World.wav", 0, -1);
 
         sp = new StartPanel();
         mainPanel.removeAll();
@@ -55,6 +53,7 @@ public class MainFrame extends JFrame {
     }
 
     public void run(){
+        BGMusic.playLoop("Resources\\BGM\\Mint Espresso - Kirby Cafe.wav", 0, -1);
         slp = new SelectPanel();
         mainPanel.setVisible(false);
         mainPanel.removeAll();
@@ -75,7 +74,8 @@ public class MainFrame extends JFrame {
         mainPanel.add(tdx.UI);
         getGlassPane().setVisible(true);
         setVisible(true);
-
+        if(Math.random() >= 0.5) BGMusic.playLoop("Resources\\BGM\\Lunatic Eyes Invisible Full Moon - Touhou 14.5- Urban Legend in Limbo.wav", 0, -1);
+        else BGMusic.playLoop("Resources\\BGM\\Beloved Tomboyish Girl (Alpha Mix) - Touhou 6_ the Embodiment of Scarlet Devil.wav", 0, -1);
         UpdateRunner.run(new Runnable() {
             @Override
             public void run() {
@@ -83,37 +83,35 @@ public class MainFrame extends JFrame {
             }
         });
         while(!restartSwitch){}
+        restartSwitch = false;
     }
 
     public void update(){
-        if(!gameOverSwitch && tdx.pp.gameOver) gameOver();
-        else if(!winSwitch && tdx.pp.win) win();
-        else if(!restartSwitch && (tdx.gp.restart || tdx.wp.restart)){
+        if(tdx.pp.gameOver) gameOver();
+        else if(tdx.pp.win) win();
+        else if(tdx.gp.restart || tdx.wp.restart){
             UpdateRunner.stop();
             restartSwitch = true;
+            return;
         }
         tdx.update();
     }
 
     public void win(){
+        BGMusic.playLoop("Resources\\BGM\\Battle Victory - Mario & Luigi Bowser's Inside Story.wav", 0, -1);
         mainPanel.setVisible(false);
         mainPanel.removeAll();
         mainPanel.add(tdx.wp);
         mainPanel.setVisible(true);
-
-        winSwitch = true;
-        gameOverSwitch = false;
-        restartSwitch = false;
+        tdx.pp.win = false;
     }
 
     public void gameOver(){
+        BGMusic.playOnce("Resources\\BGM\\Game Over - Super Mario World.wav");
         mainPanel.setVisible(false);
         mainPanel.removeAll();
         mainPanel.add(tdx.gp);
         mainPanel.setVisible(true);
-
-        gameOverSwitch = true;
-        restartSwitch = false;
-        winSwitch = false;
+        tdx.pp.gameOver = false;
     }
 }

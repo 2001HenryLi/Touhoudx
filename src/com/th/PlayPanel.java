@@ -12,7 +12,6 @@ import java.util.List;
 import java.util.Collections;
 
 class PlayPanel extends JPanel implements KeyListener, FocusListener, ActionListener{
-    private final int WIDTH = ScaleDimentions.WIDTH * 3 / 5;
     private int backgroundScroll = 0;
 
     public boolean gameOver;
@@ -27,19 +26,18 @@ class PlayPanel extends JPanel implements KeyListener, FocusListener, ActionList
     public volatile List<Bullet> bossProjectiles = Collections.synchronizedList(new ArrayList<Bullet>());
     public volatile List<Bomb> bombProjectiles = Collections.synchronizedList(new ArrayList<Bomb>());
 
-    public Function f = new Function();
-    private double fofx = -1;
-    public volatile ArrayList<Coordinate> points = new ArrayList<>();
+    public Function f;
+    public volatile List<Coordinate> points = Collections.synchronizedList(new ArrayList<Coordinate>());
+
     public int pixels = 0;
 
     public PlayPanel(Player p, Boss b){
-        setPreferredSize(new Dimension(WIDTH, ScaleDimentions.HEIGHT));
+        setPreferredSize(new Dimension(ScaleDimentions.PPWIDTH, ScaleDimentions.HEIGHT));
         addKeyListener(this);
         addFocusListener(this);
         this.p = p;
         this.b = b;
-
-        f.chooseRandom();
+        f = new Function(this);
         requestFocus();
     }
 
@@ -47,8 +45,9 @@ class PlayPanel extends JPanel implements KeyListener, FocusListener, ActionList
         if(!isFocusOwner()) requestFocus();
         p.update();
         b.update();
+        f.update();
         updateAllProjectiles();
-        updateFunction();
+        pixels = (int)((b.health/b.maxHealth)*(250));
         repaint();
     }
 
@@ -75,9 +74,9 @@ class PlayPanel extends JPanel implements KeyListener, FocusListener, ActionList
     }
 
     private void makeBackground(Graphics g){
-        g.drawImage(Toolkit.getDefaultToolkit().getImage("Resources/Background/background.png"),0, backgroundScroll, ScaleDimentions.WIDTH, ScaleDimentions.HEIGHT,this);
-        g.drawImage(Toolkit.getDefaultToolkit().getImage("Resources/Background/background.png"),0,0, ScaleDimentions.WIDTH, backgroundScroll,this);
-        g.drawImage(Toolkit.getDefaultToolkit().getImage("Resources/misc/lines.PNG"),0,0, ScaleDimentions.WIDTH,ScaleDimentions.HEIGHT,this);
+        g.drawImage(Toolkit.getDefaultToolkit().getImage("Resources/Background/background.png"),0, backgroundScroll, ScaleDimentions.PPWIDTH, ScaleDimentions.HEIGHT,this);
+        g.drawImage(Toolkit.getDefaultToolkit().getImage("Resources/Background/background.png"),0,0, ScaleDimentions.PPWIDTH, backgroundScroll,this);
+        g.drawImage(Toolkit.getDefaultToolkit().getImage("Resources/misc/lines.PNG"),0,0, ScaleDimentions.PPWIDTH, ScaleDimentions.HEIGHT,this);
     }
 
     private void drawProjectiles(List list, Graphics g){
@@ -93,7 +92,7 @@ class PlayPanel extends JPanel implements KeyListener, FocusListener, ActionList
             while (iterator.hasNext()) {
                 Bullet bull = iterator.next();
                 bull.update();
-                if(!bull.isOnscreen()) iterator.remove();
+                if(!bull.timeUp()) iterator.remove();
                 else if(b.takeDamage(bull)){
                     iterator.remove();
                     if(!b.isAlive()) win = true;
@@ -105,11 +104,11 @@ class PlayPanel extends JPanel implements KeyListener, FocusListener, ActionList
             while (iterator.hasNext()) {
                 Bullet bull = iterator.next();
                 bull.update();
-                if(!bull.isOnscreen()) iterator.remove();
+                if(!bull.timeUp()) iterator.remove();
                 if(p.takeDamage(bull)){
                     bossProjectiles = new ArrayList<Bullet>();
-                    points = new ArrayList<Coordinate>();
-                    fofx = 100000;
+                    synchronized (points) { points.clear(); }
+                    f.reset();
                     if(!p.isAlive()) gameOver = true;
                 }
             }
@@ -119,11 +118,11 @@ class PlayPanel extends JPanel implements KeyListener, FocusListener, ActionList
             while (iterator.hasNext()) {
                 Bullet bull = iterator.next();
                 bull.update();
-                if(!bull.isOnscreen()) iterator.remove();
+                if(!bull.timeUp()) iterator.remove();
                 if(p.takeDamage(bull)){
-                    bossProjectiles = new ArrayList<Bullet>();
+                    synchronized (bossProjectiles){ bossProjectiles.clear(); }
                     points = new ArrayList<Coordinate>();
-                    fofx = 100000;
+                    f.reset();
                     if(!p.isAlive()) gameOver = true;
                 }
             }
@@ -141,33 +140,9 @@ class PlayPanel extends JPanel implements KeyListener, FocusListener, ActionList
                     Iterator<Coordinate> iterator2 = points.iterator();
                     while (iterator2.hasNext()) if (bomb.collide(iterator2.next())) iterator2.remove();
                 }
-                if(!bomb.isOnscreen() || b.takeDamage(bomb)) iterator.remove();
+                if(!bomb.timeUp() || b.takeDamage(bomb)) iterator.remove();
             }
         }
-    }
-    private void updateFunction(){
-        fofx += 0.04;
-        if(fofx < WIDTH / 40 + 1) {
-            try {
-                BufferedImage b = ImageIO.read(new File("Resources/ProjectileSprites/Graph.png"));
-                points.add(new Coordinate(b, (int) (fofx * 100), ScaleDimentions.HEIGHT - 40 - (int) (f.getValue(fofx)), 16, 16, new MovePath() {
-                    @Override
-                    public int[] move(long t, int x0, int y0) {
-                        int[] pos = {x0, y0};
-                        return pos;
-                    }
-                }));
-            } catch(IOException e) {
-                System.exit(-1);
-            }
-            if(points.size() > 400) points.remove(0);
-        }
-        else{
-            f.chooseRandom();
-            points.clear();
-            fofx = -1;
-        }
-        pixels = (int)((b.health/b.maxHealth)*(250));
     }
 
     public void keyTyped(KeyEvent e) {}

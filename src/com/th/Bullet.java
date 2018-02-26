@@ -11,8 +11,8 @@ public class Bullet {
     private long elapsedTime = 0;
 
     private BufferedImage sprite;
-    private int spriteWidth = 32;
-    private int spriteHeight = 32;
+    private int spriteWidth;
+    private int spriteHeight;
 
     private int x0;
     private int y0;
@@ -45,7 +45,8 @@ public class Bullet {
         return y - spriteHeight/2;
     }
 
-    public boolean isOnscreen(){
+
+    public boolean timeUp(){
         //return x >= 0 && x <= (1280 * 3 / 5) && y >= 0 && y <= 960;
         return startTime != -1 && TimeUnit.SECONDS.convert(System.nanoTime() - startTime, TimeUnit.NANOSECONDS) <= 5;
     }

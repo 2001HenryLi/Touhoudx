@@ -18,14 +18,14 @@ public class TouhouDX {
     }
 
     public void update(){
-        if(pp.win){
+        if(wp.getParent() != null){
             wp.update();
         }
-        else if(!pp.gameOver && !pp.win){
+        else if(pp.getParent() != null){
             pp.update();
             UI.update();
         }
-        else if(pp.gameOver && !pp.win){
+        else if(gp.getParent() != null){
             gp.update();
         }
     }

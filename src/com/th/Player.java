@@ -129,24 +129,26 @@ public class Player {
     }
     private void shoot(){
         if(pp.keysDown[5]){
-            pp.playerProjectiles.add(new Bullet(bullets[0], x + spriteWidth/2, y, 32, 32, new MovePath() {
-                @Override
-                public int[] move(long t, int x0, int y0) {
-                    int[] pos = {x0, y0};
-                    pos[0] = x0;
-                    pos[1] = y0 - (int)(TimeUnit.MILLISECONDS.convert(t, TimeUnit.NANOSECONDS) * 3);
-                    return pos;
-                }
-            }));
-            pp.playerProjectiles.add(new Bullet(bullets[0], x - spriteWidth/2, y, 32, 32, new MovePath() {
-                @Override
-                public int[] move(long t, int x0, int y0) {
-                    int[] pos = {x0, y0};
-                    pos[0] = x0;
-                    pos[1] = y0 - (int)(TimeUnit.MILLISECONDS.convert(t, TimeUnit.NANOSECONDS) * 3);
-                    return pos;
-                }
-            }));
+            synchronized (pp.playerProjectiles) {
+                pp.playerProjectiles.add(new Bullet(bullets[0], x + spriteWidth / 2, y, 32, 32, new MovePath() {
+                    @Override
+                    public int[] move(long t, int x0, int y0) {
+                        int[] pos = {x0, y0};
+                        pos[0] = x0;
+                        pos[1] = y0 - (int) (TimeUnit.MILLISECONDS.convert(t, TimeUnit.NANOSECONDS) * 3);
+                        return pos;
+                    }
+                }));
+                pp.playerProjectiles.add(new Bullet(bullets[0], x - spriteWidth / 2, y, 32, 32, new MovePath() {
+                    @Override
+                    public int[] move(long t, int x0, int y0) {
+                        int[] pos = {x0, y0};
+                        pos[0] = x0;
+                        pos[1] = y0 - (int) (TimeUnit.MILLISECONDS.convert(t, TimeUnit.NANOSECONDS) * 3);
+                        return pos;
+                    }
+                }));
+            }
         }
     }
     public void bomb(){

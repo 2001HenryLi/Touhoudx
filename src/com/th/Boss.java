@@ -137,6 +137,7 @@ public class Boss {
     };
 
     private BulletPattern[] bps = {circle, circle2, circle3, sweep};
+
     public Boss(PlayPanel p){
         pp = p;
 
@@ -171,10 +172,11 @@ public class Boss {
         if(elapsedTime > previousShot + 1000000000){
             previousShot += 1000000000;
             int rand;
-            if(health > 2500) rand = (int)(Math.random() * bps.length/2);
-            else rand = (int)(Math.random() * bps.length/2 + bps.length/2);
+            if(health > maxHealth/2) rand = (int)(Math.random() * bps.length/2);
+            else rand = (int)(Math.random() * bps.length);
+            SFX.playOnce(sfx[rand]);
             ArrayList<Bullet> addProjectiles = bps[rand].makePattern();
-            for(Bullet b : addProjectiles) pp.bossProjectiles.add(b);
+            synchronized (pp.bossProjectiles){ for(Bullet b : addProjectiles) pp.bossProjectiles.add(b); }
         }
     }
 

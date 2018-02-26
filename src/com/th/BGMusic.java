@@ -31,6 +31,8 @@ class BGMusic {  //this plays the background music. no changes needed here unles
             e.printStackTrace();
             System.exit(-4);
         }
+        FloatControl gainControl = (FloatControl) mus.getControl(FloatControl.Type.MASTER_GAIN);
+        gainControl.setValue(volume);
     }
     public static void playOnce(String file){
         openFile(file);
@@ -53,8 +55,6 @@ class BGMusic {  //this plays the background music. no changes needed here unles
     }
     public static void setVolume(float v){
         volume = v;
-        FloatControl gainControl = (FloatControl) mus.getControl(FloatControl.Type.MASTER_GAIN);
-        gainControl.setValue(volume);
     }
     public static float getVolume(){
         return volume;

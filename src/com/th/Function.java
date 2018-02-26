@@ -1,79 +1,152 @@
 package com.th;
 
 /*types of functions:
-	 * 1) sinx
-	 * 2) cosx
-	 * 3) tanx
 	 * 4) e^x
-	 * 5) x
 	 * 6) x^2
 	 * 7) x^3
-	 * 8) sqrt(x)
-	 * 9) lnx
 	 * 
 	 * add more if you want to
 	 */
 
-public class Function {
-	
-	private int functiontype;
-	private int constant;
-	private int constant2;
-	private final double BOXHEIGHT = 83.3;
-	
-	public Function(){
-		chooseRandom();
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import java.util.concurrent.TimeUnit;
+
+public class Function{
+    private final double SCALE = 83.3;
+
+    private PlayPanel pp;
+    private long startTime = -1;
+    private long elapsedTime = 0;
+    private long previousEq = 0;
+    private long equationBuffer = TimeUnit.NANOSECONDS.convert(5, TimeUnit.SECONDS);
+	private BufferedImage sprite;
+
+    private Equation sin = new Equation() {
+        @Override
+        public int[] getCoord(long t) {
+            int x = (int)(t * ScaleDimentions.PPWIDTH / equationBuffer);
+            int y = (int)(Math.sin(x * 2 * Math.PI / (ScaleDimentions.PPWIDTH / 4))*SCALE);
+            int[] pos = {x, y};
+            return pos;
+        }
+
+        @Override
+        public String toString() {
+            return "y = sin(x)";
+        }
+    };
+    private Equation cos = new Equation() {
+        @Override
+        public int[] getCoord(long t) {
+            int x = (int)(t * ScaleDimentions.PPWIDTH / equationBuffer);
+            int y = (int)(Math.cos(x * 2 * Math.PI / (ScaleDimentions.PPWIDTH / 4))*SCALE);
+            int[] pos = {x, y};
+            return pos;
+        }
+
+        @Override
+        public String toString() {
+            return "y = cos(x)";
+        }
+    };
+    private Equation tan = new Equation() {
+        @Override
+        public int[] getCoord(long t) {
+            int x = (int)(t * ScaleDimentions.PPWIDTH / equationBuffer);
+            int y = (int)(Math.tan(x * 2 * Math.PI / (ScaleDimentions.PPWIDTH / 4))*SCALE);
+            int[] pos = {x, y};
+            return pos;
+        }
+
+        @Override
+        public String toString() {
+            return "y = tan(x)";
+        }
+    };
+    private Equation linear = new Equation() {
+        @Override
+        public int[] getCoord(long t) {
+            int x = (int)(t * ScaleDimentions.PPWIDTH / equationBuffer);
+            int y = x;
+            int[] pos = {x, y};
+            return pos;
+        }
+        @Override
+        public String toString() {
+            return "y = x";
+        }
+    };
+    private Equation sqrt = new Equation() {
+        @Override
+        public int[] getCoord(long t) {
+            int x = (int)(t * ScaleDimentions.PPWIDTH / equationBuffer);
+            int y = (int) (Math.sqrt(x) * SCALE/4);
+            int[] pos = {x, y};
+            return pos;
+        }
+        @Override
+        public String toString() {
+            return "y = sqrt(x)";
+        }
+    };
+    private Equation ln = new Equation() {
+        @Override
+        public int[] getCoord(long t) {
+            int x = (int)(t * ScaleDimentions.PPWIDTH / equationBuffer);
+            int y = (int) (Math.log(x) * SCALE/2);
+            int[] pos = {x, y};
+            return pos;
+        }
+        @Override
+        public String toString() {
+            return "y = log(x)";
+        }
+    };
+
+	private Equation[] eqs = {sin, cos, tan, linear, sqrt, ln};
+	private int eqIndex;
+
+	public Function(PlayPanel p){
+	    pp = p;
+        try {
+            sprite = ImageIO.read(new File("Resources/ProjectileSprites/Graph.png"));
+        } catch(IOException e) {
+            System.exit(-1);
+        }
+        eqIndex = (int)(Math.random() * eqs.length);
 	}
-	
-	public void chooseRandom(){
-		functiontype = (int)(Math.random()*9+1);
-		constant = (int)(Math.random()*2+1);
-		constant2 = (int)(Math.random()*2+1);
-	}
-	
-	//returns values in pixels
-	public double getValue(double xval){
-		if(functiontype == 1) return constant2 * (int)(Math.sin(constant*xval)*BOXHEIGHT);
-		if(functiontype == 2) return constant2 * (int)(Math.cos(constant*xval)*BOXHEIGHT);
-		if(functiontype == 3) return constant2 * (int)(Math.tan(constant*xval)*BOXHEIGHT);
-		if(functiontype == 5) return (int)(constant*xval*BOXHEIGHT);
-		if(functiontype == 6) return (int)(Math.pow(constant*xval, 2)*BOXHEIGHT);
-		if(functiontype == 7) return (int)(Math.pow(constant*xval, 3)*BOXHEIGHT);
-		if(functiontype == 8) return constant2 * (int)(Math.pow(constant*xval, 0.5)*BOXHEIGHT);
-		if(functiontype == 9) return constant2 * (int)(Math.log(constant*xval)*BOXHEIGHT);
-		return (int)(Math.pow(Math.E, constant*xval)*BOXHEIGHT);
-	}
-	
-	//detects if coordinates fit function
-	public boolean onLine(double xval, int y){
-		if(functiontype == 1) return y == constant2 * (int)Math.sin(constant*xval);
-		if(functiontype == 2) return y == constant2 * (int)Math.cos(constant*xval);
-		if(functiontype == 3) return y == constant2 * (int)Math.tan(constant*xval);
-		if(functiontype == 5) return y == (int)constant*xval;
-		if(functiontype == 6) return y == (int)Math.pow(constant*xval, 2);
-		if(functiontype == 7) return y == (int)Math.pow(constant*xval, 3);
-		if(functiontype == 8) return y == constant2 * (int)Math.pow(constant*xval, 0.5);
-		if(functiontype == 9) return y == constant2 * (int)Math.log(constant*xval);
-		return y == (int)Math.pow(Math.E, constant*xval);
-	}
-	
-	public int getFuncType(){ return functiontype; }
-	public double getConstant(){ return constant; }
 	
 	public String getFunction(){ 
-		String c = ""+constant;
-		String c2 = ""+constant2;
-		if(constant == 1) c = "";
-		if(constant2 == 1) c2 = "";
-
-		if(functiontype == 1) return "y = " + c2 + "sin("+c+"x)";
-		if(functiontype == 2) return "y = " + c2 + "cos("+c+"x)";
-		if(functiontype == 3) return "y = " + c2 + "tan("+c+"x)";
-		if(functiontype == 5) return "y = " +c + "x";
-		if(functiontype == 6) return "y = ("+c+"x)^2";
-		if(functiontype == 7) return "y = ("+c+"x)^3";
-		if(functiontype == 8) return "y = " + c2 + "sqrt("+c+"x)";
-		if(functiontype == 9) return "y = " + c2 + "ln("+c+"x)";
-		return "y = e^("+c+"x)";
+		return eqs[eqIndex].toString();
 	}
+
+	public void update(){
+        if(startTime == -1) startTime = System.nanoTime();
+        elapsedTime = System.nanoTime() - startTime;
+
+        if(elapsedTime > previousEq + 2 * equationBuffer) reset();
+        if(elapsedTime - previousEq >= 0){
+            int[] coords = eqs[eqIndex].getCoord(elapsedTime - previousEq);
+            pp.points.add(new Coordinate(sprite, coords[0], ScaleDimentions.HEIGHT - 40 - coords[1], 16, 16, new MovePath() {
+                @Override
+                public int[] move(long t, int x0, int y0) {
+                    int[] pos = {x0, y0};
+                    if(t > elapsedTime - previousEq + equationBuffer){
+                        pos[0] = -100;
+                        pos[1] = -100;
+                    }
+                    return pos;
+                }
+            }));
+        }
+	}
+	public void reset(){
+        startTime = System.nanoTime();
+        previousEq = 0;
+        synchronized (pp.points){ pp.points.clear(); }
+        eqIndex = (int)(Math.random() * eqs.length);
+    }
 }

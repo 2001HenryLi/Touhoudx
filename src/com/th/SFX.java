@@ -33,6 +33,8 @@ class SFX {  //this plays the sound effects. no changes needed here unless furth
     }
     public static void playOnce(String file){
         openFile(file);
+        FloatControl gainControl = (FloatControl) sfx.getControl(FloatControl.Type.MASTER_GAIN);
+        gainControl.setValue(volume);
         sfx.start();  //start from the beginning
         sfx.loop(0);
     }
@@ -42,8 +44,6 @@ class SFX {  //this plays the sound effects. no changes needed here unless furth
     }
     public static void setVolume(float v){
         volume = v;
-        FloatControl gainControl = (FloatControl) sfx.getControl(FloatControl.Type.MASTER_GAIN);
-        gainControl.setValue(volume);
     }
     public static float getVolume(){
         return volume;
