@@ -2,12 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a0edc6b3-f861-4023-acd0-71445d476e6b" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Touhoudx/com/th/MainFrame$3.class" afterPath="$PROJECT_DIR$/out/production/Touhoudx/com/th/MainFrame$3.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Touhoudx/com/th/MainFrame.class" afterPath="$PROJECT_DIR$/out/production/Touhoudx/com/th/MainFrame.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Touhoudx/com/th/Player.class" afterPath="$PROJECT_DIR$/out/production/Touhoudx/com/th/Player.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/th/MainFrame.java" afterPath="$PROJECT_DIR$/src/com/th/MainFrame.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/th/Player.java" afterPath="$PROJECT_DIR$/src/com/th/Player.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -59,11 +54,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="MainFrame.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="MainFrame.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/com/th/MainFrame.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="245">
-              <caret line="76" column="49" lean-forward="false" selection-start-line="76" selection-start-column="49" selection-end-line="76" selection-end-column="49" />
+            <state relative-caret-position="311">
+              <caret line="30" column="23" lean-forward="false" selection-start-line="30" selection-start-column="23" selection-end-line="30" selection-end-column="23" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -81,7 +76,19 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="PlayPanel.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Boss.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/th/Boss.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="268">
+              <caret line="42" column="40" lean-forward="true" selection-start-line="42" selection-start-column="40" selection-end-line="42" selection-end-column="40" />
+              <folding>
+                <element signature="e#1208#1216#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="PlayPanel.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/th/PlayPanel.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="176">
@@ -98,16 +105,6 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="1452">
               <caret line="152" column="0" lean-forward="false" selection-start-line="152" selection-start-column="0" selection-end-line="152" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Boss.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/th/Boss.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="862">
-              <caret line="180" column="5" lean-forward="false" selection-start-line="180" selection-start-column="5" selection-end-line="180" selection-end-column="5" />
               <folding />
             </state>
           </provider>
@@ -196,9 +193,9 @@
         <option value="$PROJECT_DIR$/src/com/th/PlayPanel.java" />
         <option value="$PROJECT_DIR$/src/com/th/UIPanel.java" />
         <option value="$PROJECT_DIR$/src/com/th/Function.java" />
-        <option value="$PROJECT_DIR$/src/com/th/Boss.java" />
         <option value="$PROJECT_DIR$/src/com/th/TouhouDX.java" />
         <option value="$PROJECT_DIR$/src/com/th/Player.java" />
+        <option value="$PROJECT_DIR$/src/com/th/Boss.java" />
         <option value="$PROJECT_DIR$/src/com/th/MainFrame.java" />
       </list>
     </option>
@@ -927,14 +924,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/th/Boss.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="862">
-          <caret line="180" column="5" lean-forward="false" selection-start-line="180" selection-start-column="5" selection-end-line="180" selection-end-column="5" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/th/Player.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="330">
@@ -981,20 +970,30 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/th/MainFrame.java">
+    <entry file="file://$PROJECT_DIR$/src/com/th/PlayPanel.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="245">
-          <caret line="76" column="49" lean-forward="false" selection-start-line="76" selection-start-column="49" selection-end-line="76" selection-end-column="49" />
+        <state relative-caret-position="176">
+          <caret line="84" column="0" lean-forward="false" selection-start-line="84" selection-start-column="0" selection-end-line="84" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/th/PlayPanel.java">
+    <entry file="file://$PROJECT_DIR$/src/com/th/Boss.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="176">
-          <caret line="84" column="0" lean-forward="false" selection-start-line="84" selection-start-column="0" selection-end-line="84" selection-end-column="0" />
+        <state relative-caret-position="268">
+          <caret line="42" column="40" lean-forward="true" selection-start-line="42" selection-start-column="40" selection-end-line="42" selection-end-column="40" />
+          <folding>
+            <element signature="e#1208#1216#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/th/MainFrame.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="311">
+          <caret line="30" column="23" lean-forward="false" selection-start-line="30" selection-start-column="23" selection-end-line="30" selection-end-column="23" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
