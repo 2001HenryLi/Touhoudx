@@ -33,7 +33,8 @@ public class Boss {
     private int y_f = y;
 
     private BufferedImage[] shots = new BufferedImage[4];
-    private String[] sfx = {"Resources\\SFX\\ATTACK3.wav", "Resources\\SFX\\ATTACK2.wav", "Resources\\SFX\\ATTACK.wav", "Resources\\SFX\\ATTACK4.wav"};
+    //private String[] sfx = {"Resources\\SFX\\ATTACK3.wav", "Resources\\SFX\\ATTACK2.wav", "Resources\\SFX\\ATTACK.wav", "Resources\\SFX\\ATTACK4.wav"};
+    private String[] sfx = {"Resources\\SFX\\ORIN.wav", "Resources\\SFX\\ORIN.wav", "Resources\\SFX\\ORIN.wav", "Resources\\SFX\\ORIN.wav"};
 
     private BulletPattern circle = new BulletPattern() {
         @Override

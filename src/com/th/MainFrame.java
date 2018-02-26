@@ -27,8 +27,8 @@ public class MainFrame extends JFrame {
 
     public static void main(String[] args){
         MainFrame mf = new MainFrame();
-        BGMusic.setVolume(2f);
-        SFX.setVolume(1f);
+        BGMusic.setVolume(-10f);
+        SFX.setVolume(-20f);
         while(true) {
             mf.start();
             mf.run();
