@@ -29,6 +29,8 @@ public class Player {
     private BufferedImage hitbox;
     private int hitboxWidth = 16;
     private int hitboxHeight = 16;
+    private int hitboxSpriteWidth = 64;
+    private int hitboxSpriteHeight = 64;
 
     private String bulletPath = "Resources/ProjectileSprites/";
     private String bombPath = "Resources/ProjectileSprites/CircleLargeBoss.png";
@@ -81,7 +83,7 @@ public class Player {
             sprites[6] = ImageIO.read(new File(SPRITE_DIRECTORY+name+"Right.png"));
             bullets[0] = ImageIO.read(new File(bulletPath+bulletType));
             bullets[1] = ImageIO.read(new File(bombPath));
-            hitbox = ImageIO.read(new File("Resources/CharacterSprites/hitbox.png"));
+            hitbox = ImageIO.read(new File("Resources/CharacterSprites/eff_sloweffect.png"));
         } catch(IOException e) {
             System.exit(-1);
         }
@@ -192,8 +194,9 @@ public class Player {
         g.drawImage(sprite, getSpriteX(), getSpriteY(), spriteWidth, spriteHeight, imageObserver);
     }
     public void drawHitbox(Graphics g, ImageObserver imageObserver){
-        g.drawImage(hitbox, getHitboxX(), getHitboxY(), hitboxWidth, hitboxHeight, imageObserver);
+        g.drawImage(hitbox, getSpriteX(), getSpriteY(), hitboxSpriteWidth, hitboxSpriteHeight, imageObserver);
     }
+
     public boolean isAlive(){
         return lives > 0;
     }
