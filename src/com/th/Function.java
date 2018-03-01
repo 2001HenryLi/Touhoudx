@@ -130,17 +130,19 @@ public class Function{
         if(elapsedTime > previousEq + 2 * equationBuffer) reset();
         if(elapsedTime - previousEq >= 0){
             int[] coords = eqs[eqIndex].getCoord(elapsedTime - previousEq);
-            pp.points.add(new Coordinate(sprite, coords[0], ScaleDimentions.HEIGHT - 40 - coords[1], 16, 16, new MovePath() {
-                @Override
-                public int[] move(long t, int x0, int y0) {
-                    int[] pos = {x0, y0};
-                    if(t > elapsedTime - previousEq + equationBuffer){
-                        pos[0] = -100;
-                        pos[1] = -100;
+            synchronized (pp.points) {
+                pp.points.add(new Coordinate(sprite, coords[0], ScaleDimentions.HEIGHT - 40 - coords[1], 16, 16, new MovePath() {
+                    @Override
+                    public int[] move(long t, int x0, int y0) {
+                        int[] pos = {x0, y0};
+                        if (t > elapsedTime - previousEq + equationBuffer) {
+                            pos[0] = -100;
+                            pos[1] = -100;
+                        }
+                        return pos;
                     }
-                    return pos;
-                }
-            }));
+                }));
+            }
         }
 	}
 	public void reset(){

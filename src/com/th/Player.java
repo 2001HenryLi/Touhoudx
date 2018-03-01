@@ -159,7 +159,7 @@ public class Player {
             if(isInVuln) SFX.playOnce("Resources\\SFX\\DEAD.wav");
             else SFX.playOnce("Resources\\SFX\\SPELLCARD.wav");
             ArrayList<Bullet> addProjectiles = BOMB.makePattern();
-            for(Bullet b : addProjectiles) pp.bombProjectiles.add((Bomb)b);
+            synchronized (pp.bombProjectiles){ for(Bullet b : addProjectiles) pp.bombProjectiles.add((Bomb)b); }
             bombs--;
             canBomb = false;
         }
