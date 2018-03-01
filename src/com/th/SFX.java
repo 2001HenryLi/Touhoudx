@@ -7,11 +7,9 @@ import java.io.IOException;
 
 class SFX {  //this plays the sound effects. no changes needed here unless further notice
     private static Clip sfx = null;
-    private static String f = "";
     private static float volume;
 
     private static void openFile(String file){
-        f = file;
         try {
             sfx = AudioSystem.getClip();
             sfx.open(AudioSystem.getAudioInputStream(new File(file)));
@@ -30,18 +28,15 @@ class SFX {  //this plays the sound effects. no changes needed here unless furth
             e.printStackTrace();
             System.exit(-4);
         }
+        FloatControl gainControl = (FloatControl) sfx.getControl(FloatControl.Type.MASTER_GAIN);
+        gainControl.setValue(volume);
     }
     public static void playOnce(String file){
         openFile(file);
-        FloatControl gainControl = (FloatControl) sfx.getControl(FloatControl.Type.MASTER_GAIN);
-        gainControl.setValue(volume);
-        sfx.start();  //start from the beginning
+        sfx.start();
         sfx.loop(0);
     }
 
-    public static String getMusic(){
-        return f;
-    }
     public static void setVolume(float v){
         volume = v;
     }

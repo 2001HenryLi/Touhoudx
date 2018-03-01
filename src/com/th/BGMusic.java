@@ -36,15 +36,15 @@ class BGMusic {  //this plays the background music. no changes needed here unles
     }
     public static void playOnce(String file){
         openFile(file);
-        mus.start();  //start from the beginning
+        mus.start();
         mus.loop(0);
     }
     public static void playLoop(String file, int loopStart, int loopEnd){
         openFile(file);
 
-        mus.start();  //start from the beginning
-        mus.setLoopPoints(loopStart, loopEnd);  //loop the correct parts
-        mus.loop(Clip.LOOP_CONTINUOUSLY);  //tell it to loop
+        mus.start();
+        mus.setLoopPoints(loopStart, loopEnd);
+        mus.loop(Clip.LOOP_CONTINUOUSLY);
     }
     public static void stop(){
         if(mus != null) mus.stop();
