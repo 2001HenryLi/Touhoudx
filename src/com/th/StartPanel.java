@@ -12,7 +12,6 @@ class StartPanel extends JPanel implements KeyListener, FocusListener, ActionLis
     private volatile boolean gotInput = false;
 
     public StartPanel(){
-        requestFocus();
         setPreferredSize(new Dimension(ScaleDimentions.WIDTH, ScaleDimentions.HEIGHT));
         addKeyListener(this);
         addFocusListener(this);
@@ -36,7 +35,6 @@ class StartPanel extends JPanel implements KeyListener, FocusListener, ActionLis
         g.drawString("Press Enter to Play", 850, (int)ypos);
     }
     public void update(){
-        if(!isFocusOwner()) requestFocus();
         ang += (Math.PI/90);
         repaint();
     }

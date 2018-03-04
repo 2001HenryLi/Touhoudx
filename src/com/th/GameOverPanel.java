@@ -12,7 +12,6 @@ public class GameOverPanel extends JPanel implements KeyListener, FocusListener,
     private Image img;
 
     public GameOverPanel(){
-        requestFocus();
         setPreferredSize(new Dimension(ScaleDimentions.WIDTH, ScaleDimentions.HEIGHT));
         addKeyListener(this);
         addFocusListener(this);
@@ -30,7 +29,6 @@ public class GameOverPanel extends JPanel implements KeyListener, FocusListener,
     }
 
     public void update(){
-        if(!isFocusOwner()) requestFocus();
         repaint();
     }
 

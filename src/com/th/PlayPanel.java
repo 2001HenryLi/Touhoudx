@@ -38,11 +38,9 @@ class PlayPanel extends JPanel implements KeyListener, FocusListener, ActionList
         this.p = p;
         this.b = b;
         f = new Function(this);
-        requestFocus();
     }
 
     public void update(){
-        if(!isFocusOwner()) requestFocus();
         p.update();
         b.update();
         f.update();

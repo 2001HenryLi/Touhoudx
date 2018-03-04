@@ -12,7 +12,6 @@ public class WinPanel extends JPanel implements KeyListener, FocusListener, Acti
     private Image img;
 
     public WinPanel(){
-        requestFocus();
         setPreferredSize(new Dimension(ScaleDimentions.WIDTH, ScaleDimentions.HEIGHT));
         addKeyListener(this);
         addFocusListener(this);
@@ -30,7 +29,6 @@ public class WinPanel extends JPanel implements KeyListener, FocusListener, Acti
     }
 
     public void update(){
-        if(!isFocusOwner()) requestFocus();
         repaint();
     }
 

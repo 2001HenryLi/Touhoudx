@@ -58,7 +58,6 @@ public class MainFrame extends JFrame {
         mainPanel.setVisible(false);
         mainPanel.removeAll();
         mainPanel.add(slp);
-        slp.setVisible(true);
 
         UpdateRunner.run(new Runnable() {
             @Override
@@ -67,13 +66,16 @@ public class MainFrame extends JFrame {
             }
         });
         mainPanel.setVisible(true);
-        tdx = new TouhouDX(slp.waitForFocus());
+        slp.requestFocus();
+        tdx = new TouhouDX(slp.waitForInput());
 
+        mainPanel.setVisible(false);
         mainPanel.removeAll();
         mainPanel.add(tdx.pp);
         mainPanel.add(tdx.UI);
-        getGlassPane().setVisible(true);
-        setVisible(true);
+        mainPanel.setVisible(true);
+        tdx.pp.requestFocus();
+
         BGMusic.playLoop("Resources\\BGM\\corno.wav", 0, -1);
         UpdateRunner.run(new Runnable() {
             @Override
@@ -103,6 +105,7 @@ public class MainFrame extends JFrame {
         mainPanel.add(tdx.wp);
         mainPanel.setVisible(true);
         tdx.pp.win = false;
+        tdx.wp.requestFocus();
     }
 
     public void gameOver(){
@@ -112,5 +115,6 @@ public class MainFrame extends JFrame {
         mainPanel.add(tdx.gp);
         mainPanel.setVisible(true);
         tdx.pp.gameOver = false;
+        tdx.gp.requestFocus();
     }
 }

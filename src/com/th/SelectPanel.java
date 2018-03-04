@@ -11,13 +11,12 @@ public class SelectPanel extends JPanel implements KeyListener, FocusListener{
 	private final int HEIGHT = (int)(960 * MASTER_SCALE);
 	private int choice = 1;
 
-	private boolean gotInput;
+	private volatile boolean gotInput;
 
 	private Player guy;
 	
 	public SelectPanel() {
 		gotInput = false;
-		requestFocus();
 		setPreferredSize(new Dimension(WIDTH,HEIGHT));
 		setBackground(Color.BLACK);
 		addKeyListener(this);
@@ -41,13 +40,13 @@ public class SelectPanel extends JPanel implements KeyListener, FocusListener{
 	}
 	
 	public void update(){
-		requestFocus();
 		repaint();
 	}
 
-	public Player waitForFocus()
+	public Player waitForInput()
 	{
-		while(!gotInput){requestFocus();}
+		while(!gotInput){}
+
 		return guy;
 	}
 	
@@ -66,10 +65,8 @@ public class SelectPanel extends JPanel implements KeyListener, FocusListener{
 				gotInput = true;
 			}
 		}
-		if((e.getKeyCode() == KeyEvent.VK_LEFT) && (choice == 2))
-			choice = 1;
-		else if((e.getKeyCode() == KeyEvent.VK_RIGHT) && (choice == 1))
-			choice = 2;
+		if((e.getKeyCode() == KeyEvent.VK_LEFT) && (choice == 2)) choice = 1;
+		else if((e.getKeyCode() == KeyEvent.VK_RIGHT) && (choice == 1)) choice = 2;
 	}
 	public void keyReleased(KeyEvent e) {
 	}
