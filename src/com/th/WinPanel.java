@@ -4,27 +4,24 @@ import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 
 public class WinPanel extends JPanel implements KeyListener, FocusListener, ActionListener {
     public boolean restart = false;
-    private Image img;
+    private BufferedImage img;
 
     public WinPanel(){
         setPreferredSize(new Dimension(ScaleDimentions.WIDTH, ScaleDimentions.HEIGHT));
         addKeyListener(this);
         addFocusListener(this);
-        try {
-            img = ImageIO.read(new File("Resources/Background/winscreen.png"));
-        } catch(IOException e) {
-            System.out.println("failed");
-            System.exit(-1);
-        }
+        img = ImageLoader.openImage("Background/winscreen.png");
     }
 
     public void paintComponent(Graphics g){
         super.paintComponent(g);
+
         g.drawImage(img,0,0, ScaleDimentions.WIDTH, ScaleDimentions.HEIGHT, this);
     }
 

@@ -17,11 +17,12 @@ public class Player {
 
     public PlayPanel pp;
 
-    private final String SPRITE_DIRECTORY = "Resources/CharacterSprites/";
+    private final String SPRITE_DIRECTORY = "CharacterSprites/";
     private String name;
     private String bulletType;
 
     private BufferedImage sprite;
+    private String[] spritePaths = new String[10];
     private BufferedImage[] sprites = new BufferedImage[7];
     private int spriteIndex = 3;
     private int spriteWidth = 64;
@@ -32,8 +33,9 @@ public class Player {
     private int hitboxSpriteWidth = 64;
     private int hitboxSpriteHeight = 64;
 
-    private String bulletPath = "Resources/ProjectileSprites/";
-    private String bombPath = "Resources/ProjectileSprites/CircleLargeBoss.png";
+    private String bulletPath = "ProjectileSprites/";
+    private String bombPath = "ProjectileSprites/CircleLargeBoss.png";
+    private String hitboxPath = "CharacterSprites/eff_sloweffect.png";
     private BufferedImage[] bullets = new BufferedImage[2];
 
     private int x = 1280 * 3 / 5 / 2;
@@ -69,24 +71,27 @@ public class Player {
 
     public Player(String n){
         name = n;
-        if(name.equals("cirno")) bulletType = "Cusp.png";
-        else bulletType = "VertTangent.png";
         startTime = System.nanoTime();
-        try {
-            sprite = ImageIO.read(new File(SPRITE_DIRECTORY+name+".png"));
-            sprites[0] = ImageIO.read(new File(SPRITE_DIRECTORY+name+"Left.png"));
-            sprites[1] = ImageIO.read(new File(SPRITE_DIRECTORY+name+"transitleft2.png"));
-            sprites[2] = ImageIO.read(new File(SPRITE_DIRECTORY+name+"transitleft1.png"));
-            sprites[3] = ImageIO.read(new File(SPRITE_DIRECTORY+name+".png"));
-            sprites[4] = ImageIO.read(new File(SPRITE_DIRECTORY+name+"transitright1.png"));
-            sprites[5] = ImageIO.read(new File(SPRITE_DIRECTORY+name+"transitright2.png"));
-            sprites[6] = ImageIO.read(new File(SPRITE_DIRECTORY+name+"Right.png"));
-            bullets[0] = ImageIO.read(new File(bulletPath+bulletType));
-            bullets[1] = ImageIO.read(new File(bombPath));
-            hitbox = ImageIO.read(new File("Resources/CharacterSprites/eff_sloweffect.png"));
-        } catch(IOException e) {
-            System.exit(-1);
-        }
+        if(name.equals("cirno")) bulletType = "Cusp.png";
+        else if(name.equals("reimu")) bulletType = "VertTangent.png";
+        loadSprites();
+        for(int i = 0; i < sprites.length; i++) sprites[i] = ImageLoader.openImage(spritePaths[i]);
+        sprite = sprites[3];
+        bullets[0] = ImageLoader.openImage(bulletPath+bulletType);
+        bullets[1] = ImageLoader.openImage(bombPath);
+        hitbox = ImageLoader.openImage(hitboxPath);
+    }
+    private void loadSprites(){
+        spritePaths[0] = SPRITE_DIRECTORY+name+"Left.png";
+        spritePaths[1] = SPRITE_DIRECTORY+name+"TransitLeft2.png";
+        spritePaths[2] = SPRITE_DIRECTORY+name+"TransitLeft1.png";
+        spritePaths[3] = SPRITE_DIRECTORY+name+".png";
+        spritePaths[4] = SPRITE_DIRECTORY+name+"TransitRight1.png";
+        spritePaths[5] = SPRITE_DIRECTORY+name+"TransitRight2.png";
+        spritePaths[6] = SPRITE_DIRECTORY+name+"Right.png";
+        spritePaths[7] = SPRITE_DIRECTORY+name+"LeftHit.png";
+        spritePaths[8] = SPRITE_DIRECTORY+name+"Hit.png";
+        spritePaths[9] = SPRITE_DIRECTORY+name+"RightHit.png";
     }
     public void update(){
         if(startTime == -1) startTime = System.nanoTime();
@@ -94,13 +99,9 @@ public class Player {
 
         if(isInVuln && elapsedTime - inVulnTime >= 1000000000){
             isInVuln = false;
-            try {
-                sprites[0] = ImageIO.read(new File(SPRITE_DIRECTORY+name+"Left.png"));
-                sprites[3] = ImageIO.read(new File(SPRITE_DIRECTORY+name+".png"));
-                sprites[6] = ImageIO.read(new File(SPRITE_DIRECTORY+name+"Right.png"));
-            } catch(IOException e) {
-                System.exit(-1);
-            }
+            sprites[0] = ImageLoader.openImage(spritePaths[0]);
+            sprites[3] = ImageLoader.openImage(spritePaths[3]);
+            sprites[6] = ImageLoader.openImage(spritePaths[6]);
         }
 
         move();
@@ -132,7 +133,7 @@ public class Player {
     private void shoot(){
         if(pp.keysDown[5]){
             synchronized (pp.playerProjectiles) {
-                SFX.playOnce("Resources/SfX/se_etbreak.wav");
+                SFX.playOnce("SFX/se_etbreak.wav");
                 pp.playerProjectiles.add(new Bullet(bullets[0], x + spriteWidth / 2, y, 32, 32, new MovePath() {
                     @Override
                     public int[] move(long t, int x0, int y0) {
@@ -156,8 +157,8 @@ public class Player {
     }
     public void bomb(){
         if(bombs > 0 && canBomb){
-            if(isInVuln) SFX.playOnce("Resources\\SFX\\DEAD.wav");
-            else SFX.playOnce("Resources\\SFX\\SPELLCARD.wav");
+            if(bombs == 4) SFX.playOnce("SFX/DEAD.wav");
+            else SFX.playOnce("SFX/SPELLCARD.wav");
             ArrayList<Bullet> addProjectiles = BOMB.makePattern();
             synchronized (pp.bombProjectiles){ for(Bullet b : addProjectiles) pp.bombProjectiles.add((Bomb)b); }
             bombs--;
@@ -170,13 +171,10 @@ public class Player {
             inVulnTime = System.nanoTime() - startTime;
             lives--;
             isInVuln = true;
-            try {
-                sprites[0] = ImageIO.read(new File(SPRITE_DIRECTORY+name+"Lefthit.png"));
-                sprites[3] = ImageIO.read(new File(SPRITE_DIRECTORY+name+"hit.png"));
-                sprites[6] = ImageIO.read(new File(SPRITE_DIRECTORY+name+"Righthit.png"));
-            } catch(IOException e) {
-                System.exit(-1);
-            }
+            sprites[0] = ImageLoader.openImage(spritePaths[7]);
+            sprites[3] = ImageLoader.openImage(spritePaths[8]);
+            sprites[6] = ImageLoader.openImage(spritePaths[9]);
+
             x = 1280 * 3 / 5 / 2;
             y = 960;
             bombs = 4;

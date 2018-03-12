@@ -1,6 +1,7 @@
 package com.th;
 
 import java.awt.*;
+import java.io.File;
 import javax.swing.*;
 
 public class MainFrame extends JFrame {
@@ -20,7 +21,7 @@ public class MainFrame extends JFrame {
         setSize(ScaleDimentions.WIDTH + 6, ScaleDimentions.HEIGHT);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setResizable(false);
-        setIconImage(Toolkit.getDefaultToolkit().getImage("resources\\misc\\logo.jpg"));
+        setIconImage(ImageLoader.openImage("misc/logo.jpg"));
         setGlassPane(gp);
         getGlassPane().setVisible(false);
     }
@@ -36,7 +37,7 @@ public class MainFrame extends JFrame {
     }
 
     public void start(){
-        BGMusic.playLoop("Resources\\BGM\\Title Theme - Super Mario World.wav", 0, -1);
+        BGMusic.playLoop("BGM/Title Theme - Super Mario World.wav", 0, -1);
 
         sp = new StartPanel();
         mainPanel.removeAll();
@@ -49,11 +50,12 @@ public class MainFrame extends JFrame {
                 sp.update();
             }
         });
+        sp.requestFocus();
         sp.waitForInput();
     }
 
     public void run(){
-        BGMusic.playLoop("Resources\\BGM\\Mint Espresso - Kirby Cafe.wav", 0, -1);
+        BGMusic.playLoop("BGM/Mint Espresso - Kirby Cafe.wav", 0, -1);
         slp = new SelectPanel();
         mainPanel.setVisible(false);
         mainPanel.removeAll();
@@ -76,7 +78,7 @@ public class MainFrame extends JFrame {
         mainPanel.setVisible(true);
         tdx.pp.requestFocus();
 
-        BGMusic.playLoop("Resources\\BGM\\corno.wav", 0, -1);
+        BGMusic.playLoop("BGM/corno.wav", 0, -1);
         UpdateRunner.run(new Runnable() {
             @Override
             public void run() {
@@ -99,7 +101,7 @@ public class MainFrame extends JFrame {
     }
 
     public void win(){
-        BGMusic.playLoop("Resources\\BGM\\Battle Victory - Mario & Luigi Bowser's Inside Story.wav", 0, -1);
+        BGMusic.playLoop("BGM/Battle Victory - Mario & Luigi Bowser's Inside Story.wav", 0, -1);
         mainPanel.setVisible(false);
         mainPanel.removeAll();
         mainPanel.add(tdx.wp);
@@ -109,7 +111,7 @@ public class MainFrame extends JFrame {
     }
 
     public void gameOver(){
-        BGMusic.playOnce("Resources\\BGM\\Game Over - Super Mario World.wav");
+        BGMusic.playOnce("BGM/Game Over - Super Mario World.wav");
         mainPanel.setVisible(false);
         mainPanel.removeAll();
         mainPanel.add(tdx.gp);

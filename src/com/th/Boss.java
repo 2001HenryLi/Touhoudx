@@ -33,8 +33,7 @@ public class Boss {
     private int y_f = y;
 
     private BufferedImage[] shots = new BufferedImage[4];
-    //private String[] sfx = {"Resources\\SFX\\ATTACK3.wav", "Resources\\SFX\\ATTACK2.wav", "Resources\\SFX\\ATTACK.wav", "Resources\\SFX\\ATTACK4.wav"};
-    private String[] sfx = {"Resources\\SFX\\ORIN.wav", "Resources\\SFX\\ORIN.wav", "Resources\\SFX\\ORIN.wav", "Resources\\SFX\\ORIN.wav"};
+    private String[] sfx = {"SFX/ATTACK3.wav", "SFX/ATTACK2.wav", "SFX/ATTACK.wav", "SFX/ATTACK4.wav"};
 
     private BulletPattern circle = new BulletPattern() {
         @Override
@@ -142,15 +141,11 @@ public class Boss {
     public Boss(PlayPanel p){
         pp = p;
 
-        try {
-            sprite = ImageIO.read(new File("Resources/BossSprites/"+name+".png"));
-            shots[0] = ImageIO.read(new File("Resources\\ProjectileSprites\\BasicShot.png"));
-            shots[1] = ImageIO.read(new File("Resources\\ProjectileSprites\\plusc.png"));
-            shots[2] = ImageIO.read(new File("Resources\\ProjectileSprites\\PotatoProjectile.png"));
-            shots[3] = ImageIO.read(new File("Resources\\ProjectileSprites\\CircleLarge.png"));
-        } catch(IOException e) {
-            System.exit(-1);
-        }
+        sprite = ImageLoader.openImage("BossSprites/"+name+".png");
+        shots[0] = ImageLoader.openImage("ProjectileSprites/BasicShot.png");
+        shots[1] = ImageLoader.openImage("ProjectileSprites/plusc.png");
+        shots[2] = ImageLoader.openImage("ProjectileSprites/PotatoProjectile.png");
+        shots[3] = ImageLoader.openImage("ProjectileSprites/CircleLarge.png");
         spriteWidth = sprite.getWidth();
         spriteHeight = sprite.getHeight();
     }
@@ -161,12 +156,7 @@ public class Boss {
 
         if(health > 2500) name = "BossStage1";
         else name = "BossStage2";
-        try {
-            sprite = ImageIO.read(new File("Resources/BossSprites/"+name+".png"));
-        } catch (IOException e) {
-            e.printStackTrace();
-            System.exit(-1);
-        }
+        sprite = ImageLoader.openImage("BossSprites/"+name+".png");
 
         if(elapsedTime > previousMove + 1000000000 || health <= 2500) move();
 

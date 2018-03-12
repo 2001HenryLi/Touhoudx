@@ -8,12 +8,6 @@ public class UpdateRunner {
     private static final int FPS = 60;
     private static ScheduledExecutorService exe;
 
-    private final static Runnable NULL = new Runnable () {
-        public void run () {
-            // Do nothing
-        }
-    };
-
     public static void run(Runnable r){
         stop();
         exe = Executors.newSingleThreadScheduledExecutor();

@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="Touhoudx:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/Touhoudx_jar</output-path>
+    <root id="archive" name="Touhoudx.jar">
+      <element id="module-output" name="Touhoudx" />
+    </root>
+  </artifact>
+</component>

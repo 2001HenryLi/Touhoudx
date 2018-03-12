@@ -30,6 +30,8 @@ class PlayPanel extends JPanel implements KeyListener, FocusListener, ActionList
     public volatile List<Coordinate> points = Collections.synchronizedList(new ArrayList<Coordinate>());
 
     public int pixels = 0;
+    private BufferedImage bkg;
+    private BufferedImage grid;
 
     public PlayPanel(Player p, Boss b){
         setPreferredSize(new Dimension(ScaleDimentions.PPWIDTH, ScaleDimentions.HEIGHT));
@@ -38,6 +40,9 @@ class PlayPanel extends JPanel implements KeyListener, FocusListener, ActionList
         this.p = p;
         this.b = b;
         f = new Function(this);
+
+        bkg = ImageLoader.openImage("Background/background.png");
+        grid = ImageLoader.openImage("misc/lines.png");
     }
 
     public void update(){
@@ -72,13 +77,11 @@ class PlayPanel extends JPanel implements KeyListener, FocusListener, ActionList
     }
 
     private void makeBackground(Graphics g){
-        g.drawImage(Toolkit.getDefaultToolkit().getImage("Resources/Background/background.png"),
-                0, backgroundScroll, ScaleDimentions.PPWIDTH, ScaleDimentions.HEIGHT,
+        g.drawImage(bkg, 0, backgroundScroll, ScaleDimentions.PPWIDTH, ScaleDimentions.HEIGHT,
                 0, 0, ScaleDimentions.PPWIDTH, ScaleDimentions.HEIGHT - backgroundScroll,this);
-        g.drawImage(Toolkit.getDefaultToolkit().getImage("Resources/Background/background.png"),
-                0,0, ScaleDimentions.PPWIDTH, backgroundScroll,
+        g.drawImage(bkg, 0,0, ScaleDimentions.PPWIDTH, backgroundScroll,
                 0,0, ScaleDimentions.PPWIDTH, backgroundScroll, this);
-        g.drawImage(Toolkit.getDefaultToolkit().getImage("Resources/misc/lines.PNG"),0,0, ScaleDimentions.PPWIDTH, ScaleDimentions.HEIGHT,this);
+        g.drawImage(grid,0,0, ScaleDimentions.PPWIDTH, ScaleDimentions.HEIGHT,this);
     }
 
     private void drawProjectiles(List list, Graphics g){
@@ -97,7 +100,6 @@ class PlayPanel extends JPanel implements KeyListener, FocusListener, ActionList
                 if(!bull.timeUp()) iterator.remove();
                 else if(b.takeDamage(bull)){
                     iterator.remove();
-                    if(!b.isAlive()) win = true;
                 }
             }
         }
@@ -111,7 +113,6 @@ class PlayPanel extends JPanel implements KeyListener, FocusListener, ActionList
                     bossProjectiles = new ArrayList<Bullet>();
                     synchronized (points) { points.clear(); }
                     f.reset();
-                    if(!p.isAlive()) gameOver = true;
                 }
             }
         }
@@ -125,7 +126,6 @@ class PlayPanel extends JPanel implements KeyListener, FocusListener, ActionList
                     synchronized (bossProjectiles){ bossProjectiles.clear(); }
                     points = new ArrayList<Coordinate>();
                     f.reset();
-                    if(!p.isAlive()) gameOver = true;
                 }
             }
         }
@@ -145,6 +145,8 @@ class PlayPanel extends JPanel implements KeyListener, FocusListener, ActionList
                 if(!bomb.timeUp() || b.takeDamage(bomb)) iterator.remove();
             }
         }
+        if(!b.isAlive()) win = true;
+        if(!p.isAlive()) gameOver = true;
     }
 
     public void keyTyped(KeyEvent e) {}

@@ -3,20 +3,22 @@ package com.th;
 import java.awt.*;
 import javax.swing.*;
 import java.awt.event.*;
+import java.awt.image.BufferedImage;
 
 public class SelectPanel extends JPanel implements KeyListener, FocusListener{
-
 	private final double MASTER_SCALE = 1.0;
 	private final int WIDTH = (int)(1280 * MASTER_SCALE);
 	private final int HEIGHT = (int)(960 * MASTER_SCALE);
 	private int choice = 1;
+	private BufferedImage choicey;
 
-	private volatile boolean gotInput;
+	private volatile boolean gotInput = false;
 
 	private Player guy;
 	
 	public SelectPanel() {
-		gotInput = false;
+        choicey = ImageLoader.openImage("Background/characterselect.png");
+
 		setPreferredSize(new Dimension(WIDTH,HEIGHT));
 		setBackground(Color.BLACK);
 		addKeyListener(this);
@@ -25,20 +27,16 @@ public class SelectPanel extends JPanel implements KeyListener, FocusListener{
 	
 	public void paintComponent(Graphics g){
 		super.paintComponent(g);
-		render(g);
+
+        if(choice == 1)
+            g.drawImage(choicey, 0, 0, 640, 960, 0, 0, 640, 960, this);
+        else if(choice == 2)
+            g.drawImage(choicey, 640, 0, 1280, 960, 640, 0, 1280, 960, this);
+        g.setFont(new Font(Font.SANS_SERIF, Font.TRUETYPE_FONT, 50));
+        g.setColor(Color.WHITE);
+        g.drawString("Select a character (Arrow keys to toggle)", 275, 100);
 	}
-	
-	public void render(Graphics g){
-		Image choicey = Toolkit.getDefaultToolkit().getImage("Resources/Background/characterselect.png");
-		if(choice == 1)
-			g.drawImage(choicey, 0, 0, 640, 960, 0, 0, 640, 960, this);
-		else
-			g.drawImage(choicey, 640, 0, 1280, 960, 640, 0, 1280, 960, this);
-		g.setFont(new Font(Font.SANS_SERIF, Font.TRUETYPE_FONT, 50));
-		g.setColor(Color.WHITE);
-		g.drawString("Select a character (Arrow keys to toggle)", 275, 100);
-	}
-	
+
 	public void update(){
 		repaint();
 	}
@@ -46,7 +44,6 @@ public class SelectPanel extends JPanel implements KeyListener, FocusListener{
 	public Player waitForInput()
 	{
 		while(!gotInput){}
-
 		return guy;
 	}
 	
@@ -60,7 +57,7 @@ public class SelectPanel extends JPanel implements KeyListener, FocusListener{
 				guy = new Player("cirno");
 				gotInput = true;
 			}
-			if(choice == 2) {
+			else if(choice == 2) {
 				guy = new Player("reimu");
 				gotInput = true;
 			}

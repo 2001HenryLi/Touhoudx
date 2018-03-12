@@ -111,11 +111,7 @@ public class Function{
 
 	public Function(PlayPanel p){
 	    pp = p;
-        try {
-            sprite = ImageIO.read(new File("Resources/ProjectileSprites/Graph.png"));
-        } catch(IOException e) {
-            System.exit(-1);
-        }
+        sprite = ImageLoader.openImage("ProjectileSprites/Graph.png");
         eqIndex = (int)(Math.random() * eqs.length);
 	}
 	

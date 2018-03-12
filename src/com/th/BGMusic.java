@@ -6,6 +6,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 
 class BGMusic {  //this plays the background music. no changes needed here unless further notice
+    private static ClassLoader classLoader = BGMusic.class.getClassLoader();
     private static Clip mus = null;
     private static String f = "";
     private static float volume;
@@ -15,7 +16,7 @@ class BGMusic {  //this plays the background music. no changes needed here unles
         try {
             stop();
             mus = AudioSystem.getClip();
-            mus.open(AudioSystem.getAudioInputStream(new File(file)));
+            mus.open(AudioSystem.getAudioInputStream(classLoader.getResource(f)));
         }catch(LineUnavailableException e){
             e.printStackTrace();
             System.exit(-1);
@@ -30,6 +31,10 @@ class BGMusic {  //this plays the background music. no changes needed here unles
         catch(IOException e){
             e.printStackTrace();
             System.exit(-4);
+        }
+        catch(NullPointerException e){
+            e.printStackTrace();
+            System.exit(-5);
         }
         FloatControl gainControl = (FloatControl) mus.getControl(FloatControl.Type.MASTER_GAIN);
         gainControl.setValue(volume);

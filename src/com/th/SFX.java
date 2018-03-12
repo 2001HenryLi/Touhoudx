@@ -6,27 +6,32 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 
 class SFX {  //this plays the sound effects. no changes needed here unless further notice
+    private static ClassLoader classLoader = SFX.class.getClassLoader();
     private static float volume;
 
     private static Clip openFile(String file){
         Clip sfx = null;
         try {
             sfx = AudioSystem.getClip();
-            sfx.open(AudioSystem.getAudioInputStream(new File(file)));
+            sfx.open(AudioSystem.getAudioInputStream(classLoader.getResource(file)));
         }catch(LineUnavailableException e){
             e.printStackTrace();
             System.exit(-1);
-        }catch (FileNotFoundException e) {
+        }catch(FileNotFoundException e) {
             e.printStackTrace();
             System.exit(-2);
         }
-        catch (UnsupportedAudioFileException e){
+        catch(UnsupportedAudioFileException e){
             e.printStackTrace();
             System.exit(-3);
         }
         catch(IOException e){
             e.printStackTrace();
             System.exit(-4);
+        }
+        catch(NullPointerException e){
+            e.printStackTrace();
+            System.exit(-5);
         }
 
         try {
