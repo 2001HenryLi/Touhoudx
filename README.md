@@ -2,13 +2,12 @@
 Calculus-Based Shoot-em-up for Code Day
 
 ## TO DO
+- [ ] GET JAR FILE (using LFS)
 - [ ] Enemies (Non-bosses)
-- [ ] Fix concurrentModificationException if it can be fixed (Still happens even with synchronized list)
 - [ ] Optimization (in progress)
 - [ ] Drootr boss
 - [ ] Some type of level progression
 - [ ] Pause menu
-- [ ] More options in starting screen
 
 ## Github Help
 ### Merge Conflict if you DON'T need code you were working on
