@@ -20,7 +20,9 @@ public class Bullet {
     private int y;
     private MovePath mp;
 
-    public Bullet(BufferedImage b, int X, int Y, int w, int h, MovePath MP){
+    private long duration = 5;
+
+    public Bullet(BufferedImage b, int X, int Y, int w, int h, MovePath MP, long d){
         sprite = b;
         spriteWidth = w;
         spriteHeight = h;
@@ -29,6 +31,7 @@ public class Bullet {
         y = Y;
         y0 = Y;
         mp = MP;
+        duration = d;
     }
     public void update(){
         if(startTime == -1) startTime = System.nanoTime();
@@ -47,8 +50,8 @@ public class Bullet {
 
 
     public boolean timeUp(){
-        //return x >= 0 && x <= (1280 * 3 / 5) && y >= 0 && y <= 960;
-        return startTime != -1 && TimeUnit.SECONDS.convert(System.nanoTime() - startTime, TimeUnit.NANOSECONDS) <= 5;
+        if(duration < 0) return !(x + spriteWidth/2 < 0 || x - spriteWidth/2 > ScaleDimentions.PPWIDTH || y + spriteWidth/2 < 0 || y - spriteWidth/2 > ScaleDimentions.HEIGHT);
+        return startTime != -1 && System.nanoTime() - startTime <= duration;
     }
 
     public void draw(Graphics g, ImageObserver imageObserver){

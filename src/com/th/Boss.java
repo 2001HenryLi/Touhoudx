@@ -19,7 +19,8 @@ public class Boss {
 
     public PlayPanel pp;
 
-    private String name = "BossStage1";
+    private String[] stages = {"BossStage1", "BossStage2"};
+    private int currStage = 0;
     private BufferedImage sprite;
     private int spriteWidth;
     private int spriteHeight;
@@ -51,12 +52,11 @@ public class Boss {
                         pos[1] = y0 + (int)(Math.cos(radians) * tMilli / 1.5);
                         return pos;
                     }
-                }));
+                }, -1));
             }
             return pattern;
         }
     };
-
     private BulletPattern circle2 = new BulletPattern() {
         @Override
         public ArrayList<Bullet> makePattern() {
@@ -76,13 +76,12 @@ public class Boss {
                             pos[1] = y0 + (int) (Math.cos(radians) * tDiff/Math.pow(tMilli, 0.1));
                             return pos;
                         }
-                    }));
+                    }, -1));
                 }
             }
             return pattern;
         }
     };
-
     private BulletPattern circle3 = new BulletPattern() {
         @Override
         public ArrayList<Bullet> makePattern() {
@@ -104,13 +103,12 @@ public class Boss {
                             pos[1] = y0 + (int) (Math.cos(radians + tDiff/1000.0 * dir) * tDiff/Math.pow(tMilli, 0.2));
                             return pos;
                         }
-                    }));
+                    }, TimeUnit.NANOSECONDS.convert(5, TimeUnit.SECONDS)));
                 }
             }
             return pattern;
         }
     };
-
     private BulletPattern sweep = new BulletPattern() {
         @Override
         public ArrayList<Bullet> makePattern() {
@@ -129,19 +127,21 @@ public class Boss {
                             pos[1] = y0 + (int) (tDiff / 3);
                             return pos;
                         }
-                    }));
+                    }, -1));
                 }
             }
             return pattern;
         }
     };
-
     private BulletPattern[] bps = {circle, circle2, circle3, sweep};
 
     public Boss(PlayPanel p){
         pp = p;
+        loadSprites();
+    }
 
-        sprite = ImageLoader.openImage("BossSprites/"+name+".png");
+    public void loadSprites(){
+        sprite = ImageLoader.openImage("BossSprites/"+stages[currStage]+".png");
         shots[0] = ImageLoader.openImage("ProjectileSprites/BasicShot.png");
         shots[1] = ImageLoader.openImage("ProjectileSprites/plusc.png");
         shots[2] = ImageLoader.openImage("ProjectileSprites/PotatoProjectile.png");
@@ -154,12 +154,9 @@ public class Boss {
         if(startTime == -1) startTime = System.nanoTime();
         elapsedTime = System.nanoTime() - startTime;
 
-        if(health > 2500) name = "BossStage1";
-        else name = "BossStage2";
-        sprite = ImageLoader.openImage("BossSprites/"+name+".png");
+        if(health < 2500 && currStage == 0) sprite = ImageLoader.openImage("BossSprites/"+stages[++currStage]+".png");
 
         if(elapsedTime > previousMove + 1000000000 || health <= 2500) move();
-
         if(elapsedTime > previousShot + 1000000000){
             previousShot += 1000000000;
             int rand;

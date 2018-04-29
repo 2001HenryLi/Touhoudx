@@ -5,8 +5,8 @@ import java.awt.image.BufferedImage;
 
 public class Bomb extends Bullet {
 
-    public Bomb(BufferedImage img, int X, int Y, int w, int h, MovePath MP){
-        super(img, X, Y, w, h, MP);
+    public Bomb(BufferedImage img, int X, int Y, int w, int h, MovePath MP, long d){
+        super(img, X, Y, w, h, MP, d);
     }
 
     public boolean collide(Bullet b){

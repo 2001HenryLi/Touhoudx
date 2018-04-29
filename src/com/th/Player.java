@@ -63,25 +63,29 @@ public class Player {
                         pos[1] = y0 + (int)(Math.cos(radians) * tMilli / 4);
                         return pos;
                     }
-                }));
+                }, -1));
             }
             return pattern;
+        }
+    };
+    private MovePath FORWARD = new MovePath() {
+        @Override
+        public int[] move(long t, int x0, int y0) {
+            int[] pos = {x0, y0};
+            pos[0] = x0;
+            pos[1] = y0 - (int) (TimeUnit.MILLISECONDS.convert(t, TimeUnit.NANOSECONDS) * 3);
+            return pos;
         }
     };
 
     public Player(String n){
         name = n;
         startTime = System.nanoTime();
-        if(name.equals("cirno")) bulletType = "Cusp.png";
-        else if(name.equals("reimu")) bulletType = "VertTangent.png";
         loadSprites();
-        for(int i = 0; i < sprites.length; i++) sprites[i] = ImageLoader.openImage(spritePaths[i]);
-        sprite = sprites[3];
-        bullets[0] = ImageLoader.openImage(bulletPath+bulletType);
-        bullets[1] = ImageLoader.openImage(bombPath);
-        hitbox = ImageLoader.openImage(hitboxPath);
     }
     private void loadSprites(){
+        if(name.equals("cirno")) bulletType = "Cusp.png";
+        else if(name.equals("reimu")) bulletType = "VertTangent.png";
         spritePaths[0] = SPRITE_DIRECTORY+name+"Left.png";
         spritePaths[1] = SPRITE_DIRECTORY+name+"TransitLeft2.png";
         spritePaths[2] = SPRITE_DIRECTORY+name+"TransitLeft1.png";
@@ -92,6 +96,12 @@ public class Player {
         spritePaths[7] = SPRITE_DIRECTORY+name+"LeftHit.png";
         spritePaths[8] = SPRITE_DIRECTORY+name+"Hit.png";
         spritePaths[9] = SPRITE_DIRECTORY+name+"RightHit.png";
+        for(int i = 0; i < sprites.length; i++) sprites[i] = ImageLoader.openImage(spritePaths[i]);
+        sprite = sprites[3];
+        hitbox = ImageLoader.openImage(hitboxPath);
+
+        bullets[0] = ImageLoader.openImage(bulletPath+bulletType);
+        bullets[1] = ImageLoader.openImage(bombPath);
     }
     public void update(){
         if(startTime == -1) startTime = System.nanoTime();
@@ -134,24 +144,8 @@ public class Player {
         if(pp.keysDown[5]){
             synchronized (pp.playerProjectiles) {
                 SFX.playOnce("SFX/se_etbreak.wav");
-                pp.playerProjectiles.add(new Bullet(bullets[0], x + spriteWidth / 2, y, 32, 32, new MovePath() {
-                    @Override
-                    public int[] move(long t, int x0, int y0) {
-                        int[] pos = {x0, y0};
-                        pos[0] = x0;
-                        pos[1] = y0 - (int) (TimeUnit.MILLISECONDS.convert(t, TimeUnit.NANOSECONDS) * 3);
-                        return pos;
-                    }
-                }));
-                pp.playerProjectiles.add(new Bullet(bullets[0], x - spriteWidth / 2, y, 32, 32, new MovePath() {
-                    @Override
-                    public int[] move(long t, int x0, int y0) {
-                        int[] pos = {x0, y0};
-                        pos[0] = x0;
-                        pos[1] = y0 - (int) (TimeUnit.MILLISECONDS.convert(t, TimeUnit.NANOSECONDS) * 3);
-                        return pos;
-                    }
-                }));
+                pp.playerProjectiles.add(new Bullet(bullets[0], x + spriteWidth / 2, y, 32, 32, FORWARD, -1));
+                pp.playerProjectiles.add(new Bullet(bullets[0], x - spriteWidth / 2, y, 32, 32, FORWARD, -1));
             }
         }
     }

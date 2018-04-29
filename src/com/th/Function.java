@@ -106,6 +106,13 @@ public class Function{
         }
     };
 
+    private MovePath still = new MovePath() {
+        @Override
+        public int[] move(long t, int x0, int y0) {
+            int[] pos = {x0, y0};
+            return pos;
+        }
+    };
 	private Equation[] eqs = {sin, cos, tan, linear, sqrt, ln};
 	private int eqIndex;
 
@@ -123,22 +130,10 @@ public class Function{
         if(startTime == -1) startTime = System.nanoTime();
         elapsedTime = System.nanoTime() - startTime;
 
-        if(elapsedTime > previousEq + 2 * equationBuffer) reset();
-        if(elapsedTime - previousEq >= 0){
-            int[] coords = eqs[eqIndex].getCoord(elapsedTime - previousEq);
-            synchronized (pp.points) {
-                pp.points.add(new Coordinate(sprite, coords[0], ScaleDimentions.HEIGHT - 40 - coords[1], 16, 16, new MovePath() {
-                    @Override
-                    public int[] move(long t, int x0, int y0) {
-                        int[] pos = {x0, y0};
-                        if (t > elapsedTime - previousEq + equationBuffer) {
-                            pos[0] = -100;
-                            pos[1] = -100;
-                        }
-                        return pos;
-                    }
-                }));
-            }
+        if(elapsedTime > previousEq + equationBuffer * 2) reset();
+        int[] coords = eqs[eqIndex].getCoord(Math.max(elapsedTime - previousEq, 0));
+        synchronized (pp.points) {
+            pp.points.add(new Coordinate(sprite, coords[0], ScaleDimentions.HEIGHT - 40 - coords[1], 16, 16, still, equationBuffer));
         }
 	}
 	public void reset(){
